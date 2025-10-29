@@ -16,27 +16,21 @@ struct MyWatchListApp: App {
 #endif
     @StateObject var dataManager = DataManager()
     
-    @State var selectedTab: Tabs = .userContent
+    #if os(iOS)
+    init() {
+        if CommandLine.arguments.contains("enable-testing") {
+            // Deactivate animations for ui testing
+            UIView.setAnimationsEnabled(false)
+        }
+    }
+    #endif
     
     var body: some Scene {
         WindowGroup {
-            TabView(selection: $selectedTab) {
-                Tab("My Contents", systemImage: "list.bullet", value: .userContent) {
-                    NavigationSplitView {
-                        SidebarView()
-                    } content: {
-                        ContentView()
-                    } detail: {
-                        DetailView()
-                    }
-                }
-                Tab("Search content", systemImage: "plus.magnifyingglass", value: .search) {
-                    SearchView()
-                }
-            }
-            .environment(\.networkManager, networkManager)
-            .environment(\.managedObjectContext, dataManager.container.viewContext)
-            .environmentObject(dataManager)
+            HomeView(dataManager: dataManager)
+                .environment(\.networkManager, networkManager)
+                .environment(\.managedObjectContext, dataManager.container.viewContext)
+                .environmentObject(dataManager)
         }
     }
 }

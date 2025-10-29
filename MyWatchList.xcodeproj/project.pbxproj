@@ -6,8 +6,32 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C23CD4E32E6B1C4E00DD1656 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = C23CD4E22E6B1C4E00DD1656 /* YouTubePlayerKit */; };
+		C24517892EA377AA003CB8EE /* _ConfidentialKit in Frameworks */ = {isa = PBXBuildFile; productRef = C24517882EA377AA003CB8EE /* _ConfidentialKit */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C257EBA42E9D3DA70064FCC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C2D8589C2E61AE99005187AF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C2D858A32E61AE99005187AF;
+			remoteInfo = MyWatchList;
+		};
+		C2E067782EB0BD9800A2661D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C2D8589C2E61AE99005187AF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C2D858A32E61AE99005187AF;
+			remoteInfo = MyWatchList;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		C257EBA02E9D3DA60064FCC0 /* MyWatchListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyWatchListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2D858A42E61AE99005187AF /* MyWatchList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyWatchList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2E067722EB0BD9800A2661D /* MyWatchListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyWatchListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -21,6 +45,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		C257EBA12E9D3DA60064FCC0 /* MyWatchListTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MyWatchListTests;
+			sourceTree = "<group>";
+		};
 		C2D858A62E61AE99005187AF /* MyWatchList */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -29,10 +58,31 @@
 			path = MyWatchList;
 			sourceTree = "<group>";
 		};
+		C2E067732EB0BD9800A2661D /* MyWatchListUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MyWatchListUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C257EB9D2E9D3DA60064FCC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C2D858A12E61AE99005187AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C23CD4E32E6B1C4E00DD1656 /* YouTubePlayerKit in Frameworks */,
+				C24517892EA377AA003CB8EE /* _ConfidentialKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2E0676F2EB0BD9800A2661D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -46,6 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				C2D858A62E61AE99005187AF /* MyWatchList */,
+				C257EBA12E9D3DA60064FCC0 /* MyWatchListTests */,
+				C2E067732EB0BD9800A2661D /* MyWatchListUITests */,
 				C2D858A52E61AE99005187AF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +106,8 @@
 			isa = PBXGroup;
 			children = (
 				C2D858A42E61AE99005187AF /* MyWatchList.app */,
+				C257EBA02E9D3DA60064FCC0 /* MyWatchListTests.xctest */,
+				C2E067722EB0BD9800A2661D /* MyWatchListUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,6 +115,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C257EB9F2E9D3DA60064FCC0 /* MyWatchListTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C257EBA82E9D3DA70064FCC0 /* Build configuration list for PBXNativeTarget "MyWatchListTests" */;
+			buildPhases = (
+				C257EB9C2E9D3DA60064FCC0 /* Sources */,
+				C257EB9D2E9D3DA60064FCC0 /* Frameworks */,
+				C257EB9E2E9D3DA60064FCC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C257EBA52E9D3DA70064FCC0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				C257EBA12E9D3DA60064FCC0 /* MyWatchListTests */,
+			);
+			name = MyWatchListTests;
+			packageProductDependencies = (
+			);
+			productName = MyWatchListTests;
+			productReference = C257EBA02E9D3DA60064FCC0 /* MyWatchListTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C2D858A32E61AE99005187AF /* MyWatchList */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C2D858B02E61AE9B005187AF /* Build configuration list for PBXNativeTarget "MyWatchList" */;
@@ -72,16 +149,42 @@
 			buildRules = (
 			);
 			dependencies = (
+				C245178C2EA3788F003CB8EE /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				C2D858A62E61AE99005187AF /* MyWatchList */,
 			);
 			name = MyWatchList;
 			packageProductDependencies = (
+				C23CD4E22E6B1C4E00DD1656 /* YouTubePlayerKit */,
+				C24517882EA377AA003CB8EE /* _ConfidentialKit */,
 			);
 			productName = MyWatchList;
 			productReference = C2D858A42E61AE99005187AF /* MyWatchList.app */;
 			productType = "com.apple.product-type.application";
+		};
+		C2E067712EB0BD9800A2661D /* MyWatchListUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C2E0677C2EB0BD9800A2661D /* Build configuration list for PBXNativeTarget "MyWatchListUITests" */;
+			buildPhases = (
+				C2E0676E2EB0BD9800A2661D /* Sources */,
+				C2E0676F2EB0BD9800A2661D /* Frameworks */,
+				C2E067702EB0BD9800A2661D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C2E067792EB0BD9800A2661D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				C2E067732EB0BD9800A2661D /* MyWatchListUITests */,
+			);
+			name = MyWatchListUITests;
+			packageProductDependencies = (
+			);
+			productName = MyWatchListUITests;
+			productReference = C2E067722EB0BD9800A2661D /* MyWatchListUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -90,11 +193,19 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1640;
-				LastUpgradeCheck = 1640;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2600;
 				TargetAttributes = {
+					C257EB9F2E9D3DA60064FCC0 = {
+						CreatedOnToolsVersion = 26.0.1;
+						TestTargetID = C2D858A32E61AE99005187AF;
+					};
 					C2D858A32E61AE99005187AF = {
 						CreatedOnToolsVersion = 16.4;
+					};
+					C2E067712EB0BD9800A2661D = {
+						CreatedOnToolsVersion = 26.0.1;
+						TestTargetID = C2D858A32E61AE99005187AF;
 					};
 				};
 			};
@@ -107,18 +218,39 @@
 			);
 			mainGroup = C2D8589B2E61AE99005187AF;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C23CD4E12E6B1C4E00DD1656 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
+				C24517872EA377AA003CB8EE /* XCRemoteSwiftPackageReference "swift-confidential" */,
+				C245178A2EA37858003CB8EE /* XCRemoteSwiftPackageReference "swift-confidential-plugin" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C2D858A52E61AE99005187AF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				C2D858A32E61AE99005187AF /* MyWatchList */,
+				C257EB9F2E9D3DA60064FCC0 /* MyWatchListTests */,
+				C2E067712EB0BD9800A2661D /* MyWatchListUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C257EB9E2E9D3DA60064FCC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C2D858A22E61AE99005187AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2E067702EB0BD9800A2661D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -128,7 +260,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C257EB9C2E9D3DA60064FCC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C2D858A02E61AE99005187AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2E0676E2EB0BD9800A2661D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -137,7 +283,71 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C245178C2EA3788F003CB8EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = C245178B2EA3788F003CB8EE /* Confidential */;
+		};
+		C257EBA52E9D3DA70064FCC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C2D858A32E61AE99005187AF /* MyWatchList */;
+			targetProxy = C257EBA42E9D3DA70064FCC0 /* PBXContainerItemProxy */;
+		};
+		C2E067792EB0BD9800A2661D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C2D858A32E61AE99005187AF /* MyWatchList */;
+			targetProxy = C2E067782EB0BD9800A2661D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		C257EBA62E9D3DA70064FCC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PTPRZC36QH;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.marwen.MyWatchListTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyWatchList.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyWatchList";
+			};
+			name = Debug;
+		};
+		C257EBA72E9D3DA70064FCC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PTPRZC36QH;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.marwen.MyWatchListTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyWatchList.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyWatchList";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		C2D858AE2E61AE9B005187AF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -172,6 +382,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = PTPRZC36QH;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -195,6 +406,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -234,7 +446,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = PTPRZC36QH;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -250,6 +463,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;
@@ -262,9 +476,14 @@
 				CODE_SIGN_ENTITLEMENTS = MyWatchList/MyWatchList.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = PTPRZC36QH;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyWatchList/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -275,12 +494,12 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marwen.MyWatchList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -290,7 +509,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				XROS_DEPLOYMENT_TARGET = 2.5;
+				XROS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Debug;
 		};
@@ -302,9 +521,14 @@
 				CODE_SIGN_ENTITLEMENTS = MyWatchList/MyWatchList.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = PTPRZC36QH;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyWatchList/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -315,12 +539,12 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marwen.MyWatchList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -330,13 +554,68 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				XROS_DEPLOYMENT_TARGET = 2.5;
+				XROS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
+		C2E0677A2EB0BD9800A2661D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PTPRZC36QH;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.marwen.MyWatchListUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MyWatchList;
+			};
+			name = Debug;
+		};
+		C2E0677B2EB0BD9800A2661D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PTPRZC36QH;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.marwen.MyWatchListUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MyWatchList;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C257EBA82E9D3DA70064FCC0 /* Build configuration list for PBXNativeTarget "MyWatchListTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C257EBA62E9D3DA70064FCC0 /* Debug */,
+				C257EBA72E9D3DA70064FCC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C2D8589F2E61AE99005187AF /* Build configuration list for PBXProject "MyWatchList" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -355,7 +634,61 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		C2E0677C2EB0BD9800A2661D /* Build configuration list for PBXNativeTarget "MyWatchListUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2E0677A2EB0BD9800A2661D /* Debug */,
+				C2E0677B2EB0BD9800A2661D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C23CD4E12E6B1C4E00DD1656 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SvenTiigi/YouTubePlayerKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.1;
+			};
+		};
+		C24517872EA377AA003CB8EE /* XCRemoteSwiftPackageReference "swift-confidential" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/securevale/swift-confidential";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.4.2;
+			};
+		};
+		C245178A2EA37858003CB8EE /* XCRemoteSwiftPackageReference "swift-confidential-plugin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/securevale/swift-confidential-plugin.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.4.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C23CD4E22E6B1C4E00DD1656 /* YouTubePlayerKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C23CD4E12E6B1C4E00DD1656 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */;
+			productName = YouTubePlayerKit;
+		};
+		C24517882EA377AA003CB8EE /* _ConfidentialKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C24517872EA377AA003CB8EE /* XCRemoteSwiftPackageReference "swift-confidential" */;
+			productName = _ConfidentialKit;
+		};
+		C245178B2EA3788F003CB8EE /* Confidential */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C245178A2EA37858003CB8EE /* XCRemoteSwiftPackageReference "swift-confidential-plugin" */;
+			productName = "plugin:Confidential";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C2D8589C2E61AE99005187AF /* Project object */;
 }

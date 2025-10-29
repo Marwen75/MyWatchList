@@ -1,0 +1,42 @@
+{
+  "originHash" : "cad17c58359d848f02905bd800c58b4d9dddadfe38558390d951cd16fac9dde0",
+  "pins" : [
+    {
+      "identity" : "swift-confidential",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/securevale/swift-confidential",
+      "state" : {
+        "revision" : "37ece2467ed2f9416531a809a53b58f6bd39f7c5",
+        "version" : "0.4.2"
+      }
+    },
+    {
+      "identity" : "swift-confidential-plugin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/securevale/swift-confidential-plugin.git",
+      "state" : {
+        "revision" : "6508cf4f18fdf41232b01e68a1e1d81d3b90554d",
+        "version" : "0.4.2"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-syntax.git",
+      "state" : {
+        "revision" : "4799286537280063c85a32f09884cfbca301b1a1",
+        "version" : "602.0.0"
+      }
+    },
+    {
+      "identity" : "youtubeplayerkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SvenTiigi/YouTubePlayerKit",
+      "state" : {
+        "revision" : "a0f3f0996c2d752faa654b69b82acaa444bed922",
+        "version" : "2.0.1"
+      }
+    }
+  ],
+  "version" : 3
+}

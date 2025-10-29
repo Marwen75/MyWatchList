@@ -1,19 +1,90 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788.4" systemVersion="24G90" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
-    <entity name="Content" representedClassName="Content" syncable="YES" codeGenerationType="class">
-        <attribute name="actors" optional="YES" attributeType="String"/>
-        <attribute name="aka" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24299" systemVersion="25A362" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Actor" representedClassName="Actor" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="picture" optional="YES" attributeType="String" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="rank" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Movie" inverseName="actors" inverseEntity="Movie"/>
+        <relationship name="shows" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TvShow" inverseName="actors" inverseEntity="TvShow"/>
+    </entity>
+    <entity name="Director" representedClassName="Director" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="picture" optional="YES" attributeType="String" allowsExternalBinaryDataStorage="YES"/>
+        <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Movie" inverseName="directors" inverseEntity="Movie"/>
+        <relationship name="shows" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TvShow" inverseName="directors" inverseEntity="TvShow"/>
+    </entity>
+    <entity name="Movie" representedClassName="Movie" syncable="YES" codeGenerationType="class">
+        <attribute name="budget" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="genres" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="imdbUrl" optional="YES" attributeType="String"/>
-        <attribute name="imgPoster" optional="YES" attributeType="String"/>
+        <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="poster" optional="YES" attributeType="String" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="priority" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="releaseDate" optional="YES" attributeType="String"/>
+        <attribute name="runTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <attribute name="year" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="contents" inverseEntity="Tag"/>
+        <attribute name="trailerUrl" optional="YES" attributeType="String"/>
+        <attribute name="voteAverage" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="watched" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="actors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Actor" inverseName="movies" inverseEntity="Actor"/>
+        <relationship name="directors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Director" inverseName="movies" inverseEntity="Director"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="movies" inverseEntity="Tag"/>
+    </entity>
+    <entity name="ShowEpisode" representedClassName="ShowEpisode" syncable="YES" codeGenerationType="class">
+        <attribute name="airDate" optional="YES" attributeType="String"/>
+        <attribute name="episodeNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="rank" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="runTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="stillPath" optional="YES" attributeType="String"/>
+        <attribute name="voteAverage" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="watched" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="season" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ShowSeason" inverseName="episodes" inverseEntity="ShowSeason"/>
+    </entity>
+    <entity name="ShowSeason" representedClassName="ShowSeason" syncable="YES" codeGenerationType="class">
+        <attribute name="airDate" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="poster" optional="YES" attributeType="String" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="rank" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="seasonNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="voteAverage" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="watched" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="episodes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ShowEpisode" inverseName="season" inverseEntity="ShowEpisode"/>
+        <relationship name="tvShow" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TvShow" inverseName="seasons" inverseEntity="TvShow"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isMovieTag" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="contents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Content" inverseName="tags" inverseEntity="Content"/>
+        <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Movie" inverseName="tags" inverseEntity="Movie"/>
+        <relationship name="shows" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TvShow" inverseName="tags" inverseEntity="TvShow"/>
+    </entity>
+    <entity name="TvShow" representedClassName="TvShow" syncable="YES" codeGenerationType="class">
+        <attribute name="firstAirDate" optional="YES" attributeType="String"/>
+        <attribute name="genres" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="imdbUrl" optional="YES" attributeType="String"/>
+        <attribute name="inProduction" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastAirDate" optional="YES" attributeType="String"/>
+        <attribute name="numberOfEpisodes" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="numberOfSeasons" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="poster" optional="YES" attributeType="String" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="priority" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="trailerUrl" optional="YES" attributeType="String"/>
+        <attribute name="voteAverage" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="watched" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="actors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Actor" inverseName="shows" inverseEntity="Actor"/>
+        <relationship name="directors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Director" inverseName="shows" inverseEntity="Director"/>
+        <relationship name="seasons" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ShowSeason" inverseName="tvShow" inverseEntity="ShowSeason"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="shows" inverseEntity="Tag"/>
     </entity>
 </model>

@@ -1,0 +1,48 @@
+//
+//  ContentViewMovieRow.swift
+//  MyWatchList
+//
+//  Created by Marwen Haouacine on 09/10/2025.
+//
+
+#if os(macOS)
+import SwiftUI
+
+struct ContentViewMovieRow: View {
+    @Environment(\.networkManager) var networkManager
+    @ObservedObject var movie: Movie
+    
+    var body: some View {
+        VStack {
+            Text(movie.movieTitle)
+            Label(movie.movieTagsList, systemImage: "tag")
+            
+            HStack {
+                Spacer()
+                SmallPosterImageView(maxWidth: 150, maxHeight: 200, path: movie.moviePoster)
+                Spacer()
+            }
+            
+            HStack {
+                switch movie.priority {
+                case 0:
+                    Label("Watch later", systemImage: "eye.half.closed")
+                        .imageScale(.small)
+                case 1:
+                    Label("Must see", systemImage: "eye")
+                        .imageScale(.small)
+                default:
+                    Label("See urgently", systemImage: "eye.trianglebadge.exclamationmark")
+                        .imageScale(.small)
+                }
+            }
+        }
+        .padding(3)
+        .infoStyle()
+    }
+}
+
+#Preview {
+    ContentViewMovieRow(movie: .example)
+}
+#endif
