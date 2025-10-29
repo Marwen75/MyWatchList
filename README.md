@@ -83,6 +83,7 @@ Here’s what’s next for **MyWatchList** 👇
 
 ## 💻 Requirements
 
+- iOS **26.0** or later 
 - macOS **Tahoe (26.0)** or later  
 - Xcode **26.0** or later  
 - Swift **6**
