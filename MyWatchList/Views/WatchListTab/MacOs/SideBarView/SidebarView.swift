@@ -16,7 +16,7 @@ struct SidebarView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(colors: [.red.mix(with: .black, by: 0.5), .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
+            LinearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
             
             List(selection: $sidebarViewViewModel.selectedFilter) { 
                 Section("Smart Filters") {
@@ -27,7 +27,7 @@ struct SidebarView: View {
                         .foregroundStyle(sidebarViewViewModel.selectedFilter == filter ? .white : .gray)
                     }
                 }
-                .listRowBackground(Color.yellow.mix(with: .black, by: 0.3).opacity(0.1))
+                .listRowBackground(Color.darkYellow.opacity(0.1))
                 
                 Section("Movie Tags") {
                     ForEach(sidebarViewViewModel.movieTags) { filter in
@@ -46,7 +46,7 @@ struct SidebarView: View {
                     }
                     .onDelete(perform: sidebarViewViewModel.deleteMovieTag)
                 }
-                .listRowBackground(Color.yellow.mix(with: .black, by: 0.3).opacity(0.1))
+                .listRowBackground(Color.darkYellow.opacity(0.1))
                 
                 Section("Tv show Tags") {
                     ForEach(sidebarViewViewModel.showTags) { filter in
@@ -65,7 +65,7 @@ struct SidebarView: View {
                     }
                     .onDelete(perform: sidebarViewViewModel.deleteShowTag)
                 }
-                .listRowBackground(Color.yellow.mix(with: .black, by: 0.3).opacity(0.1))
+                .listRowBackground(Color.darkYellow.opacity(0.1))
             }
             .scrollContentBackground(.hidden)
         }

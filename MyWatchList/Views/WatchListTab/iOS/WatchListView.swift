@@ -16,7 +16,7 @@ struct WatchListView: View {
     var body: some View {
         NavigationStack(path: $watchListPathManager.routes) {
             ZStack {
-                LinearGradient(colors: [.red.mix(with: .black, by: 0.5), .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
+                LinearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
                 VStack {
                     if watchListViewModel.selectedFilter?.typeOfContent == .movies {
                         List(selection: $watchListViewModel.selectedMovie) {

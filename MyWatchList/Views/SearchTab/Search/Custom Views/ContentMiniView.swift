@@ -105,14 +105,14 @@ struct ContentMiniView: View {
             ContentUnavailableView {
                 Label("No Poster available", systemImage: "film")
                     .font(.system(size: 12).italic())
-                    .foregroundStyle(.aluminum)
+                    .foregroundStyle(.white)
                     .frame(maxHeight: 300)
             }
             .cornerRadius(15)
             .background {
                 RoundedRectangle(cornerRadius: 15).stroke(Color.yellow.mix(with: .black, by: 0.1), lineWidth: 1)
             }
-            .shadow(color: Color.aluminum, radius: 3)
+            .shadow(color: Color.white, radius: 3)
         }
 #endif
     }

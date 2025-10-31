@@ -16,7 +16,7 @@ struct SeasonDetailView: View {
         Form {
             Section(season.seasonNumber != nil ? "Season \(season.seasonNumber, default: "")" : "") {
                 if let posterPath = season.posterPath {
-                    BigPosterImageView(maxHeight: 650, path: posterPath)
+                    PosterImageView(path: posterPath, size: .flexible(maxHeight: 650))
                 } else {
                     ContentUnavailableView("No Poster Available", systemImage: "film")
                 }
@@ -43,7 +43,7 @@ struct SeasonDetailView: View {
             .listRowBackground(Color.yellow.mix(with: .black, by: 0.1).opacity(0.1))
         }
         .scrollContentBackground(.hidden)
-        .background(.linearGradient(colors: [.red.mix(with: .black, by: 0.5), .black], startPoint: .top, endPoint: .bottom))
+        .background(.linearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom))
 #else
         ScrollView {
             VStack {
@@ -52,8 +52,7 @@ struct SeasonDetailView: View {
                 
                 HStack {
                     if let posterPath = season.posterPath {
-                        BigPosterImageView(maxHeight: 400, path: posterPath)
-                            .frame(maxWidth: 350, maxHeight: 400)
+                        PosterImageView(path: posterPath, size: .flexible(maxWidth: 350, maxHeight: 400))
                     } else {
                         ContentUnavailableView("No Poster Available", systemImage: "film")
                     }
@@ -84,7 +83,7 @@ struct SeasonDetailView: View {
             }
             .padding()
         }
-        .background(.linearGradient(colors: [.red.mix(with: .black, by: 0.5), .black], startPoint: .top, endPoint: .bottom))
+        .background(.linearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom))
         .padding()
 #endif
     }

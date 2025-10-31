@@ -19,7 +19,7 @@ struct SeasonMiniView: View {
             VStack {
                 Text(season.name ?? "Season \(season.seasonNumber)")
                 if season.seasonPoster != "" {
-                    SmallPosterImageView(maxWidth: 150, maxHeight: 200, path: season.seasonPoster)
+                    PosterImageView(path: season.seasonPoster, size: .flexible(maxWidth: 150, maxHeight: 200))
                             .opacity(season.watched ? 0.3 : 1)
                 } else {
                     ContentUnavailableView("No poster", systemImage: "film")
@@ -45,7 +45,7 @@ struct SeasonMiniView: View {
                         .font(.system(size: 12, weight: .bold, design: .serif))
                 }
                 .buttonStyle(.borderedProminent)
-                .tint(season.watched ? .darkBeige : .waterGreen)
+                .tint(season.watched ? .yellow.mix(with: .black, by: 0.3) : .darkGreen)
                 .frame(width: 150)
             }
             

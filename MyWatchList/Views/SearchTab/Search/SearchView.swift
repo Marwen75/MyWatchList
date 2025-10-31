@@ -21,7 +21,7 @@ struct SearchView: View {
     var body: some View {
         NavigationStack(path: $searchPathManager.routes) {
             ZStack {
-                LinearGradient(colors: [.red.mix(with: .black, by: 0.5), .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
+                LinearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
                 VStack {
                     TypeOfSearchVIew(searchViewModel: searchViewModel)
                     
@@ -29,7 +29,7 @@ struct SearchView: View {
                         ContentListView(searchViewModel: searchViewModel)
                     } else {
                         ContentUnavailableView("Results are empty", systemImage: "person.crop.badge.magnifyingglass", description: Text("Use the search bar to find movies or tv shows."))
-                            .foregroundStyle(.aluminum)
+                            .foregroundStyle(.white)
                         Spacer()
                     }
                 }

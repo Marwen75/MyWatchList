@@ -5,6 +5,7 @@
 //  Created by Marwen Haouacine on 05/10/2025.
 //
 
+#if os(iOS)
 import SwiftUI
 
 struct SmartFilterView: View {
@@ -16,7 +17,7 @@ struct SmartFilterView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(colors: [.red.mix(with: .black, by: 0.5), .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
+            LinearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
             
             List {
                 Section("General filters") {
@@ -77,3 +78,4 @@ struct SmartFilterView: View {
 #Preview {
     SmartFilterView(watchListViewModel: WatchListViewModel(dataManager: DataManager.preview))
 }
+#endif

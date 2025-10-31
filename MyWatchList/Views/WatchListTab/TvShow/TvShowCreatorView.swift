@@ -15,7 +15,7 @@ struct TvShowCreatorView: View {
         ScrollView(.horizontal) {
             HStack(spacing: 10) {
                 ForEach(tvShow.showDirectors) { director in
-                    PersonImageView(width: 50, height: 50, profilePath: director.directorPicture)
+                    PosterImageView(path: director.directorPicture, shape: .circle, size: .fixed(width: 50, height: 50), contentMode: .fill)
                     
                     Text(director.directorName)
                         .infoStyle()

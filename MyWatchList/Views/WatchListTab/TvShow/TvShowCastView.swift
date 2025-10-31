@@ -17,15 +17,15 @@ struct TvShowCastView: View {
                 ForEach(tvShow.showActors) { actor in
                     VStack {
                         if actor.actorPicture != "" {
-                            PersonImageView(width: 100, height: 100, profilePath: actor.actorPicture)
+                            PosterImageView(path: actor.actorPicture, shape: .circle, size: .fixed(width: 100, height: 100), contentMode: .fill)
                         } else {
                             Image(systemName: "person.circle.fill")
                                 .resizable()
                                 .frame(width: 100, height: 100)
                                 .background {
-                                    Circle().stroke(Color.darkBeige, lineWidth: 1)
+                                    Circle().stroke(Color.darkYellow, lineWidth: 1)
                                 }
-                                .shadow(color: .aluminum, radius: 3)
+                                .shadow(color: .white, radius: 3)
                         }
                         Text(actor.actorName)
                             .infoStyle()

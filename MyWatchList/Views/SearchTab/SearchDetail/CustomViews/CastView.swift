@@ -16,7 +16,7 @@ struct CastView: View {
                 ForEach(searchDetailViewModel.castMembers) { actor in
                     VStack {
                         if let profilePath = actor.profilePath {
-                            PersonImageView(width: 100, height: 100, profilePath: profilePath)
+                            PosterImageView(path: profilePath, shape: .circle, size: .fixed(width: 100, height: 100), contentMode: .fill)
                         } else {
                             Image(systemName: "person.circle.fill")
                                 .resizable()

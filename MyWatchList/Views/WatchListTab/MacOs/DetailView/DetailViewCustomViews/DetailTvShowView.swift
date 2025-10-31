@@ -19,8 +19,7 @@ struct DetailTvShowView: View {
         ScrollView {
             VStack {
                 HStack {
-                    BigPosterImageView(maxHeight: 700, path: tvShow.showPoster)
-                        .frame(maxWidth: 350, maxHeight: 400)
+                    PosterImageView(tvShow.showPoster, size: .flexible(maxWidth: 350, maxHeight: 700))
                         .onChange(of: tvShow) {
                             shouldRefresh.toggle()
                         }
@@ -39,7 +38,7 @@ struct DetailTvShowView: View {
                     }
                     ProgressView(value: tvShow.showProgress)
                         .progressViewStyle(.linear)
-                        .tint(Color.yellow.mix(with: .black, by: 0.3))
+                        .tint(Color.darkYellow)
                 }
                 .infoStyle()
                 .padding()
@@ -78,9 +77,9 @@ struct DetailTvShowView: View {
             .frame(width: 200, height: 150)
             .padding()
             .buttonStyle(.borderedProminent)
-            .tint(tvShow.watched ? Color.waterGreen : Color.yellow.mix(with: .black, by: 0.3))
+            .tint(tvShow.watched ? Color.darkGreen : Color.darkYellow)
         }
-        .background(.linearGradient(colors: [.red.mix(with: .black, by: 0.5), .black], startPoint: .top, endPoint: .bottom))
+        .background(.linearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom))
         .sheet(isPresented: $showSeasonSheet) {
             if let season = dataManager.selectedSeason {
                 SeasonDetailSheetView(season: season)

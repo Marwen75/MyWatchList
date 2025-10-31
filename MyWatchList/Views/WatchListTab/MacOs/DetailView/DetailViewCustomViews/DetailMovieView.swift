@@ -17,8 +17,7 @@ struct DetailMovieView: View {
     var body: some View {
         ScrollView {
             HStack {
-                BigPosterImageView(maxHeight: 700, path: movie.moviePoster)
-                    .frame(maxWidth: 350, maxHeight: 400)
+                PosterImageView(movie.moviePoster, size: .flexible(maxWidth: 350, maxHeight: 700))
                     .onChange(of: movie) {
                         shouldRefresh.toggle()
                     }
@@ -51,9 +50,9 @@ struct DetailMovieView: View {
             .frame(width: 200, height: 150)
             .padding()
             .buttonStyle(.borderedProminent)
-            .tint(movie.watched ? Color.waterGreen : Color.yellow.mix(with: .black, by: 0.3))
+            .tint(movie.watched ? Color.darkGreen : Color.darkYellow)
         }
-        .background(.linearGradient(colors: [.red.mix(with: .black, by: 0.5), .black], startPoint: .top, endPoint: .bottom))
+        .background(.linearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom))
     }
 }
 

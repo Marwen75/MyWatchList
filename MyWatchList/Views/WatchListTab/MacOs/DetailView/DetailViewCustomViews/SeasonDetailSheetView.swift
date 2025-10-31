@@ -20,7 +20,7 @@ struct SeasonDetailSheetView: View {
                 VStack {
                     HStack {
                         if season.seasonPoster != "" {
-                            SmallPosterImageView(maxWidth: 100, maxHeight: 150, path: season.seasonPoster)
+                            PosterImageView(path: season.seasonPoster, size: .flexible(maxWidth: 100, maxHeight: 150))
                         } else {
                             ContentUnavailableView("No Poster Found", image: "film")
                         }
@@ -32,7 +32,7 @@ struct SeasonDetailSheetView: View {
                         VStack {
                             HStack {
                                 Text("\(episode.episodeNumber)" + ". " + episode.episodeName)
-                                    .foregroundStyle(episode.watched ? .gray : .aluminum)
+                                    .foregroundStyle(episode.watched ? .gray : .white)
                                 
                                 Spacer()
                                 
@@ -64,7 +64,7 @@ struct SeasonDetailSheetView: View {
                             }
                         }
                         .font(.system(size: 11)).italic()
-                        .foregroundStyle(episode.watched ? .gray : .aluminum)
+                        .foregroundStyle(episode.watched ? .gray : .white)
                         .padding()
                         .contextMenu {
                             Button {
@@ -92,7 +92,7 @@ struct SeasonDetailSheetView: View {
                 .buttonSizing(.fitted)
             }
         }
-        .background(.linearGradient(colors: [.red.mix(with: .black, by: 0.5), .black], startPoint: .top, endPoint: .bottom))
+        .background(.linearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom))
         .padding()
     }
 }

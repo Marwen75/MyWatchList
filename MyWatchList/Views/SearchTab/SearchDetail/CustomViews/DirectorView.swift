@@ -15,7 +15,7 @@ struct DirectorView: View {
             HStack(spacing: 10) {
                 ForEach(searchDetailViewModel.directors) { director in
                     if let profilePath = director.profilePath {
-                        PersonImageView(width: 50, height: 50, profilePath: profilePath)
+                        PosterImageView(path: profilePath, shape: .circle, size: .fixed(width: 50, height: 50), contentMode: .fill)
                     } else {
                         Image(systemName: "person.circle.fill")
                             .resizable()

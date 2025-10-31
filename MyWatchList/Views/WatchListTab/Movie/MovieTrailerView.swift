@@ -17,12 +17,12 @@ struct MovieTrailerView: View {
         YouTubePlayerView(YouTubePlayer(urlString: "\(networkManager.videoUrl)" + "\(movie.movieTrailer)"))
             .frame(idealWidth: 300, idealHeight: 250)
             .cornerRadius(20)
-            .shadow(color: Color.yellow.mix(with: .black, by: 0.3).opacity(0.5), radius: 5)
+            .shadow(color: Color.darkYellow.opacity(0.5), radius: 5)
         #else
         YouTubePlayerView(YouTubePlayer(urlString: "\(networkManager.videoUrl)" + "\(movie.movieTrailer)"))
             .frame(minWidth: 350, minHeight: 300)
             .cornerRadius(20)
-            .shadow(color: Color.yellow.mix(with: .black, by: 0.3).opacity(0.5), radius: 5)
+            .shadow(color: Color.darkYellow.opacity(0.5), radius: 5)
         #endif
     }
 }

@@ -14,11 +14,11 @@ struct EpisodeDetailView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(colors: [.red.mix(with: .black, by: 0.5), .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
+            LinearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
             Form {
                 Section(episode.episodeName) {
                     if episode.episodeStillPath != "" {
-                        BigPosterImageView(maxHeight: 650, path: episode.episodeStillPath)
+                        PosterImageView(path: episode.episodeStillPath, size: .flexible(maxHeight: 650))
                     } else {
                         ContentUnavailableView("No image available", systemImage: "film")
                     }
@@ -37,7 +37,7 @@ struct EpisodeDetailView: View {
                         }
                 }
                 .sectionTitleStyle()
-                .listRowBackground(Color.yellow.mix(with: .black, by: 0.3).opacity(0.1))
+                .listRowBackground(Color.darkYellow.opacity(0.1))
                 
                 Section("Informations") {
                     HStack {
@@ -54,7 +54,7 @@ struct EpisodeDetailView: View {
                         .overviewStyle()
                 }
                 .sectionTitleStyle()
-                .listRowBackground(Color.yellow.mix(with: .black, by: 0.3).opacity(0.1))
+                .listRowBackground(Color.darkYellow.opacity(0.1))
             }
             .scrollContentBackground(.hidden)
         }

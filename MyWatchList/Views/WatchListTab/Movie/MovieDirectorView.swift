@@ -16,15 +16,15 @@ struct MovieDirectorView: View {
             HStack(spacing: 10) {
                 ForEach(movie.movieDirectors) { director in
                     if director.directorPicture != "" {
-                        PersonImageView(width: 50, height: 50, profilePath: director.directorPicture)
+                        PosterImageView(path: director.directorPicture, shape: .circle, size: .fixed(width: 50, height: 50), contentMode: .fill)
                     } else {
                         Image(systemName: "person.circle.fill")
                             .resizable()
                             .frame(width: 50, height: 50)
                             .background {
-                                Circle().stroke(Color.yellow.mix(with: .black, by: 0.3), lineWidth: 1)
+                                Circle().stroke(Color.darkYellow, lineWidth: 1)
                             }
-                            .shadow(color: .aluminum, radius: 3)
+                            .shadow(color: .white, radius: 3)
                     }
                     
                     Text(director.name ?? "")

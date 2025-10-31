@@ -1,5 +1,5 @@
 //
-//  TvListRowPosterWithInfoView.swift
+//  MovieListRowPosterWithInfoView.swift
 //  MyWatchList
 //
 //  Created by Marwen Haouacine on 17/10/2025.
@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-struct TvListRowPosterWithInfoView: View {
+struct MovieListRowPosterWithInfoView: View {
     @Environment(\.networkManager) var networkManager
-    @ObservedObject var tvShow: TvShow
+    @ObservedObject var movie: Movie
     
     var body: some View {
         ZStack(alignment: .top) {
-            ListRowPosterImageView(minHeight: 150, maxHeight: 700, path: tvShow.showPoster)
+            PosterImageView(path: movie.moviePoster, size: .flexible(maxHeight: 700, minHeight: 150))
             
             VStack {
                 HStack {
-                    Label(tvShow.showTagsList, systemImage: "tag")
+                    Label(movie.movieTagsList, systemImage: "tag")
                         .padding(10)
                         .background(Color.red.mix(with: .black, by: 0.6).opacity(0.8))
                         .cornerRadius(20)
@@ -27,19 +27,19 @@ struct TvListRowPosterWithInfoView: View {
                 Spacer()
                 
                 HStack {
-                    switch tvShow.priority {
+                    switch movie.priority {
                     case 0:
-                        Label(tvShow.watched ? "Re-watch eventually" : "Watch later", systemImage: "eye.half.closed")
+                        Label(movie.watched ? "Re-watch eventually" : "Watch later", systemImage: "eye.half.closed")
                             .padding(10)
                             .background(Color.red.mix(with: .black, by: 0.6).opacity(0.8))
                             .cornerRadius(20)
                     case 1:
-                        Label(tvShow.watched ? "Re-watch soon" : "Must see", systemImage: "eye")
+                        Label(movie.watched ? "Re-watch soon" : "Must see", systemImage: "eye")
                             .padding(10)
                             .background(Color.red.mix(with: .black, by: 0.6).opacity(0.8))
                             .cornerRadius(20)
                     default:
-                        Label(tvShow.watched ? "Re-watch urgently" : "See urgently", systemImage: "eye.trianglebadge.exclamationmark")
+                        Label(movie.watched ? "Re-watch urgently" : "See urgently", systemImage: "eye.trianglebadge.exclamationmark")
                             .padding(10)
                             .background(Color.red.mix(with: .black, by: 0.6).opacity(0.8))
                             .cornerRadius(20)
@@ -56,5 +56,5 @@ struct TvListRowPosterWithInfoView: View {
 }
 
 #Preview {
-    TvListRowPosterWithInfoView(tvShow: .example)
+    MovieListRowPosterWithInfoView(movie: .example)
 }

@@ -19,7 +19,7 @@ struct ContentViewMovieRow: View {
             
             HStack {
                 Spacer()
-                SmallPosterImageView(maxWidth: 150, maxHeight: 200, path: movie.moviePoster)
+                PosterImageView(path: movie.moviePoster, size: .flexible(maxWidth: 150, maxHeight: 200))
                 Spacer()
             }
             

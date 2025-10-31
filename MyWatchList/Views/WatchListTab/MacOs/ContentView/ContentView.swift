@@ -16,7 +16,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(colors: [.red.mix(with: .black, by: 0.5), .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
+            LinearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
             VStack {
                 switch dataManager.selectedFilter?.typeOfContent {
                 case .movies:
@@ -28,7 +28,7 @@ struct ContentView: View {
                                 }
                             }
                             .onDelete(perform: contentViewViewModel.deleteMovie)
-                            .listRowBackground(Color.yellow.mix(with: .black, by: 0.3).opacity(0.1))
+                            .listRowBackground(Color.darkYellow.opacity(0.1))
                         }
                         
                         Section("Watched") {
@@ -38,7 +38,7 @@ struct ContentView: View {
                                 }
                             }
                             .onDelete(perform: contentViewViewModel.deleteMovie)
-                            .listRowBackground(Color.yellow.mix(with: .black, by: 0.3).opacity(0.1))
+                            .listRowBackground(Color.darkYellow.opacity(0.1))
                         }
                     }
                     .scrollContentBackground(.hidden)

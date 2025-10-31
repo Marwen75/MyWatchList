@@ -75,8 +75,8 @@ struct SearchDetailView: View {
             searchDetailViewModel.contentAlreadySaved = searchDetailViewModel.dataManager.isContentAlreadySaved(id: searchDetailViewModel.tmdbId, typeOfContent: searchDetailViewModel.typeOfContent)
         }
         .scrollContentBackground(.hidden)
-        .background(.linearGradient(colors: [.red.mix(with: .black, by: 0.5), .black], startPoint: .top, endPoint: .bottom))
-        .foregroundStyle(.aluminum)
+        .background(.linearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom))
+        .foregroundStyle(.white)
         .alert("Oups", isPresented: $searchDetailViewModel.showAlert) {
             Button("ok") { }
         } message: {
@@ -86,8 +86,7 @@ struct SearchDetailView: View {
         ScrollView {
             VStack {
                 HStack {
-                    BigPosterImageView(maxHeight: 700, path: searchDetailViewModel.tmdbContent?.posterPath ?? "")
-                        .frame(maxWidth: 350, maxHeight: 400)
+                    PosterImageView(searchDetailViewModel.tmdbContent?.posterPath ?? "", size: .flexible(maxWidth: 350, maxHeight: 700))
                         
                     MainInfoView(searchDetailViewModel: searchDetailViewModel)
                 }
@@ -120,7 +119,7 @@ struct SearchDetailView: View {
                 } label: {
                     Label(searchDetailViewModel.contentAlreadySaved ? "Remove from watchlist" : "Add to watchlist", systemImage: "list.and.film")
                 }
-                .foregroundStyle(searchDetailViewModel.contentAlreadySaved ? .yellow.mix(with: .black, by: 0.1) : .waterGreen)
+                .foregroundStyle(searchDetailViewModel.contentAlreadySaved ? .yellow.mix(with: .black, by: 0.1) : .darkGreen)
                 .buttonStyle(.bordered)
                 .padding()
             }
@@ -129,8 +128,8 @@ struct SearchDetailView: View {
             CustomDivider()
                 .padding()
         }
-        .background(.linearGradient(colors: [.red.mix(with: .black, by: 0.5), .black], startPoint: .top, endPoint: .bottom))
-        .foregroundStyle(.aluminum)
+        .background(.linearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom))
+        .foregroundStyle(.white)
         .alert("Oups", isPresented: $searchDetailViewModel.showAlert) {
             Button("ok") { }
         } message: {

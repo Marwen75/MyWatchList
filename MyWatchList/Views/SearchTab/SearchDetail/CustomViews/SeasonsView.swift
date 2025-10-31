@@ -22,12 +22,12 @@ struct SeasonsView: View {
                         VStack {
                             Text(season.name ?? "Season \(season.seasonNumber ?? 0)")
                             if let posterPath = season.posterPath {
-                                SmallPosterImageView(maxWidth: 150, maxHeight: 200, path: posterPath)
+                                PosterImageView(path: posterPath, size: .flexible(maxWidth: 150, maxHeight: 200))
                             } else {
                                 ContentUnavailableView {
                                     Label("No Poster", systemImage: "film")
                                         .font(.system(size: 12).italic())
-                                        .foregroundStyle(.aluminum)
+                                        .foregroundStyle(.white)
                                         .labelStyle(.iconOnly)
                                 }
                                 .cornerRadius(15)
@@ -42,19 +42,19 @@ struct SeasonsView: View {
                     VStack {
                         Text(season.name ?? "Season \(season.seasonNumber ?? 0)")
                         if let posterPath = season.posterPath {
-                            SmallPosterImageView(maxWidth: 150, maxHeight: 200, path: posterPath)
+                            PosterImageView(path: posterPath, size: .flexible(maxWidth: 150, maxHeight: 200))
                         } else {
                             ContentUnavailableView {
                                 Label("No Poster", systemImage: "film")
                                     .font(.system(size: 12).italic())
-                                    .foregroundStyle(.aluminum)
+                                    .foregroundStyle(.white)
                                     .labelStyle(.iconOnly)
                             }
                             .cornerRadius(15)
                             .background {
                                 RoundedRectangle(cornerRadius: 5).stroke(Color.yellow.mix(with: .black, by: 0.1), lineWidth: 1)
                             }
-                            .shadow(color: Color.aluminum, radius: 3)
+                            .shadow(color: Color.white, radius: 3)
                         }
                     }
                     .onTapGesture {

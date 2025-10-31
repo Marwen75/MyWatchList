@@ -11,7 +11,7 @@ struct TvShowPosterView: View {
     @ObservedObject var tvShow: TvShow
     
     var body: some View {
-        BigPosterImageView(maxHeight: 650, path: tvShow.showPoster)
+        PosterImageView(path: tvShow.showPoster, size: .flexible(maxHeight: 650))
     }
 }
 

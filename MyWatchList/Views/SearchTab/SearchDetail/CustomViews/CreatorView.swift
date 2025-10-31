@@ -15,7 +15,7 @@ struct CreatorView: View {
             HStack(spacing: 10) {
                 ForEach(searchDetailViewModel.creators) { creator in
                     if let profilePath = creator.profilePath {
-                        PersonImageView(width: 50, height: 50, profilePath: profilePath)
+                        PosterImageView(path: profilePath, shape: .circle, size: .fixed(width: 50, height: 50), contentMode: .fill)
                     } else {
                         Image(systemName: "person.circle.fill")
                             .resizable()

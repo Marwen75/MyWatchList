@@ -11,7 +11,7 @@ import SwiftUI
 struct NoContentView: View {
     var body: some View {
         ZStack {
-            LinearGradient(colors: [.red.mix(with: .black, by: 0.5), .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
+            LinearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
             
             Text("No Content Selected")
                 .font(.title)

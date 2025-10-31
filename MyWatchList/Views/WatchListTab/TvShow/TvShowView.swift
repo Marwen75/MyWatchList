@@ -13,11 +13,11 @@ struct TvShowView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(colors: [.red.mix(with: .black, by: 0.5), .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
+            LinearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
             
             Form {
                 Section(tvShow.showTitle) {
-                    BigPosterImageView(maxHeight: 650, path: tvShow.showPoster)
+                    PosterImageView(path: tvShow.showPoster, size: .flexible(maxHeight: 650))
                     
                     VStack {
                         HStack {
@@ -37,33 +37,33 @@ struct TvShowView: View {
                     TvShowPriorityAndTagView(tvShow: tvShow)
                 }
                 .sectionTitleStyle()
-                .listRowBackground(Color.darkBeige.opacity(0.1))
+                .listRowBackground(Color.darkYellow.opacity(0.1))
                 
 #if os(iOS)
                 Section(tvShow.showSeasons.count > 1 ? "Seasons" : "Season") {
                     TvShowSeasonsListView(tvShow: tvShow)
                 }
                 .sectionTitleStyle()
-                .listRowBackground(Color.darkBeige.opacity(0.1))
+                .listRowBackground(Color.darkYellow.opacity(0.1))
 #endif
                 
                 Section("Informations") {
                     TvShowMainInfoView(tvShow: tvShow)
                 }
                 .sectionTitleStyle()
-                .listRowBackground(Color.darkBeige.opacity(0.1))
+                .listRowBackground(Color.darkYellow.opacity(0.1))
                 
                 Section("Trailer") {
                     TvShowTrailerView(tvShow: tvShow)
                 }
                 .sectionTitleStyle()
-                .listRowBackground(Color.darkBeige.opacity(0.1))
+                .listRowBackground(Color.darkYellow.opacity(0.1))
                 
                 Section("Cast") {
                     TvShowCastView(tvShow: tvShow)
                 }
                 .sectionTitleStyle()
-                .listRowBackground(Color.darkBeige.opacity(0.1))
+                .listRowBackground(Color.darkYellow.opacity(0.1))
             }
             .scrollContentBackground(.hidden)
             .onAppear {
