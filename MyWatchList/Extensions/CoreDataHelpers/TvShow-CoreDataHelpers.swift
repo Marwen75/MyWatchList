@@ -64,10 +64,10 @@ extension TvShow {
     
     /// Return a list of tag names to display
     var showTagsList: String {
-        guard let tags else { return "No tags" }
+        guard let tags else { return NSLocalizedString("No tags", comment: "No tags") }
 
         if tags.count == 0 {
-            return "No tags"
+            return NSLocalizedString("No tags", comment: "No tags")
         } else {
             return showTags.map(\.tagName).formatted()
         }

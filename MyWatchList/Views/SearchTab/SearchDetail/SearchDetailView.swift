@@ -86,15 +86,17 @@ struct SearchDetailView: View {
         ScrollView {
             VStack {
                 HStack {
-                    PosterImageView(searchDetailViewModel.tmdbContent?.posterPath ?? "", size: .flexible(maxWidth: 350, maxHeight: 700))
-                        
-                    MainInfoView(searchDetailViewModel: searchDetailViewModel)
+                    PosterImageView(path: searchDetailViewModel.tmdbContent?.posterPath ?? "", size: .flexible(maxWidth: 350, maxHeight: 500))
+                    
+                    VStack {
+                        MainInfoView(searchDetailViewModel: searchDetailViewModel)
+                        Spacer()
+                    }
                 }
                 
-                CustomDivider()
-                    .padding()
-                
                 if searchDetailViewModel.typeOfContent == .shows {
+                    CustomDivider()
+                        .padding()
                     SeasonsView(searchDetailViewModel: searchDetailViewModel)
                 }
                 

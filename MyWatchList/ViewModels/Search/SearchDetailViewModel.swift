@@ -51,7 +51,10 @@ class SearchDetailViewModel: ObservableObject {
             switch typeOfContent {
             case .movies:
                 let movieDetails = try await networkManager.fetch(.movieDetails,
-                                                                  parameters: [URLQueryItem(name: "append_to_response", value: "videos")],
+                                                                  parameters: [
+                                                                    URLQueryItem(name: "append_to_response", value: "videos"),
+                                                                    URLQueryItem(name: "language", value: Locale.appLanguageCode)
+                                                                  ],
                                                                   contentId: String(tmdbId),
                                                                   withCredits: false, withSeasonDetails: false,
                                                                   seasonNumber: nil)
@@ -59,7 +62,10 @@ class SearchDetailViewModel: ObservableObject {
                 tmdbContent = movieDetails
             default:
                 let tvShowDetails = try await networkManager.fetch(.tvShowDetails,
-                                                                   parameters: [URLQueryItem(name: "append_to_response", value: "videos")],
+                                                                   parameters: [
+                                                                    URLQueryItem(name: "append_to_response", value: "videos"),
+                                                                    URLQueryItem(name: "language", value: Locale.appLanguageCode)
+                                                                   ],
                                                                    contentId: String(tmdbId),
                                                                    withCredits: false, withSeasonDetails: false,
                                                                    seasonNumber: nil)
@@ -80,10 +86,10 @@ class SearchDetailViewModel: ObservableObject {
     func fetchSeasonDetails(tmdbContent: TmdbContent) async {
         do {
             if let contentSeasons = tmdbContent.seasons {
-                let seasonsFiltered = contentSeasons.filter({ $0.airDate != nil && $0.name != "Specials" })
+                let seasonsFiltered = contentSeasons.filter({ $0.airDate != nil && $0.name != "Specials" && $0.seasonNumber != 0 })
                 for i in 0..<seasonsFiltered.count {
                     let season = try await networkManager.fetch(.seasonDetails,
-                                                                parameters: nil, contentId: String(tmdbId),
+                                                                parameters: [URLQueryItem(name: "language", value: Locale.appLanguageCode)], contentId: String(tmdbId),
                                                                 withCredits: false, withSeasonDetails: true, seasonNumber: i + 1)
                     
                     seasons.append(season)

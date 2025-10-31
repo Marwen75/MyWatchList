@@ -30,7 +30,7 @@ struct SeasonDetailView: View {
                         
                     Spacer()
                     
-                    Text("Episodes: \(season.episodeCount, default: "N.A")")
+                    Text("Episodes: \(season.episodes?.count, default: "N.A")")
                 }
                 .infoStyle()
                 

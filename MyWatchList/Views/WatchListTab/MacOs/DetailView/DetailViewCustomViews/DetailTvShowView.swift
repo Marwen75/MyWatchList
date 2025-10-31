@@ -19,7 +19,7 @@ struct DetailTvShowView: View {
         ScrollView {
             VStack {
                 HStack {
-                    PosterImageView(tvShow.showPoster, size: .flexible(maxWidth: 350, maxHeight: 700))
+                    PosterImageView(path: tvShow.showPoster, size: .flexible(maxWidth: 350, maxHeight: 500))
                         .onChange(of: tvShow) {
                             shouldRefresh.toggle()
                         }
@@ -69,15 +69,6 @@ struct DetailTvShowView: View {
             CustomDivider()
                 .padding()
             
-            Button {
-                tvShow.watched.toggle()
-            } label: {
-                Text(tvShow.watched ? "Mark as unwatched" : "Mark as watched")
-            }
-            .frame(width: 200, height: 150)
-            .padding()
-            .buttonStyle(.borderedProminent)
-            .tint(tvShow.watched ? Color.darkGreen : Color.darkYellow)
         }
         .background(.linearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom))
         .sheet(isPresented: $showSeasonSheet) {

@@ -33,13 +33,13 @@ class SearchViewModel: ObservableObject {
         do {
             switch selectedTypeOfContent {
             case .movies:
-                let searchResults = try await networkManager.fetch(.movies, parameters: [URLQueryItem(name: "query", value: searchText), URLQueryItem(name: "page", value: String(currentPage))], contentId: nil, withCredits: false, withSeasonDetails: false, seasonNumber: nil)
+                let searchResults = try await networkManager.fetch(.movies, parameters: [URLQueryItem(name: "query", value: searchText), URLQueryItem(name: "page", value: String(currentPage)), URLQueryItem(name: "language", value: Locale.appLanguageCode)], contentId: nil, withCredits: false, withSeasonDetails: false, seasonNumber: nil)
                 
                 totalPages = searchResults.totalPages
                 tmdbContents.append(contentsOf: searchResults.results)
                 tmdbContents = tmdbContents.uniqued().filter { $0.posterPath != nil }
             default:
-                let searchResults = try await networkManager.fetch(.tvShows, parameters: [URLQueryItem(name: "query", value: searchText), URLQueryItem(name: "page", value: String(currentPage))], contentId: nil, withCredits: false, withSeasonDetails: false, seasonNumber: nil)
+                let searchResults = try await networkManager.fetch(.tvShows, parameters: [URLQueryItem(name: "query", value: searchText), URLQueryItem(name: "page", value: String(currentPage)), URLQueryItem(name: "language", value: Locale.appLanguageCode)], contentId: nil, withCredits: false, withSeasonDetails: false, seasonNumber: nil)
                 
                 totalPages = searchResults.totalPages
                 tmdbContents.append(contentsOf: searchResults.results)

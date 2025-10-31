@@ -17,7 +17,7 @@ struct DetailMovieView: View {
     var body: some View {
         ScrollView {
             HStack {
-                PosterImageView(movie.moviePoster, size: .flexible(maxWidth: 350, maxHeight: 700))
+                PosterImageView(path: movie.moviePoster, size: .flexible(maxWidth: 350, maxHeight: 500))
                     .onChange(of: movie) {
                         shouldRefresh.toggle()
                     }

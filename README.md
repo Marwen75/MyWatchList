@@ -33,6 +33,9 @@ It combines smooth performance and smart filtering to make managing your watchli
 
 - 🧪 **Unit & UI Tests**  
   A robust test suite ensures app reliability and smooth user experience.
+  
+- 🌍 **Localization in multiple languages** 
+  The app is available in french and english.
 
 ___
 
@@ -72,7 +75,6 @@ ___
 
 Here’s what’s next for **MyWatchList** 👇
 
-- 🌍 **Localization in multiple languages** (French, English, Spanish, etc.)
 - 🔍 **Spotlight integration** — search for shows directly from macOS or iOS Spotlight.
 - 🔔 **Smart notifications** — reminders for upcoming releases or episodes.
 - 💎 **Premium version** — unlock exclusive features and customization options.

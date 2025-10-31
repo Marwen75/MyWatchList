@@ -14,8 +14,8 @@ struct Filter: Identifiable, Hashable {
     var typeOfContent: TypeOfContent
     var tag: Tag?
     
-    static var movies = Filter(id: UUID(), name: "Movies", icon: "film", typeOfContent: .movies)
-    static var tvShows = Filter(id: UUID(), name: "Tv Shows", icon: "tv", typeOfContent: .shows)
+    static var movies = Filter(id: UUID(), name: NSLocalizedString("Movies", comment: "All movies"), icon: "film", typeOfContent: .movies)
+    static var tvShows = Filter(id: UUID(), name: NSLocalizedString("Tv Shows", comment: "All shows"), icon: "tv", typeOfContent: .shows)
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
