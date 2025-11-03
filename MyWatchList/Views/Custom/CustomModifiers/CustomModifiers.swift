@@ -60,17 +60,11 @@ struct ShapeModifier: ViewModifier {
         case .rounded(let radius):
             content
                 .cornerRadius(radius)
-                .background {
-                    RoundedRectangle(cornerRadius: radius)
-                        .stroke(Color.darkYellow, lineWidth: 1)
-                }
+                .background { RoundedRectangle(cornerRadius: radius).stroke(Color.darkYellow, lineWidth: 1) }
         case .circle:
             content
                 .clipShape(Circle())
-                .background {
-                    Circle()
-                        .stroke(Color.darkYellow, lineWidth: 1)
-                }
+                .background { Circle().stroke(Color.darkYellow, lineWidth: 1) }
         }
     }
 }

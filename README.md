@@ -36,6 +36,9 @@ It combines smooth performance and smart filtering to make managing your watchli
   
 - 🌍 **Localization in multiple languages** 
   The app is available in french and english.
+  
+- 🔍 **Spotlight integration** 
+  Search for movies or shows directly from macOS or iOS Spotlight and be redirected directly on the content page.
 
 ___
 
@@ -75,7 +78,6 @@ ___
 
 Here’s what’s next for **MyWatchList** 👇
 
-- 🔍 **Spotlight integration** — search for shows directly from macOS or iOS Spotlight.
 - 🔔 **Smart notifications** — reminders for upcoming releases or episodes.
 - 💎 **Premium version** — unlock exclusive features and customization options.
 - ⌚ **Apple Watch compatibility** — track progress and mark episodes from your wrist.

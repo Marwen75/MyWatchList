@@ -37,11 +37,10 @@ final class MyWatchListUITests: XCTestCase {
         XCTAssertEqual(tabBarButtons.count, 2, "There should be 2 buttons inside the tab bar.")
     }
     
-    
     @MainActor
     func testAddMovieFromSearchShouldAppearInMainList() throws {
-        let searchTab = app.tabBars.buttons["Search"]
-        XCTAssertTrue(searchTab.waitForExistence(timeout: 3))
+        let searchTab = app.tabBars.buttons.element(boundBy: 1)
+        XCTAssertTrue(searchTab.waitForExistence(timeout: 5))
         searchTab.tap()
 
         let searchField = app.textFields["searchField"]
@@ -64,11 +63,11 @@ final class MyWatchListUITests: XCTestCase {
         XCTAssertTrue(addButton.waitForExistence(timeout: 10), "The 'add' button should appear afeter scrolling.")
         addButton.tap()
 
-        let watchlistTab = app.tabBars.buttons["Watch list"]
+        let watchlistTab = app.tabBars.buttons["wlTab"]
         XCTAssertTrue(watchlistTab.waitForExistence(timeout: 3))
         watchlistTab.tap()
 
-        let movieCell = app.staticTexts.containing(NSPredicate(format: "label CONTAINS[c] %@", "Star Trek")).firstMatch
+        let movieCell = app.staticTexts.containing(NSPredicate(format: "label CONTAINS[c] %@", "Alien")).firstMatch
         XCTAssertTrue(movieCell.waitForExistence(timeout: 5), "The movie should appear in the watchlist.")
         
         movieCell.tap()
@@ -76,20 +75,20 @@ final class MyWatchListUITests: XCTestCase {
         app.swipeUp()
     }
     
-    @MainActor
+    //@MainActor
     func testAddTvShowFromSearchShouldAppearInMainList() throws {
-        let searchTab = app.tabBars.buttons["Search"]
+        let searchTab = app.tabBars.buttons.element(boundBy: 1)
         XCTAssertTrue(searchTab.waitForExistence(timeout: 3))
         searchTab.tap()
         
-        let tvSegment = app.segmentedControls.buttons["Tv Shows"]
+        let tvSegment = app.segmentedControls.buttons.element(boundBy: 1)
         XCTAssertTrue(tvSegment.waitForExistence(timeout: 3))
         tvSegment.tap()
         
         let searchField = app.textFields["searchField"]
         XCTAssertTrue(searchField.waitForExistence(timeout: 5))
         searchField.tap()
-        searchField.typeText("Sons of anarchy\n")
+        searchField.typeText("Breaking Bad\n")
         
         let firstResultImage = app.images.matching(NSPredicate(format: "identifier BEGINSWITH %@", "searchResult_")).firstMatch
         XCTAssertTrue(firstResultImage.waitForExistence(timeout: 10), "The image from the tv show should exist")
@@ -107,7 +106,7 @@ final class MyWatchListUITests: XCTestCase {
         XCTAssertTrue(addButton.waitForExistence(timeout: 10))
         addButton.tap()
         
-        let watchlistTab = app.tabBars.buttons["Watch list"]
+        let watchlistTab = app.tabBars.buttons["wlTab"]
         XCTAssertTrue(watchlistTab.waitForExistence(timeout: 3))
         watchlistTab.tap()
         
@@ -115,7 +114,7 @@ final class MyWatchListUITests: XCTestCase {
         XCTAssertTrue(filterButton.waitForExistence(timeout: 5), "Filter button should exist.")
         filterButton.tap()
         
-        let tvShowsButton = app.cells.staticTexts["Tv Shows"]
+        let tvShowsButton = app.cells.element(boundBy: 2)
         XCTAssertTrue(tvShowsButton.waitForExistence(timeout: 5), "Tv filter button from sheet view should exist.")
         tvShowsButton.tap()
         

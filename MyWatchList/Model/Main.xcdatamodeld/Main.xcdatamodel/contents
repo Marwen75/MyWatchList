@@ -15,9 +15,9 @@
         <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Movie" inverseName="directors" inverseEntity="Movie"/>
         <relationship name="shows" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TvShow" inverseName="directors" inverseEntity="TvShow"/>
     </entity>
-    <entity name="Movie" representedClassName="Movie" syncable="YES" codeGenerationType="class">
+    <entity name="Movie" representedClassName="Movie" syncable="YES" codeGenerationType="class" coreSpotlightDisplayNameExpression="title">
         <attribute name="budget" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="genres" optional="YES" attributeType="String"/>
+        <attribute name="genres" optional="YES" attributeType="String" spotlightIndexingEnabled="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="imdbUrl" optional="YES" attributeType="String"/>
         <attribute name="overview" optional="YES" attributeType="String"/>
@@ -25,7 +25,7 @@
         <attribute name="priority" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="releaseDate" optional="YES" attributeType="String"/>
         <attribute name="runTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String" spotlightIndexingEnabled="YES"/>
         <attribute name="trailerUrl" optional="YES" attributeType="String"/>
         <attribute name="voteAverage" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="watched" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -66,9 +66,9 @@
         <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Movie" inverseName="tags" inverseEntity="Movie"/>
         <relationship name="shows" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TvShow" inverseName="tags" inverseEntity="TvShow"/>
     </entity>
-    <entity name="TvShow" representedClassName="TvShow" syncable="YES" codeGenerationType="class">
+    <entity name="TvShow" representedClassName="TvShow" syncable="YES" codeGenerationType="class" coreSpotlightDisplayNameExpression="title">
         <attribute name="firstAirDate" optional="YES" attributeType="String"/>
-        <attribute name="genres" optional="YES" attributeType="String"/>
+        <attribute name="genres" optional="YES" attributeType="String" spotlightIndexingEnabled="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="imdbUrl" optional="YES" attributeType="String"/>
         <attribute name="inProduction" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -78,7 +78,7 @@
         <attribute name="overview" optional="YES" attributeType="String"/>
         <attribute name="poster" optional="YES" attributeType="String" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="priority" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String" spotlightIndexingEnabled="YES"/>
         <attribute name="trailerUrl" optional="YES" attributeType="String"/>
         <attribute name="voteAverage" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="watched" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>

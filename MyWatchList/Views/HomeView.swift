@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreSpotlight
 
 struct HomeView: View {
     @Environment(\.networkManager) var networkManager
@@ -51,13 +52,39 @@ struct HomeView: View {
                     .environmentObject(dataManager)
 #endif
             }
+            .accessibilityIdentifier("wlTab")
             
             Tab("Search", systemImage: "plus.magnifyingglass", value: .search) {
                 SearchView(dataManager: dataManager, networkManager: networkManager)
                     .environmentObject(searchPathManager)
             }
+            .accessibilityIdentifier("schTab")
+        }
+        .onContinueUserActivity(CSSearchableItemActionType, perform: loadSpotlightItem)
+    }
+    
+    func loadSpotlightItem(_ userActivity: NSUserActivity) {
+        if let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
+            if let movie = dataManager.movie(with: uniqueIdentifier) {
+                dataManager.selectedFilter = .movies
+                dataManager.selectedMovie = movie
+                #if os(iOS)
+                watchListPathManager.push(to: .movieDetails(movie: movie))
+                #endif
+            } else if let tvShow = dataManager.tvShow(with: uniqueIdentifier) {
+                dataManager.selectedFilter = .tvShows
+                dataManager.selectedShow = tvShow
+                #if os(iOS)
+                watchListPathManager.push(to: .tvShowDetails(tvShow: tvShow))
+                #endif
+            }
         }
     }
+}
+
+enum Tabs: Equatable, Hashable {
+    case userContent
+    case search
 }
 
 #Preview {

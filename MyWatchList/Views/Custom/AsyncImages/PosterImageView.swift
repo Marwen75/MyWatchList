@@ -32,7 +32,6 @@ struct PosterImageView: View {
         self.contentMode = contentMode
     }
     
-    
     var body: some View {
         AsyncImage(url: networkManager.imageURL.appending(path: path)) { image in
             image

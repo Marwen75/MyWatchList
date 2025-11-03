@@ -20,6 +20,7 @@ struct MyWatchListApp: App {
     init() {
         if CommandLine.arguments.contains("enable-testing") {
             // Deactivate animations for ui testing
+            dataManager.deleteAll()
             UIView.setAnimationsEnabled(false)
         }
     }
@@ -33,9 +34,4 @@ struct MyWatchListApp: App {
                 .environmentObject(dataManager)
         }
     }
-}
-
-enum Tabs: Equatable, Hashable {
-    case userContent
-    case search
 }

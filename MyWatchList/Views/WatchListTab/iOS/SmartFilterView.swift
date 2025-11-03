@@ -27,6 +27,7 @@ struct SmartFilterView: View {
                             dismiss()
                         }
                         .foregroundStyle(watchListViewModel.selectedFilter == filter ? .white : .gray)
+                        .accessibilityIdentifier(filter.name)
                     }
                 }
                 .listRowBackground(Color.yellow.mix(with: .black, by: 0.1).opacity(0.1))

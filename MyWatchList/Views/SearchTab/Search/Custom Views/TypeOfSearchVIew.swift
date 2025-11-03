@@ -14,7 +14,7 @@ struct TypeOfSearchVIew: View {
         VStack {
             Picker("", selection: $searchViewModel.selectedTypeOfContent) {
                 ForEach(searchViewModel.typeOfContent, id: \.self) {
-                    Text($0.rawValue)
+                    Text(NSLocalizedString($0.rawValue, comment: ""))
                 }
             }
             .pickerStyle(.segmented)

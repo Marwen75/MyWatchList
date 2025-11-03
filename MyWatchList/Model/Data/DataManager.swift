@@ -9,6 +9,7 @@ import CoreData
 
 class DataManager: ObservableObject {
     let container: NSPersistentCloudKitContainer
+    var spotlightDelegate: NSCoreDataCoreSpotlightDelegate?
     
     @Published var selectedFilter: Filter? = Filter.movies
     @Published var selectedMovie: Movie?
@@ -66,9 +67,22 @@ class DataManager: ObservableObject {
                                                queue: .main,
                                                using: remoteStoreChanged)
         
-        container.loadPersistentStores { description, error in
+        
+        container.loadPersistentStores { [weak self] _, error in
             if let error {
                 fatalError("Fatal error while loading persistent stores: \(error.localizedDescription)")
+            }
+            
+            // Initializing the spotlight delegate so the user can
+            // search for an Movie or a Tv Show from his home screen
+            if let description = self?.container.persistentStoreDescriptions.first {
+                description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+                
+                if let coordinator = self?.container.persistentStoreCoordinator {
+                    self?.spotlightDelegate = NSCoreDataCoreSpotlightDelegate(forStoreWith: description, coordinator: coordinator)
+                }
+                
+                self?.spotlightDelegate?.startSpotlightIndexing()
             }
         }
     }
@@ -471,7 +485,7 @@ class DataManager: ObservableObject {
         let predicates = getAllPredicates(forFilter: .tvShows)
         let request = TvShow.fetchRequest()
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-        request.sortDescriptors = [NSSortDescriptor(key: "watched", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         
         let allShows = (try? container.viewContext.fetch(request)) ?? []
         
@@ -561,5 +575,27 @@ class DataManager: ObservableObject {
             }
         }
         return true
+    }
+    
+    /// Tries to create a movie from spotlight search
+    /// - Parameter uniqueIdentifier: The core data unique identifier
+    /// - Returns: If successful a Movie object else nil
+    func movie(with uniqueIdentifier: String) -> Movie? {
+        guard let url = URL(string: uniqueIdentifier) else { return nil }
+        
+        guard let id = container.persistentStoreCoordinator.managedObjectID(forURIRepresentation: url) else { return nil }
+        
+        return try? container.viewContext.existingObject(with: id) as? Movie
+    }
+    
+    /// Tries to create a tv show from spotlight search
+    /// - Parameter uniqueIdentifier: The core data unique identifier
+    /// - Returns: If successful a TvShow object else nil
+    func tvShow(with uniqueIdentifier: String) -> TvShow? {
+        guard let url = URL(string: uniqueIdentifier) else { return nil }
+        
+        guard let id = container.persistentStoreCoordinator.managedObjectID(forURIRepresentation: url) else { return nil }
+        
+        return try? container.viewContext.existingObject(with: id) as? TvShow
     }
 }

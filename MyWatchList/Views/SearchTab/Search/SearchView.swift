@@ -43,7 +43,7 @@ struct SearchView: View {
                 }
             }
             .navigationTitle("Search")
-            //.navigationBarTitleDisplayMode(.inline)
+            .inlineNavigationBar()
             .alert("Oups", isPresented: $searchViewModel.showAlert) {
                 Button("ok") { }
             } message: {
