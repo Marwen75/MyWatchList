@@ -122,15 +122,15 @@ final class SearchDetailViewModelTests: MyWatchListBaseTestCase {
         
         await vm.waitUntilLoaded()
         
-        XCTAssertFalse(vm.errorMessage.isEmpty)
+        XCTAssertEqual(vm.appError, .invalidURL)
     }
     
     func testSearchDetailsWhenNetworkFailsShouldSetErrorMessage() async {
-        let failingNetwork = MockNetworkManager(fileName: .movieDetails, shouldFail: true, mockError: .badServerResponse)
+        let failingNetwork = MockNetworkManager(fileName: .movieDetails, shouldFail: true, mockError: .networkFailed)
         vm = SearchDetailViewModel(dataManager: dataManager, networkManager: failingNetwork, tmdbId: 54138, typeOfContent: .movies)
         
         await vm.waitUntilLoaded()
         
-        XCTAssertFalse(vm.errorMessage.isEmpty)
+        XCTAssertEqual(vm.appError, .networkFailed)
     }
 }

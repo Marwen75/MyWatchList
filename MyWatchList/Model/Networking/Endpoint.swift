@@ -7,27 +7,63 @@
 
 import Foundation
 
-struct Endpoint<T: Decodable> {
+struct Endpoint<Response: Decodable> {
     var path: String
-    var type: T.Type
     var method = HTTPMethod.get
+    var pathComponents: [String]
+    let queryItems: [URLQueryItem]
+    
+    init(path: String, method: HTTPMethod = HTTPMethod.get, pathComponents: [String] = [], queryItems: [URLQueryItem] = []) {
+        self.path = path
+        self.method = method
+        self.pathComponents = pathComponents
+        
+        var combinedItems = queryItems
+        combinedItems.append(URLQueryItem(name: "language", value: Locale.appLanguageCode))
+        self.queryItems = combinedItems
+    }
 }
 
-extension Endpoint where T == TmdbContent {
-    static let movieDetails = Endpoint(path: "movie", type: TmdbContent.self)
-    static let tvShowDetails = Endpoint(path: "tv", type: TmdbContent.self)
+extension Endpoint where Response == TmdbContent {
+    static func movieDetails(id: String, includeCredits: Bool = false) -> Self {
+        var components = [id]
+        if includeCredits { components.append("credits") }
+        let queryItems = [URLQueryItem(name: "append_to_response", value: "videos")]
+        
+        return Endpoint(path: "movie", pathComponents: components, queryItems: queryItems)
+    }
+    
+    static func tvShowDetails(id: String, includeCredits: Bool = false) -> Self {
+        var components = [id]
+        if includeCredits { components.append("credits") }
+        let queryItems = [URLQueryItem(name: "append_to_response", value: "videos")]
+        
+        return Endpoint(path: "tv", pathComponents: components, queryItems: queryItems)
+    }
 }
 
-extension Endpoint where T == TmdbResult {
-    static let movies = Endpoint(path: "search/movie", type: TmdbResult.self)
-    static let tvShows = Endpoint(path: "search/tv", type: TmdbResult.self)
+extension Endpoint where Response == TmdbResult {
+    static func movies(query: String, page: Int = 1) -> Self {
+        Endpoint(path: "search/movie", queryItems: [URLQueryItem(name: "query", value: query), URLQueryItem(name: "page", value: "\(page)")])
+    }
+
+    static func shows(query: String, page: Int = 1) -> Self {
+        Endpoint(path: "search/tv",queryItems: [URLQueryItem(name: "query", value: query), URLQueryItem(name: "page", value: "\(page)")])
+    }
 }
 
-extension Endpoint where T == Credits {
-    static let movieCredits = Endpoint(path: "movie", type: Credits.self)
-    static let showCredits = Endpoint(path: "tv", type: Credits.self)
+extension Endpoint where Response == Credits {
+    static func movieCredits(id: String) -> Self {
+        Endpoint(path: "movie", pathComponents: [id, "credits"])
+    }
+
+    static func showCredits(id: String) -> Self {
+        Endpoint(path: "tv", pathComponents: [id, "credits"])
+    }
 }
 
-extension Endpoint where T == Season {
-    static let seasonDetails = Endpoint(path: "tv", type: Season.self)
+extension Endpoint where Response == Season {
+    static func seasonDetails(showId: String, seasonNumber: Int) -> Self {
+        Endpoint(path: "tv", pathComponents: [showId, "season", "\(seasonNumber)"])
+    }
 }

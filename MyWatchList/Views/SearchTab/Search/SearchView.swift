@@ -11,6 +11,7 @@ struct SearchView: View {
     @Environment(\.networkManager) var networkManager
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var searchPathManager: SearchPathManager
+    @EnvironmentObject var errorManager: ErrorManager
     @StateObject var searchViewModel: SearchViewModel
     
     init(dataManager: DataManager, networkManager: NetworkManager) {
@@ -44,10 +45,10 @@ struct SearchView: View {
             }
             .navigationTitle("Search")
             .inlineNavigationBar()
-            .alert("Oups", isPresented: $searchViewModel.showAlert) {
-                Button("ok") { }
-            } message: {
-                Text(searchViewModel.errorMessage)
+            .onChange(of: searchViewModel.appError) { _, newError in
+                if let error = newError {
+                    errorManager.present(error)
+                }
             }
         }
     }
@@ -56,4 +57,5 @@ struct SearchView: View {
 #Preview {
     SearchView(dataManager: DataManager.preview, networkManager: NetworkManager(environment: .testing))
         .environmentObject(SearchPathManager())
+        .environmentObject(ErrorManager())
 }

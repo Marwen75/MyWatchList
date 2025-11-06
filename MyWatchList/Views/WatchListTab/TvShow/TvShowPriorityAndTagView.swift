@@ -18,7 +18,7 @@ struct TvShowPriorityAndTagView: View {
             Label(tvShow.watched ? "Re-watch soon" : "Must watch", systemImage: "eye").tag(Int16(1))
             Label(tvShow.watched ? "Re-watch urgently" : "Watch urgently", systemImage: "eye.trianglebadge.exclamationmark").tag(Int16(2))
         }
-        .pickerStyle(.automatic)
+        .foregroundStyle(.white)
         
         Menu {
             ForEach(tvShow.showTags) { tag in
@@ -47,7 +47,7 @@ struct TvShowPriorityAndTagView: View {
         } label: {
             Text(tvShow.showTagsList).underline()
                 .multilineTextAlignment(.leading)
-                .infoStyle()
+                .foregroundStyle(.yellow)
         }
         
 #else

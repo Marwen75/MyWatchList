@@ -22,21 +22,62 @@ struct DetailMovieView: View {
                         shouldRefresh.toggle()
                     }
                 
-                MovieMainInfoView(movie: movie)
+                VStack {
+                    ItemMainInfoView(item: movie) {
+                        VStack(spacing: 10) {
+                            CustomDivider()
+                            
+                            HStack {
+                                Label("\(movie.movieReleaseDate)", systemImage: "calendar")
+                                
+                                Spacer()
+                                
+                                Label(movie.movieBudget == 0 ? "N/A" : "\(movie.movieBudget)", systemImage: "dollarsign.circle")
+                            }
+                            
+                            CustomDivider()
+                            
+                            HStack {
+                                Label("\(movie.movieRuntime, default: "N/A") minutes", systemImage: "clock")
+                                
+                                Spacer()
+                                
+                                Label(movie.movieVoteAverage == "0" ? "N/A" : movie.movieVoteAverage + "/10", systemImage: "star.circle")
+                            }
+                            
+                            CustomDivider()
+                        }
+                    }
+                    MoviePriorityAndTagView(movie: movie)
+                    
+                    CustomDivider()
+                    
+                    Toggle("Show reminders", isOn: $movie.reminderEnabled)
+                        .toggleStyle(CheckToggleStyle())
+                        .infoStyle()
+                        .padding()
+                    
+                    if movie.reminderEnabled {
+                        DatePicker("Reminder date", selection: $movie.movieReminderDate)
+                            .tint(.darkRed)
+                            .infoStyle()
+                        
+                    }
+                }
             }
             .padding()
             
             CustomDivider()
                 .padding()
             
-            MovieTrailerView(movie: movie)
+            ItemTrailerView(item: movie)
                     .padding()
                     .id(shouldRefresh)
             
             CustomDivider()
                 .padding()
             
-            MovieCastView(movie: movie)
+            ItemCastView(item: movie)
                 .padding()
             
             CustomDivider()

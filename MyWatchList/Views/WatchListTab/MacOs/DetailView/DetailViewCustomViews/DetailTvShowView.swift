@@ -24,7 +24,48 @@ struct DetailTvShowView: View {
                             shouldRefresh.toggle()
                         }
                     
-                    TvShowMainInfoView(tvShow: tvShow)
+                    VStack {
+                        ItemMainInfoView(item: tvShow) {
+                            VStack(spacing: 10) {
+                                CustomDivider()
+                                
+                                HStack {
+                                    Label("\(tvShow.showFirstAirDate)", systemImage: "calendar")
+                                    Spacer()
+                                    
+                                    if tvShow.showInProduction {
+                                        Label("In production", systemImage: "video")
+                                    } else {
+                                        Label(tvShow.showLastAirDate, systemImage: "video.slash")
+                                    }
+                                }
+                                
+                                CustomDivider()
+                                
+                                HStack {
+                                    Label("\(tvShow.showNumberOfEpisodes, default: "N/A") episodes", systemImage: "clock")
+                                    Spacer()
+                                    
+                                    Label(tvShow.showVoteAverage == "0" ? "N/A" : tvShow.showVoteAverage + "/10", systemImage: "star.circle")
+                                }
+                            }
+                        }
+                        
+                        TvShowPriorityAndTagView(tvShow: tvShow)
+                        
+                        CustomDivider()
+                        
+                        Toggle("Show reminders", isOn: $tvShow.reminderEnabled)
+                            .toggleStyle(CheckToggleStyle())
+                            .infoStyle()
+                            .padding()
+                        
+                        if tvShow.reminderEnabled {
+                            DatePicker("Reminder date", selection: $tvShow.showReminderDate)
+                                .tint(.darkRed)
+                                .infoStyle()
+                        }
+                    }
                 }
                 
                 VStack {
@@ -38,7 +79,7 @@ struct DetailTvShowView: View {
                     }
                     ProgressView(value: tvShow.showProgress)
                         .progressViewStyle(.linear)
-                        .tint(Color.darkYellow)
+                        .tint(.yellow)
                 }
                 .infoStyle()
                 .padding()
@@ -56,14 +97,14 @@ struct DetailTvShowView: View {
             CustomDivider()
                 .padding()
             
-            TvShowTrailerView(tvShow: tvShow)
+            ItemTrailerView(item: tvShow)
                     .padding()
                     .id(shouldRefresh)
             
             CustomDivider()
                 .padding()
             
-            TvShowCastView(tvShow: tvShow)
+            ItemCastView(item: tvShow)
                 .padding()
             
             CustomDivider()

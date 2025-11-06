@@ -11,6 +11,7 @@ import SwiftUI
 struct WatchListView: View {
     @EnvironmentObject var watchListPathManager: WatchListPathManager
     @EnvironmentObject var dataManager: DataManager
+    @EnvironmentObject var errorManager: ErrorManager
     @ObservedObject var watchListViewModel: WatchListViewModel
     
     var body: some View {
@@ -75,6 +76,11 @@ struct WatchListView: View {
                         }
                     }
                 }
+                .onChange(of: watchListViewModel.appError) { _, newError in
+                    if let error = newError {
+                        errorManager.present(error)
+                    }
+                }
                 .navigationTitle(watchListViewModel.selectedFilter?.name ?? "")
                 .navigationSubtitle(watchListViewModel.selectedFilter?.typeOfContent == .movies ? "\(watchListViewModel.dataManager.fetchMovies().count) results" : "\(watchListViewModel.dataManager.fetchTvShows().count) results")
                 .navigationBarTitleDisplayMode(.inline)
@@ -100,13 +106,13 @@ struct WatchListView: View {
             .navigationDestination(for: WatchListRoute.self) { route in
                 switch route {
                 case .movieDetails(let movie):
-                    MovieView(movie: movie)
+                    MovieView(movie: movie, dataManager: dataManager)
                 case .tvShowDetails(let tvShow):
-                    TvShowView(tvShow: tvShow)
+                    TvShowView(tvShow: tvShow, dataManager: dataManager)
                 case .seasonDetails(let season):
-                    TvShowSeasonDetailView(season: season)
+                    TvShowSeasonDetailView(season: season, dataManager: dataManager)
                 case .episodeDetails(let episode):
-                    EpisodeDetailView(episode: episode)
+                    EpisodeDetailView(episode: episode, dataManager: dataManager)
                 }
             }
         }

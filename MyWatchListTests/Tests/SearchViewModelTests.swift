@@ -62,6 +62,6 @@ final class SearchViewModelTests: MyWatchListBaseTestCase {
         
         await searchVm.search()
         
-        XCTAssertFalse(searchVm.errorMessage.isEmpty)
+        XCTAssertEqual(searchVm.appError, .invalidURL)
     }
 }

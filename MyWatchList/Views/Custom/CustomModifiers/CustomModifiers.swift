@@ -10,7 +10,7 @@ import SwiftUI
 struct Overview: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.system(size: 15, weight: .thin, design: .serif)).italic()
+            .font(.system(size: 15, weight: .thin, design: .monospaced)).italic()
             .foregroundStyle(.white)
     }
 }
@@ -18,7 +18,7 @@ struct Overview: ViewModifier {
 struct Informations: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.system(size: 15, weight: .light, design: .serif))
+            .font(.system(size: 15, weight: .light, design: .monospaced))
             .foregroundStyle(.white)
     }
 }
@@ -36,6 +36,14 @@ struct ContentTitle: ViewModifier {
         content
             .font(.system(size: 16, weight: .semibold, design: .monospaced))
             .foregroundStyle(.white)
+    }
+}
+
+struct FormSection: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .listRowBackground(Color.darkYellow.opacity(0.1))
+            .sectionTitleStyle()
     }
 }
 

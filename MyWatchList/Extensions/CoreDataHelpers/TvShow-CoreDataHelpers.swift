@@ -8,6 +8,7 @@
 import SwiftUI
 
 extension TvShow {
+    
     var showId: Int {
         Int(id)
     }
@@ -116,6 +117,66 @@ extension TvShow {
     
     var showProgress: Double {
         Double(numberOfEpisodesWatched) / Double(showNumberOfEpisodes)
+    }
+    
+    var showReminderDate: Date {
+        get { reminderDate ?? .now }
+        set { reminderDate = newValue }
+    }
+}
+
+extension TvShow: WatchableItem {
+    var titleForNotification: String {
+        showTitle
+    }
+    
+    var itemReminderDate: Date {
+        showReminderDate
+    }
+    
+    var itemReminderEnabled: Bool {
+        get { reminderEnabled }
+        set { reminderEnabled = newValue }
+    }
+    
+    var itemTitle: String {
+        showTitle
+    }
+    
+    var itemPosterPath: String {
+        showPoster
+    }
+    
+    var trailerPath: String {
+        showTrailer
+    }
+    
+    var itemActors: [Actor] {
+        showActors
+    }
+    
+    var itemCredits: [Director] {
+        showDirectors
+    }
+    
+    var crewLabelSingular: String {
+        NSLocalizedString("Creator", comment: "")
+    }
+    
+    var crewLabelPlural: String {
+        NSLocalizedString("Creators", comment: "")
+    }
+    
+    var itemGenres: String {
+        showGenres
+    }
+    
+    var itemOverview: String {
+        showOverview
+    }
+    
+    var itemRating: String {
+        showVoteAverage == "0" ? "N/A" : "\(showVoteAverage)/10"
     }
 }
 

@@ -24,6 +24,10 @@ extension View {
         modifier(ContentTitle())
     }
     
+    func formSectionStyle() -> some View {
+        modifier(FormSection())
+    }
+    
     func inlineNavigationBar() -> some View {
         #if os(macOS)
         self

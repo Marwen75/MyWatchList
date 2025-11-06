@@ -7,14 +7,6 @@
 
 import Foundation
 
-/// The protocol approach lets us create mocks for testing or replace the network manager in production without to much cost
-@dynamicMemberLookup
-protocol NetworkManagerProtocol {
-    func fetch<T>(_ resource: Endpoint<T>, parameters queryParameters: [URLQueryItem]?, contentId id: String?, withCredits: Bool, withSeasonDetails: Bool, seasonNumber: Int?) async throws -> T
-    
-    subscript<Value>(dynamicMember keyPath: KeyPath<AppEnvironment, Value>) -> Value { get }
-}
-
 @dynamicMemberLookup
 struct NetworkManager: NetworkManagerProtocol {
     var environment: AppEnvironment
@@ -22,49 +14,36 @@ struct NetworkManager: NetworkManagerProtocol {
     /// Fetches in a generic way the data from the network
     /// - Parameters:
     ///   - resource: The endpoint to target for the fetching
-    ///   - queryParameters: The parameters to add to the request
-    ///   - id: The optional id if the request needs it
-    ///   - withCredits: True if the request should include credits
-    ///   - withSeasonDetails: True if the request should include season details
-    ///   - seasonNumber: The season number to fetch
     /// - Returns: A decoded result from the request
     @MainActor
-    func fetch<T>(_ resource: Endpoint<T>, parameters queryParameters: [URLQueryItem]? = nil, contentId id: String? = nil, withCredits: Bool = false, withSeasonDetails: Bool = false, seasonNumber: Int? = nil) async throws -> T {
-        
+    func fetch<T>(_ resource: Endpoint<T>) async throws -> T {
         var url = URL(string: resource.path, relativeTo: environment.baseURL)
-        if let queryItems = queryParameters {
-            url?.append(queryItems: queryItems)
+        
+        for component in resource.pathComponents {
+            url = url?.appendingPathComponent(component)
         }
         
-        if let id {
-            url = url?.appending(path: id)
-            if withCredits {
-                url = url?.appending(path: "credits")
-            }
-            if withSeasonDetails {
-                url = url?.appending(path: "season/" + "\(seasonNumber, default: "")", directoryHint: .notDirectory)
-            }
+        url?.append(queryItems: resource.queryItems)
+        
+        guard let usableUrl = url else { throw AppError.invalidURL }
+        
+        var request = URLRequest(url: usableUrl)
+        request.httpMethod = resource.method.rawValue
+        
+        print("➡️ URL:", url?.absoluteString ?? "nil")
+        
+        let (data, response) = try await environment.session.data(for: request)
+        
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+            throw AppError.invalidRequest
         }
         
-        if let usableUrl = url {
-            var request = URLRequest(url: usableUrl)
-            request.httpMethod = resource.method.rawValue
+        do {
+            let decoder = JSONDecoder()
             
-            let (data, response) = try await environment.session.data(for: request)
-            
-            guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-                throw URLError(.badServerResponse)
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                
-                return try decoder.decode(T.self, from: data)
-            } catch {
-                throw URLError(.cannotDecodeRawData)
-            }
-        } else {
-            throw URLError(.unsupportedURL)
+            return try decoder.decode(T.self, from: data)
+        } catch {
+            throw AppError(error)
         }
     }
     

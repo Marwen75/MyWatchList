@@ -9,7 +9,15 @@ import SwiftUI
 
 struct TvShowView: View {
     @EnvironmentObject var dataManager: DataManager
+    @EnvironmentObject var errorManager: ErrorManager
+    @StateObject var notificationViewModel: NotificationViewModel<TvShow>
     @ObservedObject var tvShow: TvShow
+    
+    init(tvShow: TvShow, dataManager: DataManager) {
+        self.tvShow = tvShow
+        let viewModel = NotificationViewModel(item: tvShow, dataManager: dataManager)
+        _notificationViewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         ZStack {
@@ -17,7 +25,7 @@ struct TvShowView: View {
             
             Form {
                 Section(tvShow.showTitle) {
-                    PosterImageView(path: tvShow.showPoster, size: .flexible(maxHeight: 650))
+                    PosterImageView(path: tvShow.showPoster, size: .flexible(maxHeight: 700))
                     
                     VStack {
                         HStack {
@@ -30,50 +38,93 @@ struct TvShowView: View {
                         }
                         ProgressView(value: tvShow.showProgress)
                             .progressViewStyle(.linear)
-                            .tint(.yellow.mix(with: .black, by: 0.2))
+                            .tint(.yellow)
                     }
                     .infoStyle()
                     
                     TvShowPriorityAndTagView(tvShow: tvShow)
+                        .infoStyle()
                 }
-                .sectionTitleStyle()
-                .listRowBackground(Color.darkYellow.opacity(0.1))
+                .formSectionStyle()
+                
+                Section("Reminders") {
+                    Toggle("Show reminders", isOn: $tvShow.reminderEnabled)
+                        .toggleStyle(CheckToggleStyle())
+                        .infoStyle()
+                    
+                    if tvShow.reminderEnabled {
+                        DatePicker("Reminder date", selection: $tvShow.showReminderDate)
+                            .tint(.darkRed)
+                            .infoStyle()
+                    }
+                }
+                .formSectionStyle()
                 
 #if os(iOS)
                 Section(tvShow.showSeasons.count > 1 ? "Seasons" : "Season") {
                     TvShowSeasonsListView(tvShow: tvShow)
                 }
-                .sectionTitleStyle()
-                .listRowBackground(Color.darkYellow.opacity(0.1))
+                .formSectionStyle()
 #endif
                 
                 Section("Informations") {
-                    TvShowMainInfoView(tvShow: tvShow)
+                    ItemMainInfoView(item: tvShow) {
+                        HStack {
+                            Label("\(tvShow.showFirstAirDate)", systemImage: "calendar")
+                            Spacer()
+                            if tvShow.showInProduction {
+                                Label("In production", systemImage: "video")
+                            } else {
+                                Label(tvShow.showLastAirDate, systemImage: "video.slash")
+                            }
+                        }
+                        .infoStyle()
+                        
+                        HStack {
+                            Label("\(tvShow.showNumberOfEpisodes, default: "N/A") episodes", systemImage: "clock")
+                            Spacer()
+                            Label(tvShow.showVoteAverage == "0" ? "N/A" : tvShow.showVoteAverage + "/10", systemImage: "star.circle")
+                        }
+                        .infoStyle()
+                    }
                 }
-                .sectionTitleStyle()
-                .listRowBackground(Color.darkYellow.opacity(0.1))
+                .formSectionStyle()
                 
                 Section("Trailer") {
-                    TvShowTrailerView(tvShow: tvShow)
+                    ItemTrailerView(item: tvShow)
                 }
-                .sectionTitleStyle()
-                .listRowBackground(Color.darkYellow.opacity(0.1))
+                .formSectionStyle()
                 
                 Section("Cast") {
-                    TvShowCastView(tvShow: tvShow)
+                    ItemCastView(item: tvShow)
+                        .frame(minHeight: 100)
                 }
-                .sectionTitleStyle()
-                .listRowBackground(Color.darkYellow.opacity(0.1))
+                .formSectionStyle()
             }
             .scrollContentBackground(.hidden)
             .onAppear {
                 tvShow.watched = tvShow.numberOfEpisodesWatched == tvShow.numberOfEpisodes
+            }
+            .onChange(of: notificationViewModel.appError) { _, newError in
+                if let error = newError {
+                    errorManager.present(error)
+                }
+            }
+            .onChange(of: tvShow.reminderEnabled) {
+                Task {
+                    await notificationViewModel.updateReminder()
+                }
+            }
+            .onChange(of: tvShow.reminderDate) {
+                Task {
+                    await notificationViewModel.updateReminder()
+                }
             }
         }
     }
 }
 
 #Preview {
-    TvShowView(tvShow: .example)
+    TvShowView(tvShow: .example, dataManager: DataManager.preview)
         .environmentObject(DataManager.preview)
 }

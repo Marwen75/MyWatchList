@@ -12,21 +12,20 @@ struct MockNetworkManager: NetworkManagerProtocol {
     var environment: MyWatchList.AppEnvironment = .testing
     var fileName: JsonResponse
     var shouldFail: Bool = false
-    var mockError: URLError.Code = .badServerResponse
+    var mockError: AppError = .networkFailed
     
-    init(fileName: JsonResponse, shouldFail: Bool = false, mockError: URLError.Code = .badServerResponse) {
+    init(fileName: JsonResponse, shouldFail: Bool = false, mockError: AppError = .networkFailed) {
             self.fileName = fileName
             self.shouldFail = shouldFail
             self.mockError = mockError
     }
     
-    
-    func fetch<T>(_ resource: MyWatchList.Endpoint<T>, parameters queryParameters: [URLQueryItem]?, contentId id: String?, withCredits: Bool, withSeasonDetails: Bool, seasonNumber: Int?) async throws -> T where T : Decodable {
+    func fetch<T>(_ resource: MyWatchList.Endpoint<T>) async throws -> T where T : Decodable {
         if shouldFail {
-            throw URLError(mockError)
+            throw mockError
         }
         
-        guard let url = #bundle.url(forResource: fileName.rawValue, withExtension: "json") else { throw URLError(.fileDoesNotExist) }
+        guard let url = #bundle.url(forResource: fileName.rawValue, withExtension: "json") else { throw AppError.invalidURL }
         
         let data = try Data(contentsOf: url)
         
@@ -35,7 +34,7 @@ struct MockNetworkManager: NetworkManagerProtocol {
             
             return decodedObject
         } catch {
-            throw URLError(.cannotDecodeRawData)
+            throw AppError(error)
         }
     }
     

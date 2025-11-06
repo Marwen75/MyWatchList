@@ -8,7 +8,16 @@
 import SwiftUI
 
 struct MovieView: View {
+    @EnvironmentObject var dataManager: DataManager
+    @EnvironmentObject var errorManager: ErrorManager
+    @StateObject private var notificationViewModel: NotificationViewModel<Movie>
     @ObservedObject var movie: Movie
+    
+    init(movie: Movie, dataManager: DataManager) {
+        self.movie = movie
+        let viewModel = NotificationViewModel(item: movie, dataManager: dataManager)
+        _notificationViewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         ZStack {
@@ -19,33 +28,76 @@ struct MovieView: View {
                     PosterImageView(path: movie.moviePoster, size: .flexible(maxHeight: 700))
                     
                     MoviePriorityAndTagView(movie: movie)
+                        .infoStyle()
                 }
-                .listRowBackground(Color.darkYellow.opacity(0.1))
+                .formSectionStyle()
+                
+                Section("Reminders") {
+                    Toggle("Show reminders", isOn: $movie.reminderEnabled)
+                        .toggleStyle(CheckToggleStyle())
+                        .infoStyle()
+                    
+                    if movie.reminderEnabled {
+                        DatePicker("Reminder date", selection: $movie.movieReminderDate)
+                            .tint(.darkRed)
+                            .infoStyle()
+                    }
+                }
+                .formSectionStyle()
                 
                 Section("Informations") {
-                    MovieMainInfoView(movie: movie)
+                    ItemMainInfoView(item: movie) {
+                        HStack {
+                            Label("\(movie.movieReleaseDate)", systemImage: "calendar")
+                            Spacer()
+                            Label(movie.movieBudget == 0 ? "N/A" : "\(movie.movieBudget)", systemImage: "dollarsign.circle")
+                        }
+                        .infoStyle()
+                        
+                        HStack {
+                            Label("\(movie.movieRuntime, default: "N/A") minutes", systemImage: "clock")
+                            Spacer()
+                            Label(movie.movieVoteAverage == "0" ? "N/A" : movie.movieVoteAverage + "/10", systemImage: "star.circle")
+                        }
+                        .infoStyle()
+                    }
                 }
-                .listRowBackground(Color.darkYellow.opacity(0.1))
+                .formSectionStyle()
                 
                 Section("Trailer") {
-                    MovieTrailerView(movie: movie)
+                    ItemTrailerView(item: movie)
                 }
-                .listRowBackground(Color.darkYellow.opacity(0.1))
+                .formSectionStyle()
                 
                 Section("Cast") {
-                    MovieCastView(movie: movie)
+                    ItemCastView(item: movie)
                         .frame(minHeight: 100)
                 }
-                .listRowBackground(Color.darkYellow.opacity(0.1))
+                .formSectionStyle()
             }
             .scrollContentBackground(.hidden)
+            .onChange(of: notificationViewModel.appError) { _, newError in
+                if let error = newError {
+                    errorManager.present(error)
+                }
+            }
+            .onChange(of: movie.reminderEnabled) {
+                Task {
+                    await notificationViewModel.updateReminder()
+                }
+            }
+            .onChange(of: movie.reminderDate) {
+                Task {
+                    await notificationViewModel.updateReminder()
+                }
+            }
         }
     }
 }
 
 #Preview {
     NavigationStack {
-        MovieView(movie: .example)
+        MovieView(movie: .example, dataManager: DataManager.preview)
             .environmentObject(DataManager.preview)
     }
 }

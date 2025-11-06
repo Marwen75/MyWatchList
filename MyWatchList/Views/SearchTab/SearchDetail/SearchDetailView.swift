@@ -12,6 +12,7 @@ struct SearchDetailView: View {
     @Environment(\.networkManager) var networkManager
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var searchPathManager: SearchPathManager
+    @EnvironmentObject var errorManager: ErrorManager
     
     @StateObject var searchDetailViewModel: SearchDetailViewModel
     
@@ -77,10 +78,10 @@ struct SearchDetailView: View {
         .scrollContentBackground(.hidden)
         .background(.linearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom))
         .foregroundStyle(.white)
-        .alert("Oups", isPresented: $searchDetailViewModel.showAlert) {
-            Button("ok") { }
-        } message: {
-            Text(searchDetailViewModel.errorMessage)
+        .onChange(of: searchDetailViewModel.appError) { _, newError in
+            if let error = newError {
+                errorManager.present(error)
+            }
         }
         #else
         ScrollView {
@@ -132,10 +133,10 @@ struct SearchDetailView: View {
         }
         .background(.linearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom))
         .foregroundStyle(.white)
-        .alert("Oups", isPresented: $searchDetailViewModel.showAlert) {
-            Button("ok") { }
-        } message: {
-            Text(searchDetailViewModel.errorMessage)
+        .onChange(of: searchDetailViewModel.appError) { _, newError in
+            if let error = newError {
+                errorManager.present(error)
+            }
         }
         #endif
     }

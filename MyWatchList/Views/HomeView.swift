@@ -60,6 +60,7 @@ struct HomeView: View {
             }
             .accessibilityIdentifier("schTab")
         }
+        .tint(.yellow)
         .onContinueUserActivity(CSSearchableItemActionType, perform: loadSpotlightItem)
     }
     

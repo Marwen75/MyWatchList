@@ -14,12 +14,11 @@ struct MoviePriorityAndTagView: View {
     var body: some View {
         #if os(iOS)
         Picker("Watch Priority", selection: $movie.priority) {
-            Label("Watch later", systemImage: "eye.half.closed").tag(Int16(0))
-            Label("Must see", systemImage: "eye").tag(Int16(1))
-            Label("Watch urgently", systemImage: "eye.trianglebadge.exclamationmark").tag(Int16(2))
+            Label(movie.watched ? "Re-watch eventually" : "Watch later", systemImage: "eye.half.closed").tag(Int16(0))
+            Label(movie.watched ? "Re-watch soon" : "Must watch", systemImage: "eye").tag(Int16(1))
+            Label(movie.watched ? "Re-watch urgently" : "Watch urgently", systemImage: "eye.trianglebadge.exclamationmark").tag(Int16(2))
         }
-        .pickerStyle(.automatic)
-        .infoStyle()
+        .foregroundStyle(.white)
         
         Menu {
             ForEach(movie.movieTags) { tag in
@@ -48,15 +47,20 @@ struct MoviePriorityAndTagView: View {
         } label: {
             Text(movie.movieTagsList).underline()
                 .multilineTextAlignment(.leading)
-                .infoStyle()
+                .foregroundStyle(.yellow)
         }
         
         Toggle(movie.watched ? "Mark as unwatched" : "Mark as watched", isOn: $movie.watched)
+            .foregroundStyle(.white)
+            .tint(.yellow)
+            .onChange(of: movie.watched, dataManager.save)
+        
+        
         #else
         HStack {
             Picker("", selection: $movie.priority) {
                 Label("Watch later", systemImage: "eye.half.closed").tag(Int16(0))
-                Label("Must see", systemImage: "eye").tag(Int16(1))
+                Label("Must watch", systemImage: "eye").tag(Int16(1))
                 Label("Watch urgently", systemImage: "eye.trianglebadge.exclamationmark").tag(Int16(2))
             }
             .pickerStyle(.menu)

@@ -24,6 +24,7 @@ class SearchDetailViewModel: ObservableObject {
     @Published var showAlert = false
     @Published var errorMessage = ""
     @Published var contentAlreadySaved = false
+    @Published var appError: AppError?
     #if DEBUG
     @Published var isLoaded = false
     #endif
@@ -50,34 +51,18 @@ class SearchDetailViewModel: ObservableObject {
         do {
             switch typeOfContent {
             case .movies:
-                let movieDetails = try await networkManager.fetch(.movieDetails,
-                                                                  parameters: [
-                                                                    URLQueryItem(name: "append_to_response", value: "videos"),
-                                                                    URLQueryItem(name: "language", value: Locale.appLanguageCode)
-                                                                  ],
-                                                                  contentId: String(tmdbId),
-                                                                  withCredits: false, withSeasonDetails: false,
-                                                                  seasonNumber: nil)
+                let movieDetails = try await networkManager.fetch(.movieDetails(id: String(tmdbId)))
                 
                 tmdbContent = movieDetails
             default:
-                let tvShowDetails = try await networkManager.fetch(.tvShowDetails,
-                                                                   parameters: [
-                                                                    URLQueryItem(name: "append_to_response", value: "videos"),
-                                                                    URLQueryItem(name: "language", value: Locale.appLanguageCode)
-                                                                   ],
-                                                                   contentId: String(tmdbId),
-                                                                   withCredits: false, withSeasonDetails: false,
-                                                                   seasonNumber: nil)
+                let tvShowDetails = try await networkManager.fetch(.tvShowDetails(id: String(tmdbId)))
                 
                 tmdbContent = tvShowDetails
                 creators = tvShowDetails.creators ?? []
                 await fetchSeasonDetails(tmdbContent: tvShowDetails)
             }
         } catch {
-            errorMessage = error.localizedDescription
-            showAlert = true
-            
+            appError = AppError(error)
         }
     }
     
@@ -86,18 +71,15 @@ class SearchDetailViewModel: ObservableObject {
     func fetchSeasonDetails(tmdbContent: TmdbContent) async {
         do {
             if let contentSeasons = tmdbContent.seasons {
-                let seasonsFiltered = contentSeasons.filter({ $0.airDate != nil && $0.name != "Specials" && $0.seasonNumber != 0 })
+                let seasonsFiltered = contentSeasons.filter({ $0.airDate != nil && $0.name != "Specials" && $0.seasonNumber != 0 }) 
                 for i in 0..<seasonsFiltered.count {
-                    let season = try await networkManager.fetch(.seasonDetails,
-                                                                parameters: [URLQueryItem(name: "language", value: Locale.appLanguageCode)], contentId: String(tmdbId),
-                                                                withCredits: false, withSeasonDetails: true, seasonNumber: i + 1)
+                    let season = try await networkManager.fetch(.seasonDetails(showId: String(tmdbId), seasonNumber: i + 1))
                     
                     seasons.append(season)
                 }
             }
         } catch {
-            errorMessage = error.localizedDescription
-            showAlert = true
+            appError = AppError(error)
         }
     }
     
@@ -106,24 +88,17 @@ class SearchDetailViewModel: ObservableObject {
         do {
             switch typeOfContent {
             case .movies:
-                let credits = try await networkManager.fetch(.movieCredits, parameters: nil,
-                                                             contentId: String(tmdbId), withCredits: true,
-                                                             withSeasonDetails: false,seasonNumber: nil)
+                let credits = try await networkManager.fetch(.movieCredits(id: String(tmdbId)))
                 
                 castMembers = credits.cast
                 directors = credits.crew.filter({ $0.job == "Director" })
             case .shows:
-                let credits = try await networkManager.fetch(.showCredits, parameters: nil,
-                                                             contentId: String(tmdbId), withCredits: true,
-                                                             withSeasonDetails: false, seasonNumber: nil)
+                let credits = try await networkManager.fetch(.showCredits(id: String(tmdbId)))
                 
                 castMembers = credits.cast
             }
         } catch {
-            await MainActor.run {
-                errorMessage = error.localizedDescription
-                showAlert = true
-            }
+            appError = AppError(error)
         }
     }
     

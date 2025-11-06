@@ -15,6 +15,7 @@ struct MyWatchListApp: App {
     @State var networkManager = NetworkManager(environment: .production)
 #endif
     @StateObject var dataManager = DataManager()
+    @StateObject var errorManager = ErrorManager()
     
     #if os(iOS)
     init() {
@@ -32,6 +33,19 @@ struct MyWatchListApp: App {
                 .environment(\.networkManager, networkManager)
                 .environment(\.managedObjectContext, dataManager.container.viewContext)
                 .environmentObject(dataManager)
+                .environmentObject(errorManager)
+                .alert(item: $errorManager.alertContext) { context in
+                    if let action = context.primaryAction {
+                        return Alert(title: Text(context.title),
+                                      message: Text(context.message),
+                                      primaryButton: .default(Text(context.primaryButtonTitle), action: action),
+                                      secondaryButton: .cancel(Text("Cancel")) {errorManager.dismiss()})
+                    } else {
+                        return Alert(title: Text(context.title),
+                                     message: Text(context.message),
+                                     dismissButton: .default(Text("Ok")) {errorManager.dismiss()})
+                    }
+                }
         }
     }
 }

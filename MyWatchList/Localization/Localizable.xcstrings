@@ -120,6 +120,26 @@
         }
       }
     },
+    "An unexpected error occured." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une erreur inattendue est survenue. "
+          }
+        }
+      }
+    },
+    "An unexpected error occurred." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une erreur inattendue est survenue. "
+          }
+        }
+      }
+    },
     "Cancel" : {
       "localizations" : {
         "fr" : {
@@ -136,6 +156,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Casting"
+          }
+        }
+      }
+    },
+    "Check settings" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voir les réglages"
           }
         }
       }
@@ -186,6 +216,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Réalisateurs"
+          }
+        }
+      }
+    },
+    "Episode" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Épisode"
           }
         }
       }
@@ -285,7 +325,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Marquer non vu"
+            "value" : "Marquer comme non visionné"
           }
         }
       }
@@ -295,7 +335,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Marquer visionné"
+            "value" : "Marquer comme visionné"
           }
         }
       }
@@ -492,12 +532,12 @@
         }
       }
     },
-    "ok" : {
+    "Ok" : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ok"
+            "value" : "Ok"
           }
         }
       }
@@ -512,12 +552,22 @@
         }
       }
     },
-    "Oups" : {
+    "Oups!" : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Oups"
+            "value" : "Oups!"
+          }
+        }
+      }
+    },
+    "Permission denied. Please enable access in settings." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permission refusée. Vérifiez que l’accès est autorisé dans les réglages."
           }
         }
       }
@@ -558,6 +608,37 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Revoir d’urgence"
+          }
+        }
+      }
+    },
+    "Reminder date" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date du rappel"
+          }
+        }
+      }
+    },
+    "Reminder!" : {
+      "comment" : "Notification title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rappel!"
+          }
+        }
+      }
+    },
+    "Reminders" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rappels"
           }
         }
       }
@@ -672,6 +753,16 @@
         }
       }
     },
+    "Show reminders" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voir les rappels"
+          }
+        }
+      }
+    },
     "Smart Filters" : {
       "localizations" : {
         "fr" : {
@@ -682,12 +773,42 @@
         }
       }
     },
+    "Something went wrong with the request. Please try again." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quelque chose s’est mal passé avec la requête. Merci de réessayer."
+          }
+        }
+      }
+    },
     "Status" : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Statut"
+          }
+        }
+      }
+    },
+    "The URL for the request is not valid. Please try again." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’URL utilisée pour la requête semble invalide. Merci de Réessayer."
+          }
+        }
+      }
+    },
+    "There was a problem accessing your saved items." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un problème est survenu pendant l’accession à vos éléments sauvegardés."
           }
         }
       }
@@ -733,6 +854,16 @@
         }
       }
     },
+    "Unable to connect. Please check your internet connection." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de se connecter. Vérifiez votre connexion internet."
+          }
+        }
+      }
+    },
     "Unwatched" : {
       "localizations" : {
         "fr" : {
@@ -749,6 +880,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Utiliser la barre de recherche pour trouver des films et des séries"
+          }
+        }
+      }
+    },
+    "Watch %@" : {
+      "comment" : "Notification subtitle",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voir %@"
           }
         }
       }
@@ -778,7 +920,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Priorité visionnage"
+            "value" : "Priorité "
           }
         }
       }
@@ -809,6 +951,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visionné(s):"
+          }
+        }
+      }
+    },
+    "We encountered a data error. Please try again later." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une erreur de données est survenues. Merci de réessayer. "
           }
         }
       }

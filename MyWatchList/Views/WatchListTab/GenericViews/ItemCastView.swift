@@ -1,23 +1,23 @@
 //
-//  TvShowCastView.swift
+//  ItemCastView.swift
 //  MyWatchList
 //
-//  Created by Marwen Haouacine on 27/09/2025.
+//  Created by Marwen Haouacine on 05/11/2025.
 //
 
 import SwiftUI
 
-struct TvShowCastView: View {
-    @Environment(\.networkManager) var networkManager
-    @ObservedObject var tvShow: TvShow
+struct ItemCastView<T:WatchableItem>: View {
+    @ObservedObject var item: T
     
     var body: some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 10) {
-                ForEach(tvShow.showActors) { actor in
+                ForEach(item.itemActors) { actor in
                     VStack {
-                        if actor.actorPicture != "" {
-                            PosterImageView(path: actor.actorPicture, shape: .circle, size: .fixed(width: 100, height: 100), contentMode: .fill)
+                        if !actor.actorPicture.isEmpty {
+                            PosterImageView(path: actor.actorPicture, shape: .circle,
+                                            size: .fixed(width: 100, height: 100), contentMode: .fill)
                         } else {
                             Image(systemName: "person.circle.fill")
                                 .resizable()
@@ -27,8 +27,10 @@ struct TvShowCastView: View {
                                 }
                                 .shadow(color: .white, radius: 3)
                         }
+                        
                         Text(actor.actorName)
                             .infoStyle()
+                            .multilineTextAlignment(.center)
                     }
                 }
             }
@@ -38,5 +40,5 @@ struct TvShowCastView: View {
 }
 
 #Preview {
-    TvShowCastView(tvShow: .example)
+    ItemCastView(item: Movie.example)
 }

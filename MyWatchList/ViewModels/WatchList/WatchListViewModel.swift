@@ -18,11 +18,10 @@ class WatchListViewModel: NSObject, ObservableObject, NSFetchedResultsController
     @Published var tagName = ""
     @Published var showTagAlert = false
     @Published var presentFilterSheet = false
-    @Published var showFetchAlert = false
-    @Published var errorMessage = ""
     @Published var tags: [Tag] = []
     @Published var movieTags: [Filter] = []
     @Published var showTags: [Filter] = []
+    @Published var appError: AppError?
     
     init(dataManager: DataManager) {
         self.dataManager = dataManager
@@ -40,9 +39,8 @@ class WatchListViewModel: NSObject, ObservableObject, NSFetchedResultsController
             try tagsController.performFetch()
             tags = tagsController.fetchedObjects ?? []
         } catch {
-            errorMessage = error.localizedDescription
-            showFetchAlert = true
-        } 
+            appError = AppError(error)
+        }
         
         movieTags = getCustomTags(forMovies: true)
         showTags = getCustomTags(forMovies: false)

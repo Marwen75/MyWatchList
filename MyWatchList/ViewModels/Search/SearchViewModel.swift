@@ -15,12 +15,11 @@ class SearchViewModel: ObservableObject {
     
     @Published var searchText = ""
     @Published var tmdbContents: [TmdbContent] = []
-    @Published var errorMessage = ""
-    @Published var showAlert = false
     @Published var typeOfContent: [TypeOfContent] = [.movies, .shows]
     @Published var selectedTypeOfContent = TypeOfContent.movies
     @Published var currentPage = 1
     @Published var totalPages = 1
+    @Published var appError: AppError?
     
     init(dataManager: DataManager, networkManager: NetworkManagerProtocol) {
         self.dataManager = dataManager
@@ -33,21 +32,20 @@ class SearchViewModel: ObservableObject {
         do {
             switch selectedTypeOfContent {
             case .movies:
-                let searchResults = try await networkManager.fetch(.movies, parameters: [URLQueryItem(name: "query", value: searchText), URLQueryItem(name: "page", value: String(currentPage)), URLQueryItem(name: "language", value: Locale.appLanguageCode)], contentId: nil, withCredits: false, withSeasonDetails: false, seasonNumber: nil)
+                let searchResults = try await networkManager.fetch(.movies(query: searchText, page: currentPage))
                 
                 totalPages = searchResults.totalPages
                 tmdbContents.append(contentsOf: searchResults.results)
                 tmdbContents = tmdbContents.uniqued().filter { $0.posterPath != nil }
             default:
-                let searchResults = try await networkManager.fetch(.tvShows, parameters: [URLQueryItem(name: "query", value: searchText), URLQueryItem(name: "page", value: String(currentPage)), URLQueryItem(name: "language", value: Locale.appLanguageCode)], contentId: nil, withCredits: false, withSeasonDetails: false, seasonNumber: nil)
+                let searchResults = try await networkManager.fetch(.shows(query: searchText, page: currentPage))
                 
                 totalPages = searchResults.totalPages
                 tmdbContents.append(contentsOf: searchResults.results)
                 tmdbContents = tmdbContents.uniqued().filter { $0.posterPath != nil }
             }
         } catch {
-            errorMessage = error.localizedDescription
-            showAlert = true
+            appError = AppError(error)
         }
     }
     
