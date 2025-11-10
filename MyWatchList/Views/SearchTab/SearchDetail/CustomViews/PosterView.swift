@@ -12,7 +12,7 @@ struct PosterView: View {
     
     var body: some View {
         if let tmdbContent = searchDetailViewModel.tmdbContent, let posterPath = tmdbContent.posterPath {
-            PosterImageView(path: posterPath, size: .flexible(maxHeight: 650))
+            PosterImageView(path: posterPath, size: .flexible(maxHeight: 700))
         } else {
             ContentUnavailableView("No Poster Available", systemImage: "film")
         }

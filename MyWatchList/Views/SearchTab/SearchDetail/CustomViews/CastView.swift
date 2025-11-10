@@ -12,7 +12,7 @@ struct CastView: View {
     
     var body: some View {
         ScrollView(.horizontal) {
-            LazyHStack(spacing: 10) {
+            LazyHStack(alignment: .top, spacing: 12) {
                 ForEach(searchDetailViewModel.castMembers) { actor in
                     VStack {
                         if let profilePath = actor.profilePath {
@@ -27,8 +27,14 @@ struct CastView: View {
                                 .shadow(color: .white, radius: 3)
                         }
                         Text(actor.name)
-                            .overviewStyle()
+                            .infoStyle()
+                            .multilineTextAlignment(.center)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.6)
+                            .truncationMode(.tail)
+                            .frame(width: 100)
                     }
+                    .frame(width: 100)
                 }
             }
         }

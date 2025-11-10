@@ -29,6 +29,7 @@ struct MovieView: View {
                     
                     MoviePriorityAndTagView(movie: movie)
                         .infoStyle()
+                        .bold()
                 }
                 .formSectionStyle()
                 
@@ -47,19 +48,7 @@ struct MovieView: View {
                 
                 Section("Informations") {
                     ItemMainInfoView(item: movie) {
-                        HStack {
-                            Label("\(movie.movieReleaseDate)", systemImage: "calendar")
-                            Spacer()
-                            Label(movie.movieBudget == 0 ? "N/A" : "\(movie.movieBudget)", systemImage: "dollarsign.circle")
-                        }
-                        .infoStyle()
-                        
-                        HStack {
-                            Label("\(movie.movieRuntime, default: "N/A") minutes", systemImage: "clock")
-                            Spacer()
-                            Label(movie.movieVoteAverage == "0" ? "N/A" : movie.movieVoteAverage + "/10", systemImage: "star.circle")
-                        }
-                        .infoStyle()
+                        MovieInfoLabelsView(movie: movie)
                     }
                 }
                 .formSectionStyle()

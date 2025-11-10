@@ -19,7 +19,7 @@ struct MovieListRow: View {
                 
                 Spacer()
                 
-                MovieListRowPosterWithInfoView(movie: movie)
+                ItemListRowPosterWithInfoView(item: movie)
             }
         } 
     }

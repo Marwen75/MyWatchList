@@ -54,16 +54,6 @@
         }
       }
     },
-    "%lld results" : {
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld résultats "
-          }
-        }
-      }
-    },
     "%lld/%lld episodes watched." : {
       "localizations" : {
         "en" : {
@@ -76,6 +66,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$lld/%2$lld episodes vus."
+          }
+        }
+      }
+    },
+    "Add a watch priority to this content" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter une priorité de visionnage à ce contenu"
           }
         }
       }
@@ -136,6 +136,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Une erreur inattendue est survenue. "
+          }
+        }
+      }
+    },
+    "By Priority" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Par priorité"
+          }
+        }
+      }
+    },
+    "By Title" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Par titre "
           }
         }
       }
@@ -216,6 +236,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Réalisateurs"
+          }
+        }
+      }
+    },
+    "Disable filters" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désactiver les filtres"
+          }
+        }
+      }
+    },
+    "Enable filters" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activer les filtres "
           }
         }
       }
@@ -367,16 +407,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Films"
-          }
-        }
-      }
-    },
-    "Must see" : {
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "À voir"
           }
         }
       }
@@ -743,16 +773,6 @@
         }
       }
     },
-    "See urgently" : {
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voir d’urgence"
-          }
-        }
-      }
-    },
     "Show reminders" : {
       "localizations" : {
         "fr" : {
@@ -779,6 +799,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quelque chose s’est mal passé avec la requête. Merci de réessayer."
+          }
+        }
+      }
+    },
+    "Sort by" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trier par"
+          }
+        }
+      }
+    },
+    "Sort your content:" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trier vos contenus"
           }
         }
       }
@@ -879,7 +919,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Utiliser la barre de recherche pour trouver des films et des séries"
+            "value" : "Utilisez la barre de recherche pour trouver des films et des séries"
           }
         }
       }

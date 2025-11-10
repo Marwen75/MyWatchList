@@ -23,6 +23,22 @@ class WatchListViewModel: NSObject, ObservableObject, NSFetchedResultsController
     @Published var showTags: [Filter] = []
     @Published var appError: AppError?
     
+    var notWatchedMovies: [Movie] {
+        dataManager.fetchMovies(watched: false)
+    }
+    
+    var watchedMovies: [Movie] {
+        dataManager.fetchMovies(watched: true)
+    }
+    
+    var notWatchedShows: [TvShow] {
+        dataManager.fetchTvShows(watched: false)
+    }
+    
+    var watchedShows: [TvShow] {
+        dataManager.fetchTvShows(watched: true)
+    }
+    
     init(dataManager: DataManager) {
         self.dataManager = dataManager
         let request = Tag.fetchRequest()

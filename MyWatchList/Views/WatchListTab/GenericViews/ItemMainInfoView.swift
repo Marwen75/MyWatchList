@@ -18,11 +18,13 @@ struct ItemMainInfoView<T: WatchableItem, ExtraContent: View>: View {
     
     var body: some View {
         #if os(iOS)
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 15) {
             Label(item.itemCredits.count > 1 ? item.crewLabelPlural : item.crewLabelSingular, systemImage: "person.crop.square.badge.video")
             
             ItemCreditsView(item: item)
                 .padding(.bottom, 8)
+            
+            Divider()
             
             extraContent()
             
@@ -33,10 +35,11 @@ struct ItemMainInfoView<T: WatchableItem, ExtraContent: View>: View {
             }
             
             Divider()
-                .foregroundStyle(.yellow)
-            
+
             Text(item.itemOverview)
                 .overviewStyle()
+            
+            Divider()
         }
         .infoStyle()
         #else

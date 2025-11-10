@@ -103,7 +103,8 @@ class SearchDetailViewModel: ObservableObject {
     }
     
     /// Adds a content if the content is not already saved, deletes it otherwise
-    func AddOrDeleteContent() {
+    /// - Parameter priority: The watch priority selected by the user for the content to add.
+    func AddOrDeleteContent(withPriority priority: WatchPriority = .low) {
         switch typeOfContent {
         case .movies:
             if contentAlreadySaved {
@@ -111,6 +112,7 @@ class SearchDetailViewModel: ObservableObject {
             } else {
                 if let tmdbContent {
                     dataManager.createMovie(fromContent: tmdbContent,
+                                            priority: priority,
                                             withCastMembers: castMembers,
                                             andDirectors: directors)
                 }
@@ -121,6 +123,7 @@ class SearchDetailViewModel: ObservableObject {
             } else {
                 if let tmdbContent {
                     dataManager.createTvShow(fromContent: tmdbContent,
+                                             priority: priority,
                                              withCastMembers: castMembers,
                                              creators: creators, andSeasons: seasons)
                 }

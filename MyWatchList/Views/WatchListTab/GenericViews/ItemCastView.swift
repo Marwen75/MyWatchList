@@ -11,8 +11,8 @@ struct ItemCastView<T:WatchableItem>: View {
     @ObservedObject var item: T
     
     var body: some View {
-        ScrollView(.horizontal) {
-            LazyHStack(spacing: 10) {
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack(alignment: .top, spacing: 12) {
                 ForEach(item.itemActors) { actor in
                     VStack {
                         if !actor.actorPicture.isEmpty {
@@ -31,7 +31,12 @@ struct ItemCastView<T:WatchableItem>: View {
                         Text(actor.actorName)
                             .infoStyle()
                             .multilineTextAlignment(.center)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.6)
+                            .truncationMode(.tail)
+                            .frame(width: 100)
                     }
+                    .frame(width: 120)
                 }
             }
         }

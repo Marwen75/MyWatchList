@@ -27,50 +27,34 @@ struct SearchDetailView: View {
             Section(searchDetailViewModel.typeOfContent == .movies ? searchDetailViewModel.tmdbContent?.title ?? "" : searchDetailViewModel.tmdbContent?.name ?? "") {
                 PosterView(searchDetailViewModel: searchDetailViewModel)
             }
-            .listRowBackground(Color.yellow.mix(with: .black, by: 0.1).opacity(0.1))
+            .formSectionStyle()
             
             if searchDetailViewModel.typeOfContent == .shows {
                 Section(searchDetailViewModel.seasons.count > 1 ? "Seasons" : "Season") {
                     SeasonsView(searchDetailViewModel: searchDetailViewModel)
                 }
-                .listRowBackground(Color.yellow.mix(with: .black, by: 0.1).opacity(0.1))
+                .formSectionStyle()
             }
             
             Section("Informations") {
                 MainInfoView(searchDetailViewModel: searchDetailViewModel)
             }
-            .listRowBackground(Color.yellow.mix(with: .black, by: 0.1).opacity(0.1))
+            .formSectionStyle()
             
             Section("Trailer") {
                 TrailerView(searchDetailViewModel: searchDetailViewModel)
             }
-            .listRowBackground(Color.yellow.mix(with: .black, by: 0.1).opacity(0.1))
+            .formSectionStyle()
             
             Section("Cast") {
                 CastView(searchDetailViewModel: searchDetailViewModel)
             }
-            .listRowBackground(Color.yellow.mix(with: .black, by: 0.1).opacity(0.1))
+            .formSectionStyle()
             
             Section {
-                HStack {
-                    Spacer()
-                    
-                    Button {
-                        searchDetailViewModel.AddOrDeleteContent()
-                        searchPathManager.pop()
-                    } label: {
-                        Label(searchDetailViewModel.contentAlreadySaved ? "Remove from watchlist" : "Add to watchlist", systemImage: "list.and.film")
-                    }
-                    .accessibilityIdentifier("addButton")
-                    .foregroundStyle(.white)
-                    .buttonStyle(.glassProminent)
-                    .tint(.clear)
-                    .padding()
-                    
-                    Spacer()
-                }
+                AddOrDeleteButtonView(searchDetailViewModel: searchDetailViewModel)
             }
-            .listRowBackground(Color.yellow.mix(with: .black, by: 0.1).opacity(0.1))
+            .formSectionStyle()
         }
         .onAppear {
             searchDetailViewModel.contentAlreadySaved = searchDetailViewModel.dataManager.isContentAlreadySaved(id: searchDetailViewModel.tmdbId, typeOfContent: searchDetailViewModel.typeOfContent)

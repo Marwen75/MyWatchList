@@ -1,7 +1,7 @@
 # 🎬 MyWatchList  
 “Organize your watchlist. Rediscover your favorites. Enjoy the show.”
 
-![Version](https://img.shields.io/badge/version-1.3-darkred?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-1.4-darkred?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/platforms-iOS%20%7C%20macOS-blue?style=for-the-badge)
 ![Swift](https://img.shields.io/badge/Swift-6.0-orange?style=for-the-badge)
 

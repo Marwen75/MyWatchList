@@ -19,9 +19,23 @@ class DataManager: ObservableObject {
     @Published var filterEnabled = false
     @Published var filterPriority = -1
     @Published var filterStatus = Status.all
+    @Published var sortOrder = SortOrder.priority
     
     enum Status {
         case all, watched, unwatched
+    }
+    
+    enum SortOrder: String, CaseIterable, Identifiable {
+        case priority, title
+        
+        var id: String { rawValue }
+        
+        var label: String {
+            switch self {
+            case .priority: NSLocalizedString("By Priority", comment: "")
+            case .title: NSLocalizedString("By Title", comment: "")
+            }
+        }
     }
     
 #if DEBUG
@@ -289,8 +303,9 @@ class DataManager: ObservableObject {
     ///   - content: The content fetched from the api
     ///   - castMembers: Cast members relative to the content fetched
     ///   - directors: Directors relative to the content fetched
-    func createMovie(fromContent content: TmdbContent, withCastMembers castMembers: [Cast], andDirectors directors: [Cast]) {
+    func createMovie(fromContent content: TmdbContent, priority: WatchPriority = .low, withCastMembers castMembers: [Cast], andDirectors directors: [Cast]) {
         let movie = Movie(context: container.viewContext)
+        
         movie.poster = content.posterPath
         movie.title = content.title
         movie.overview = content.overview
@@ -305,7 +320,7 @@ class DataManager: ObservableObject {
             movie.trailerUrl = video.key
         }
         movie.voteAverage = content.voteAverage ?? 0
-        movie.priority = 0
+        movie.priority = priority.rawValue
         movie.watched = false
         
         var actors: [Actor] = []
@@ -343,7 +358,7 @@ class DataManager: ObservableObject {
     ///   - castMembers: Cast members relative to the content fetched
     ///   - creators: Creators relative to the content fetched
     ///   - seasons: Seasons relative to the content fetched
-    func createTvShow(fromContent content: TmdbContent, withCastMembers castMembers: [Cast], creators: [Creator], andSeasons seasons: [Season]) {
+    func createTvShow(fromContent content: TmdbContent, priority: WatchPriority = .low, withCastMembers castMembers: [Cast], creators: [Creator], andSeasons seasons: [Season]) {
         let show = TvShow(context: container.viewContext)
         
         show.poster = content.posterPath
@@ -362,6 +377,7 @@ class DataManager: ObservableObject {
             show.trailerUrl = video.key
         }
         show.voteAverage = content.voteAverage ?? 0
+        show.priority = priority.rawValue
         
         var directorsToSave: [Director] = []
         
@@ -468,11 +484,23 @@ class DataManager: ObservableObject {
     
     /// Fetches the movies from the view context by applying given predicates
     /// - Returns: The movies matching de predicates
-    @MainActor func fetchMovies() -> [Movie] {
-        let predicates = getAllPredicates(forFilter: .movies)
+    @MainActor func fetchMovies(watched: Bool? = nil) -> [Movie] {
+        var predicates = getAllPredicates(forFilter: .movies)
+        
+        if let watched {
+            let watchedPredicate = NSPredicate(format: "watched = %@", NSNumber(value: watched))
+            predicates.append(watchedPredicate)
+        }
+        
         let request = Movie.fetchRequest()
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-        request.sortDescriptors = [NSSortDescriptor(key: "watched", ascending: true)]
+        
+        switch sortOrder {
+        case .priority:
+            request.sortDescriptors = [NSSortDescriptor(key: "priority", ascending: false), NSSortDescriptor(key: "title", ascending: true)]
+        case .title:
+            request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        }
         
         let allMovies = (try? container.viewContext.fetch(request)) ?? []
         
@@ -481,11 +509,23 @@ class DataManager: ObservableObject {
     
     /// Fetches the tv shows from the view context by applying given predicates
     /// - Returns: The tv shows matching de predicates
-    @MainActor func fetchTvShows() -> [TvShow] {
-        let predicates = getAllPredicates(forFilter: .tvShows)
+    @MainActor func fetchTvShows(watched: Bool? = nil) -> [TvShow] {
+        var predicates = getAllPredicates(forFilter: .tvShows)
+        
+        if let watched {
+            let watchedPredicate = NSPredicate(format: "watched = %@", NSNumber(value: watched))
+            predicates.append(watchedPredicate)
+        }
+        
         let request = TvShow.fetchRequest()
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        
+        switch sortOrder {
+        case .priority:
+            request.sortDescriptors = [NSSortDescriptor(key: "priority", ascending: false), NSSortDescriptor(key: "title", ascending: true)]
+        case .title:
+            request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        }
         
         let allShows = (try? container.viewContext.fetch(request)) ?? []
         
@@ -496,10 +536,10 @@ class DataManager: ObservableObject {
     /// - Parameter filter: The current selected filter
     /// - Returns: The predicates applyable to a fetch request
     func getAllPredicates(forFilter filter: Filter) -> [NSPredicate]  {
-        let filter = selectedFilter ?? .movies
+        let activeFilter = selectedFilter ?? .movies
         var predicates = [NSPredicate]()
         
-        if let tag = filter.tag {
+        if let tag = activeFilter.tag {
             let tagPredicate = NSPredicate(format: "tags CONTAINS %@", tag)
             predicates.append(tagPredicate)
         }

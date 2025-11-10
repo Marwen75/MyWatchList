@@ -29,10 +29,10 @@ struct ContentViewMovieRow: View {
                     Label("Watch later", systemImage: "eye.half.closed")
                         .imageScale(.small)
                 case 1:
-                    Label("Must see", systemImage: "eye")
+                    Label("Must watch", systemImage: "eye")
                         .imageScale(.small)
                 default:
-                    Label("See urgently", systemImage: "eye.trianglebadge.exclamationmark")
+                    Label("Watch urgently", systemImage: "eye.trianglebadge.exclamationmark")
                         .imageScale(.small)
                 }
             }

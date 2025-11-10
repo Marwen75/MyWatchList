@@ -21,4 +21,7 @@ protocol WatchableItem: NotifiableItem, ObservableObject {
     var itemGenres: String { get }
     var itemOverview: String { get }
     var itemRating: String { get }
+    var itemPriority: Int16 { get }
+    var itemTagsList: String { get }
+    var itemWatched: Bool { get }
 }

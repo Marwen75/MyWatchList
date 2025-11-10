@@ -31,7 +31,6 @@ struct ItemCreditsView<T: WatchableItem>: View {
                         
                         Text(director.directorName)
                             .infoStyle()
-                            .multilineTextAlignment(.center)
                     }
                 }
             }

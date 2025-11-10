@@ -1,5 +1,5 @@
 //
-//  MoviePriorityAndTagView.swift
+//  TvShowPriorityAndTagView.swift
 //  MyWatchList
 //
 //  Created by Marwen Haouacine on 27/09/2025.
@@ -7,30 +7,32 @@
 
 import SwiftUI
 
-struct MoviePriorityAndTagView: View {
+struct TvShowPriorityAndTagView: View {
     @EnvironmentObject var dataManager: DataManager
-    @ObservedObject var movie: Movie
+    @ObservedObject var tvShow: TvShow
     
     var body: some View {
-        #if os(iOS)
-        Picker("Watch Priority", selection: $movie.priority) {
-            Label(movie.watched ? "Re-watch eventually" : "Watch later", systemImage: "eye.half.closed").tag(Int16(0))
-            Label(movie.watched ? "Re-watch soon" : "Must watch", systemImage: "eye").tag(Int16(1))
-            Label(movie.watched ? "Re-watch urgently" : "Watch urgently", systemImage: "eye.trianglebadge.exclamationmark").tag(Int16(2))
+#if os(iOS)
+        Picker("Priority", selection: $tvShow.priority) {
+            Label(tvShow.watched ? "Re-watch eventually" : "Watch later", systemImage: "eye.half.closed").tag(Int16(0))
+            Label(tvShow.watched ? "Re-watch soon" : "Must watch", systemImage: "eye").tag(Int16(1))
+            Label(tvShow.watched ? "Re-watch urgently" : "Watch urgently", systemImage: "eye.trianglebadge.exclamationmark").tag(Int16(2))
         }
-        .foregroundStyle(.white)
+        .onChange(of: tvShow.priority) {
+            dataManager.save()
+        }
         
         Menu {
-            ForEach(movie.movieTags) { tag in
+            ForEach(tvShow.showTags) { tag in
                 Button {
-                    movie.removeFromTags(tag)
+                    tvShow.removeFromTags(tag)
                     dataManager.save()
                 } label: {
                     Label(tag.tagName, systemImage: "checkmark")
                 }
             }
             
-            let otherTags = dataManager.missingTags(from: movie)
+            let otherTags = dataManager.missingTags(from: tvShow)
             
             if !otherTags.isEmpty {
                 Divider()
@@ -38,27 +40,21 @@ struct MoviePriorityAndTagView: View {
                 Section("Add tags") {
                     ForEach(otherTags) { tag in
                         Button(tag.tagName) {
-                            movie.addToTags(tag)
+                            tvShow.addToTags(tag)
                             dataManager.save()
                         }
                     }
                 }
             }
         } label: {
-            Text(movie.movieTagsList).underline()
+            Text(tvShow.showTagsList).underline()
                 .multilineTextAlignment(.leading)
                 .foregroundStyle(.yellow)
         }
         
-        Toggle(movie.watched ? "Mark as unwatched" : "Mark as watched", isOn: $movie.watched)
-            .foregroundStyle(.white)
-            .tint(.yellow)
-            .onChange(of: movie.watched, dataManager.save)
-        
-        
-        #else
+#else
         HStack {
-            Picker("", selection: $movie.priority) {
+            Picker("", selection: $tvShow.priority) {
                 Label("Watch later", systemImage: "eye.half.closed").tag(Int16(0))
                 Label("Must watch", systemImage: "eye").tag(Int16(1))
                 Label("Watch urgently", systemImage: "eye.trianglebadge.exclamationmark").tag(Int16(2))
@@ -69,16 +65,16 @@ struct MoviePriorityAndTagView: View {
             Spacer()
             
             Menu {
-                ForEach(movie.movieTags) { tag in
+                ForEach(tvShow.showTags) { tag in
                     Button {
-                        movie.removeFromTags(tag)
+                        tvShow.removeFromTags(tag)
                         dataManager.save()
                     } label: {
                         Label(tag.tagName, systemImage: "checkmark")
                     }
                 }
                 
-                let otherTags = dataManager.missingTags(from: movie)
+                let otherTags = dataManager.missingTags(from: tvShow)
                 
                 if !otherTags.isEmpty {
                     Divider()
@@ -86,22 +82,22 @@ struct MoviePriorityAndTagView: View {
                     Section("Add tags") {
                         ForEach(otherTags) { tag in
                             Button(tag.tagName) {
-                                movie.addToTags(tag)
+                                tvShow.addToTags(tag)
                                 dataManager.save()
                             }
                         }
                     }
                 }
             } label: {
-                Text(movie.movieTagsList).underline()
+                Text(tvShow.showTagsList).underline()
                     .multilineTextAlignment(.leading)
             }
         }
-        #endif
+#endif
     }
 }
 
 #Preview {
-    MoviePriorityAndTagView(movie: .example)
+    TvShowPriorityAndTagView(tvShow: .example)
         .environmentObject(DataManager.preview)
 }

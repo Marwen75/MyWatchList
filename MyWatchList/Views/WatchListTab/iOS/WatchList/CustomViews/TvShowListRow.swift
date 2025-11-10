@@ -19,12 +19,12 @@ struct TvShowListRow: View {
                 
                 Spacer()
                 
-                TvListRowPosterWithInfoView(tvShow: show)
+                ItemListRowPosterWithInfoView(item: show)
                 
                 ProgressView("\(show.numberOfEpisodesWatched)/\(show.numberOfEpisodes) episodes watched.", value: show.showProgress)
                     .padding()
                     .infoStyle()
-                    .tint(.yellow.mix(with: .black, by: 0.2))
+                    .tint(.yellow)
             }
         } 
     }

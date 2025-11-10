@@ -12,7 +12,7 @@ struct WatchListViewMenuToolbar: View {
     
     var body: some View {
         Menu {
-            Button(dataManager.filterEnabled ? "Filter Off" : "Filter On") {
+            Button(dataManager.filterEnabled ? "Disable filters" : "Enable filters") {
                 dataManager.filterEnabled.toggle()
             }
             
@@ -28,7 +28,7 @@ struct WatchListViewMenuToolbar: View {
             Picker("Priority", selection: $dataManager.filterPriority) {
                 Text("All").tag(-1)
                 Text("Watch later").tag(0)
-                Text("Must see").tag(1)
+                Text("Must watch").tag(1)
                 Text("Watch urgently").tag(2)
             }
             .disabled(!dataManager.filterEnabled)

@@ -44,6 +44,7 @@ struct TvShowView: View {
                     
                     TvShowPriorityAndTagView(tvShow: tvShow)
                         .infoStyle()
+                        .bold()
                 }
                 .formSectionStyle()
                 
@@ -69,23 +70,7 @@ struct TvShowView: View {
                 
                 Section("Informations") {
                     ItemMainInfoView(item: tvShow) {
-                        HStack {
-                            Label("\(tvShow.showFirstAirDate)", systemImage: "calendar")
-                            Spacer()
-                            if tvShow.showInProduction {
-                                Label("In production", systemImage: "video")
-                            } else {
-                                Label(tvShow.showLastAirDate, systemImage: "video.slash")
-                            }
-                        }
-                        .infoStyle()
-                        
-                        HStack {
-                            Label("\(tvShow.showNumberOfEpisodes, default: "N/A") episodes", systemImage: "clock")
-                            Spacer()
-                            Label(tvShow.showVoteAverage == "0" ? "N/A" : tvShow.showVoteAverage + "/10", systemImage: "star.circle")
-                        }
-                        .infoStyle()
+                        TvShowInfoLabelsView(tvShow: tvShow)
                     }
                 }
                 .formSectionStyle()

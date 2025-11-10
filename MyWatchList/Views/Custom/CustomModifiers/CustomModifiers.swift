@@ -10,7 +10,8 @@ import SwiftUI
 struct Overview: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.system(size: 15, weight: .thin, design: .monospaced)).italic()
+            .font(.system(size: 14, weight: .light, design: .monospaced))
+            .fontWidth(.condensed)
             .foregroundStyle(.white)
     }
 }
@@ -19,6 +20,7 @@ struct Informations: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.system(size: 15, weight: .light, design: .monospaced))
+            .fontWidth(.condensed)
             .foregroundStyle(.white)
     }
 }

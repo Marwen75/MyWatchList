@@ -11,4 +11,5 @@ extension Color {
     static let darkYellow = Color.yellow.mix(with: .black, by: 0.3)
     static let darkRed = Color.red.mix(with: .black, by: 0.5)
     static let darkGreen = Color.green.mix(with: .black, by: 0.6)
+    static let badgeBackground = Color.red.mix(with: .black, by: 0.6).opacity(0.8)
 }

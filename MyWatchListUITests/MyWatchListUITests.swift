@@ -33,7 +33,7 @@ final class MyWatchListUITests: XCTestCase {
         let navBarButtons = app.navigationBars.buttons
         let tabBarButtons = app.tabBars.buttons
         
-        XCTAssertEqual(navBarButtons.count, 2, "There should be 2 buttons inside the navigation bar.")
+        XCTAssertEqual(navBarButtons.count, 4, "There should be 4 buttons inside the navigation bar.")
         XCTAssertEqual(tabBarButtons.count, 2, "There should be 2 buttons inside the tab bar.")
     }
     
@@ -57,11 +57,15 @@ final class MyWatchListUITests: XCTestCase {
         XCTAssertTrue(firstResultButton.isHittable, "First parent button from poster should be hittable.")
         firstResultButton.tap()
 
-        let addButton = app.buttons["addButton"]
+        let addButton = app.buttons["addMenuButton"]
         app.swipeUp()
         app.swipeUp()
         XCTAssertTrue(addButton.waitForExistence(timeout: 10), "The 'add' button should appear afeter scrolling.")
         addButton.tap()
+        
+        let mediumPriorityButton = app.buttons["priorityButton_1"]
+        XCTAssertTrue(mediumPriorityButton.waitForExistence(timeout: 3), "Priority selection should appear after tapping the add menu.")
+        mediumPriorityButton.tap()
 
         let watchlistTab = app.tabBars.buttons["wlTab"]
         XCTAssertTrue(watchlistTab.waitForExistence(timeout: 3))
@@ -75,7 +79,7 @@ final class MyWatchListUITests: XCTestCase {
         app.swipeUp()
     }
     
-    //@MainActor
+    @MainActor
     func testAddTvShowFromSearchShouldAppearInMainList() throws {
         let searchTab = app.tabBars.buttons.element(boundBy: 1)
         XCTAssertTrue(searchTab.waitForExistence(timeout: 3))
@@ -99,12 +103,16 @@ final class MyWatchListUITests: XCTestCase {
         XCTAssertTrue(firstResultButton.isHittable)
         firstResultButton.tap()
         
-        let addButton = app.buttons["addButton"]
+        let addButton = app.buttons["addMenuButton"]
         app.swipeUp()
         app.swipeUp()
         app.swipeUp()
         XCTAssertTrue(addButton.waitForExistence(timeout: 10))
         addButton.tap()
+        
+        let highPriorityButton = app.buttons["priorityButton_2"]
+        XCTAssertTrue(highPriorityButton.waitForExistence(timeout: 3), "Priority selection should appear after tapping the add menu.")
+        highPriorityButton.tap()
         
         let watchlistTab = app.tabBars.buttons["wlTab"]
         XCTAssertTrue(watchlistTab.waitForExistence(timeout: 3))
