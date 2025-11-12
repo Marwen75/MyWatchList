@@ -62,18 +62,24 @@ It combines smooth performance and smart filtering to make managing your watchli
 
 ## 🖼️ Screenshots
 
-### 🖥️ macOS App Preview
-<img width="1332" height="682" alt="movie_mac_wl" src="https://github.com/user-attachments/assets/cd594667-e308-4626-995e-4b2ccb777c30" />
-<img width="1332" height="682" alt="search_mac_wl" src="https://github.com/user-attachments/assets/c256d7ba-701a-4dbe-8250-e4cb375ad468" />
-<img width="1332" height="682" alt="show_mac_wl" src="https://github.com/user-attachments/assets/e5148e44-2b06-44a8-8669-0939aceffa60" />
-
 ### 📱 iOS App Preview
-<img width="265" height="678" alt="movie_wl" src="https://github.com/user-attachments/assets/92a8d303-c080-439e-b465-376cbf685585" />
-<img width="265" height="678" alt="search_wl" src="https://github.com/user-attachments/assets/2a3c02d9-7a7c-4c19-9990-bba66ee4883b" />
-<img width="265" height="678" alt="show_detail_wl" src="https://github.com/user-attachments/assets/ecd5aef2-48a7-49a6-9878-87c3e3914a41" />
-<img width="265" height="678" alt="show_wl" src="https://github.com/user-attachments/assets/6609920a-41e6-4eba-a7e2-d0c9256baad9" />
-<img width="265" height="678" alt="filter_on_wl" src="https://github.com/user-attachments/assets/39700a1f-722c-4fca-8f8f-5496c9db41ad" />
-<img width="265" height="678" alt="tags_wl" src="https://github.com/user-attachments/assets/e04e83f5-9285-4a90-a20e-dd86fcf53485" />
+<img width="269" height="685" alt="i_1" src="https://github.com/user-attachments/assets/d9991c6f-4212-4155-8bb2-ebed6429f0d8" />
+<img width="269" height="685" alt="i_2" src="https://github.com/user-attachments/assets/5054826a-e1e1-4cdd-8217-fd500484460e" />
+<img width="269" height="685" alt="i_5" src="https://github.com/user-attachments/assets/6d1112e8-533e-4651-b2a6-249b98a124d2" />
+<img width="269" height="685" alt="i_6" src="https://github.com/user-attachments/assets/08eb1d78-6d5a-4d4b-bb3b-c9964045781b" />
+<img width="269" height="685" alt="i_14" src="https://github.com/user-attachments/assets/16b01955-fc17-41e0-bdfe-9a2d6ac1f724" />
+<img width="269" height="685" alt="i_13" src="https://github.com/user-attachments/assets/886c13cf-fe94-4d96-a07f-68a442f90e3a" />
+<img width="269" height="685" alt="i_12" src="https://github.com/user-attachments/assets/509d7c85-69fb-4741-88d8-eeb572e5de1b" />
+<img width="269" height="685" alt="i_11" src="https://github.com/user-attachments/assets/b4a92527-cd0a-4111-9cee-167bfbd1fc7d" />
+<img width="269" height="685" alt="i_10" src="https://github.com/user-attachments/assets/1b7d5949-5792-48b3-94d9-95a14adc3cf9" />
+<img width="269" height="685" alt="i_9" src="https://github.com/user-attachments/assets/d2a4c5ef-97e2-4010-86d1-4043c9d7a8fc" />
+<img width="269" height="685" alt="i_8" src="https://github.com/user-attachments/assets/b50a25f1-be93-4c40-bb8a-53f89f0a38c9" />
+<img width="269" height="685" alt="i_7" src="https://github.com/user-attachments/assets/42a8276f-dfa0-4a56-9424-2963f6de40b8" />
+
+### 🖥️ macOS App Preview
+<img width="1068" height="698" alt="mac_1" src="https://github.com/user-attachments/assets/7559cca2-94b2-4bb5-b222-1e89f3978ecb" />
+<img width="1068" height="698" alt="mac_2" src="https://github.com/user-attachments/assets/d4c4cb08-fb1d-4cba-963d-9336acaf92ba" />
+<img width="1173" height="698" alt="mac_3" src="https://github.com/user-attachments/assets/281cc2b0-4f1e-4c96-ad4f-859268eb59e3" />
 
 ---
 
