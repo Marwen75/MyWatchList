@@ -6,13 +6,14 @@
 //
 
 import XCTest
+import StoreKit
 
 final class MyWatchListUITests: XCTestCase {
     var app: XCUIApplication!
     
     override func setUpWithError() throws {
         continueAfterFailure = false
-        
+
         app = XCUIApplication()
         app.launchArguments = ["enable-testing"]
         app.launch()
@@ -42,21 +43,21 @@ final class MyWatchListUITests: XCTestCase {
         let searchTab = app.tabBars.buttons.element(boundBy: 1)
         XCTAssertTrue(searchTab.waitForExistence(timeout: 5))
         searchTab.tap()
-
+        
         let searchField = app.textFields["searchField"]
         XCTAssertTrue(searchField.waitForExistence(timeout: 5))
         searchField.tap()
         searchField.typeText("Alien romulus\n")
-
+        
         let firstResultImage = app.images.matching(NSPredicate(format: "identifier BEGINSWITH %@", "searchResult_")).firstMatch
         XCTAssertTrue(firstResultImage.waitForExistence(timeout: 10), "Image from result should exist.")
-
+        
         let firstResultIdentifier = firstResultImage.identifier
         let firstResultButton = app.buttons.containing(NSPredicate(format: "identifier == %@", firstResultIdentifier)).firstMatch
         XCTAssertTrue(firstResultButton.exists, "First parent button from poster should exist.")
         XCTAssertTrue(firstResultButton.isHittable, "First parent button from poster should be hittable.")
         firstResultButton.tap()
-
+        
         let addButton = app.buttons["addMenuButton"]
         app.swipeUp()
         app.swipeUp()
@@ -66,11 +67,11 @@ final class MyWatchListUITests: XCTestCase {
         let mediumPriorityButton = app.buttons["priorityButton_1"]
         XCTAssertTrue(mediumPriorityButton.waitForExistence(timeout: 3), "Priority selection should appear after tapping the add menu.")
         mediumPriorityButton.tap()
-
+        
         let watchlistTab = app.tabBars.buttons["wlTab"]
         XCTAssertTrue(watchlistTab.waitForExistence(timeout: 3))
         watchlistTab.tap()
-
+        
         let movieCell = app.staticTexts.containing(NSPredicate(format: "label CONTAINS[c] %@", "Alien")).firstMatch
         XCTAssertTrue(movieCell.waitForExistence(timeout: 5), "The movie should appear in the watchlist.")
         
@@ -85,7 +86,7 @@ final class MyWatchListUITests: XCTestCase {
         XCTAssertTrue(searchTab.waitForExistence(timeout: 3))
         searchTab.tap()
         
-        let tvSegment = app.segmentedControls.buttons.element(boundBy: 1)
+        let tvSegment = app.buttons["segmentedButton_shows"]
         XCTAssertTrue(tvSegment.waitForExistence(timeout: 3))
         tvSegment.tap()
         

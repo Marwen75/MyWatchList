@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct WatchListView: View {
+    @Environment(\.requestReview) var requestReview
     @EnvironmentObject var watchListPathManager: WatchListPathManager
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var errorManager: ErrorManager
@@ -62,6 +63,11 @@ struct WatchListView: View {
                 }
                 ToolbarItem {
                     WatchListViewMenuToolbar()
+                }
+            }
+            .onAppear {
+                if watchListViewModel.shouldRequestReview {
+                    requestReview()
                 }
             }
             .navigationDestination(for: WatchListRoute.self) { route in

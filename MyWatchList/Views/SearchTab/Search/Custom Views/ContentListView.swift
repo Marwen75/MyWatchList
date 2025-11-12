@@ -22,9 +22,13 @@ struct ContentListView: View {
             .scrollTargetLayout()
         }
         .safeAreaPadding([.leading, .top, .trailing], 10)
-        .onScrollTargetVisibilityChange(idType: TmdbContent.ID.self, threshold: 0.5) { tmdbId in
-            if let lastContent = searchViewModel.tmdbContents.last, tmdbId.contains(where: { $0 == lastContent.id }) {
-                searchViewModel.currentPage += 1
+        .onScrollTargetVisibilityChange(idType: TmdbContent.ID.self, threshold: 0.5) { visibleIds in
+            guard let lastContent = searchViewModel.tmdbContents.last else { return }
+            
+            if visibleIds.contains(lastContent.id), !searchViewModel.isFetchingNextPage, searchViewModel.hasMorePages {
+                Task {
+                    await searchViewModel.fetchNextPage()
+                }
             }
         }
         #else
@@ -37,10 +41,13 @@ struct ContentListView: View {
             .scrollTargetLayout()
         }
         .safeAreaPadding([.leading, .top, .trailing], 10)
-        .onScrollTargetVisibilityChange(idType: TmdbContent.ID.self, threshold: 0.5) { tmdbId in
-            if let lastContent = searchViewModel.tmdbContents.last, tmdbId.contains(where: { $0 == lastContent.id }) {
-                searchViewModel.currentPage += 1
-                print(searchViewModel.currentPage)
+        .onScrollTargetVisibilityChange(idType: TmdbContent.ID.self, threshold: 0.5) { visibleIds in
+            guard let lastContent = searchViewModel.tmdbContents.last else { return }
+            
+            if visibleIds.contains(lastContent.id), !searchViewModel.isFetchingNextPage, searchViewModel.hasMorePages {
+                Task {
+                    await searchViewModel.fetchNextPage()
+                }
             }
         }
         #endif

@@ -13,7 +13,7 @@ struct NetworkManager: NetworkManagerProtocol {
     
     /// Fetches in a generic way the data from the network
     /// - Parameters:
-    ///   - resource: The endpoint to target for the fetching
+    /// - resource: The endpoint to target for the fetching
     /// - Returns: A decoded result from the request
     @MainActor
     func fetch<T>(_ resource: Endpoint<T>) async throws -> T {
@@ -30,13 +30,9 @@ struct NetworkManager: NetworkManagerProtocol {
         var request = URLRequest(url: usableUrl)
         request.httpMethod = resource.method.rawValue
         
-        print("➡️ URL:", url?.absoluteString ?? "nil")
-        
         let (data, response) = try await environment.session.data(for: request)
         
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-            throw AppError.invalidRequest
-        }
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw AppError.invalidRequest }
         
         do {
             let decoder = JSONDecoder()

@@ -30,47 +30,54 @@ struct SmartFilterView: View {
                         .accessibilityIdentifier(filter.name)
                     }
                 }
-                .listRowBackground(Color.yellow.mix(with: .black, by: 0.1).opacity(0.1))
+                .formSectionStyle()
                 
                 Section("Movie Tags") {
                     CustomTagsListView(watchListViewModel: watchListViewModel, forMovies: true)
                 }
-                .listRowBackground(Color.yellow.mix(with: .black, by: 0.1).opacity(0.1))
+                .formSectionStyle()
                 
                 Section("Tv show Tags") {
                     CustomTagsListView(watchListViewModel: watchListViewModel, forMovies: false)
                 }
-                .listRowBackground(Color.yellow.mix(with: .black, by: 0.1).opacity(0.1))
+                .formSectionStyle()
                 
                 Section {
                     Button("Add tag", systemImage: "plus") {
                         watchListViewModel.showTagAlert = true
                     }
+                    .accessibilityIdentifier("addTagButton")
                     .buttonStyle(.plain)
                     .foregroundStyle(.white)
                 }
-                .listRowBackground(Color.yellow.mix(with: .black, by: 0.1).opacity(0.1))
+                .formSectionStyle()
             }
             .scrollContentBackground(.hidden)
         }
-        .toolbar {
-            
-        }
         .alert("Create your own tag", isPresented: $watchListViewModel.showTagAlert) {
             Button("Movie tag") {
-                watchListViewModel.dataManager.newTag(isMovieTag: true, name: watchListViewModel.tagName)
+                watchListViewModel.tryNewTag(isMovieTag: true)
             }
+            .accessibilityIdentifier("mtButton")
+            
             Button("Tv show tag") {
-                watchListViewModel.dataManager.newTag(isMovieTag: false, name: watchListViewModel.tagName)
+                watchListViewModel.tryNewTag(isMovieTag: false)
             }
+            .accessibilityIdentifier("stButton")
+            
             Button("Cancel", role: .cancel) { }
             
             TextField("Name your tag", text: $watchListViewModel.tagName)
         }
+        .accessibilityIdentifier("ctAlert")
         .alert("Rename tag", isPresented: $watchListViewModel.renamingTag) {
             Button("OK", action: watchListViewModel.completeRename)
             Button("Cancel", role: .cancel) { }
             TextField("New name", text: $watchListViewModel.tagName)
+        }
+        .sheet(isPresented: $watchListViewModel.showingStore) {
+            StoreView()
+                .accessibilityIdentifier("storeView")
         }
     }
 }

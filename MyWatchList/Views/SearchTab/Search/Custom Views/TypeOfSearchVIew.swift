@@ -12,12 +12,16 @@ struct TypeOfSearchVIew: View {
     
     var body: some View {
         VStack {
-            Picker("", selection: $searchViewModel.selectedTypeOfContent) {
-                ForEach(searchViewModel.typeOfContent, id: \.self) {
-                    Text(NSLocalizedString($0.rawValue, comment: ""))
+            SegmentedPickerView(selection: $searchViewModel.selectedTypeOfContent, items: searchViewModel.typeOfContent,
+                label: { type in
+                    NSLocalizedString(type.rawValue, comment: "")
+                }, icon: { type in
+                    switch type {
+                    case .movies: return "film"
+                    case .shows:  return "tv"
+                    }
                 }
-            }
-            .pickerStyle(.segmented)
+            )
             .padding([.leading, .trailing, .top])
             .onChange(of: searchViewModel.selectedTypeOfContent) {
                 searchViewModel.tmdbContents = []
@@ -30,35 +34,36 @@ struct TypeOfSearchVIew: View {
                 }
             }
             
-            TextField("Search", text: $searchViewModel.searchText, prompt: searchViewModel.selectedTypeOfContent == .movies ? Text("Search movies") : Text("Search tv shows"))
-                .colorScheme(.light)
-                .padding([.leading, .trailing, .top])
-                .textFieldStyle(.roundedBorder)
-                .accessibilityIdentifier("searchField")
-                .onSubmit {
-                    if !searchViewModel.tmdbContents.isEmpty {
-                        searchViewModel.tmdbContents = []
-                    }
-                    if searchViewModel.currentPage != 1 {
-                        searchViewModel.currentPage = 1
-                    }
-                    
-                    if searchViewModel.searchText != "" {
-                        Task {
-                            await searchViewModel.search()
-                        }
+            TextField("Search", text: $searchViewModel.searchText,
+                      prompt: searchViewModel.selectedTypeOfContent == .movies ? Text("Search movies") : Text("Search tv shows"))
+            .colorScheme(.light)
+            .padding([.leading, .trailing, .top])
+            .textFieldStyle(.roundedBorder)
+            .accessibilityIdentifier("searchField")
+            .onSubmit {
+                if !searchViewModel.tmdbContents.isEmpty {
+                    searchViewModel.tmdbContents = []
+                }
+                if searchViewModel.currentPage != 1 {
+                    searchViewModel.currentPage = 1
+                }
+                
+                if searchViewModel.searchText != "" {
+                    Task {
+                        await searchViewModel.search()
                     }
                 }
-                .onChange(of: searchViewModel.currentPage) {
-                    if searchViewModel.currentPage < searchViewModel.totalPages {
-                        Task {
-                            await searchViewModel.search()
-                        }
+            }
+            .onChange(of: searchViewModel.currentPage) {
+                if searchViewModel.currentPage < searchViewModel.totalPages {
+                    Task {
+                        await searchViewModel.search()
                     }
                 }
-            #if os(macOS)
-                .frame(width: 300)
-            #endif
+            }
+#if os(macOS)
+            .frame(width: 300)
+#endif
         }
     }
 }

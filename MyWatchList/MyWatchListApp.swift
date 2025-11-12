@@ -20,8 +20,9 @@ struct MyWatchListApp: App {
     #if os(iOS)
     init() {
         if CommandLine.arguments.contains("enable-testing") {
-            // Deactivate animations for ui testing
+            // Delete all
             dataManager.deleteAll()
+            // Deactivate animations for ui testing
             UIView.setAnimationsEnabled(false)
         }
     }

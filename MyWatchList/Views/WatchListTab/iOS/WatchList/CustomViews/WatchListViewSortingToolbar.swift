@@ -17,7 +17,7 @@ struct WatchListViewSortingToolbar: View {
             Divider()
             
             Picker("Sort by", selection: $dataManager.sortOrder) {
-                ForEach(DataManager.SortOrder.allCases) { order in
+                ForEach(SortOrder.allCases) { order in
                     Text(order.label).tag(order)
                 }
             }

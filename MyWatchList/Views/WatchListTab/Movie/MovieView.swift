@@ -90,3 +90,4 @@ struct MovieView: View {
             .environmentObject(DataManager.preview)
     }
 }
+

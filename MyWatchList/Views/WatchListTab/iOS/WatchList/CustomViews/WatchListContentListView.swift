@@ -31,6 +31,7 @@ struct WatchListContentListView: View {
                     .onDelete(perform: watchListViewModel.deleteMovie)
                     .listRowBackground(Color.clear)
                 }
+                .sectionTitleStyle()
             }
             .accessibilityIdentifier("mainMovieList")
         } else {
@@ -42,6 +43,7 @@ struct WatchListContentListView: View {
                     .onDelete(perform: watchListViewModel.deleteTvShow)
                     .listRowBackground(Color.clear)
                 }
+                .sectionTitleStyle()
                 
                 Section("Watched:") {
                     ForEach(watchListViewModel.watchedShows, id: \.self) { show in
@@ -50,6 +52,7 @@ struct WatchListContentListView: View {
                     .onDelete(perform: watchListViewModel.deleteTvShow)
                     .listRowBackground(Color.clear)
                 }
+                .sectionTitleStyle()
             }
         }
     }

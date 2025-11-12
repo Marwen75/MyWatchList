@@ -19,9 +19,9 @@ struct WatchListViewMenuToolbar: View {
             Divider()
             
             Picker("Status", selection: $dataManager.filterStatus) {
-                Text("All").tag(DataManager.Status.all)
-                Text("Watched").tag(DataManager.Status.watched)
-                Text("Unwatched").tag(DataManager.Status.unwatched)
+                Text("All").tag(WatchStatus.all)
+                Text("Watched").tag(WatchStatus.watched)
+                Text("Unwatched").tag(WatchStatus.unwatched)
             }
             .disabled(!dataManager.filterEnabled)
             

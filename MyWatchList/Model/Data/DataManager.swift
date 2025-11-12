@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import StoreKit
 
 class DataManager: ObservableObject {
     let container: NSPersistentCloudKitContainer
@@ -18,25 +19,13 @@ class DataManager: ObservableObject {
     @Published var searchText = ""
     @Published var filterEnabled = false
     @Published var filterPriority = -1
-    @Published var filterStatus = Status.all
+    @Published var filterStatus = WatchStatus.all
     @Published var sortOrder = SortOrder.priority
+    @Published var products: [Product] = []
     
-    enum Status {
-        case all, watched, unwatched
-    }
+    private var storeTask: Task<Void, Never>?
     
-    enum SortOrder: String, CaseIterable, Identifiable {
-        case priority, title
-        
-        var id: String { rawValue }
-        
-        var label: String {
-            switch self {
-            case .priority: NSLocalizedString("By Priority", comment: "")
-            case .title: NSLocalizedString("By Title", comment: "")
-            }
-        }
-    }
+    let defaults: UserDefaults
     
 #if DEBUG
     /// For preview purposes only
@@ -61,11 +50,20 @@ class DataManager: ObservableObject {
         return managedObjectModel
     }()
     
-    init(inMemory: Bool = false) {
+    /// Initializes a data manager either in memory or on permanent storage
+    /// - Parameters:
+    ///   - inMemory: Whether to store this data in temporary memory or not.
+    ///   - defaults: The UserDefaults where user data should be stored.
+    init(inMemory: Bool = false, defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+        
         // Injection of the previously created model, this way we don't need to use a mock for testing
         container = NSPersistentCloudKitContainer(name: "Main", managedObjectModel: Self.model)
         
-        // For testing purposes 
+        // Watch for transactions as soon as possible and for as long as the app is running
+        storeTask = Task { await monitorTransactions() }
+        
+        // For testing purposes
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(filePath: "/dev/null")
         }
@@ -378,6 +376,7 @@ class DataManager: ObservableObject {
         }
         show.voteAverage = content.voteAverage ?? 0
         show.priority = priority.rawValue
+        show.watched = false
         
         var directorsToSave: [Director] = []
         
@@ -448,12 +447,22 @@ class DataManager: ObservableObject {
     /// - Parameters:
     ///   - isMovieTag: Boolean value to know if the tag created is a movie or a show tag
     ///   - name: The name of the created tag
-    func newTag(isMovieTag: Bool, name: String) {
+    func newTag(isMovieTag: Bool, name: String) -> Bool {
+        var shouldCreate = fullAppPurchased
+        
+        if !shouldCreate {
+            shouldCreate = count(for: Tag.fetchRequest()) < 3
+        }
+        
+        guard shouldCreate else { return false }
+        
         let tag = Tag(context: container.viewContext)
         tag.id = UUID()
         tag.name = name
         tag.isMovieTag = isMovieTag
         save()
+        
+        return true
     }
     
     /// Fetches the missing tags frome the view context for a given movie
@@ -483,9 +492,10 @@ class DataManager: ObservableObject {
     }
     
     /// Fetches the movies from the view context by applying given predicates
-    /// - Returns: The movies matching de predicates
+    /// - Parameter watched: If the movies to fetch are watched or not
+    /// - Returns: The movies matching the predicates
     @MainActor func fetchMovies(watched: Bool? = nil) -> [Movie] {
-        var predicates = getAllPredicates(forFilter: .movies)
+        var predicates = getAllPredicates()
         
         if let watched {
             let watchedPredicate = NSPredicate(format: "watched = %@", NSNumber(value: watched))
@@ -508,9 +518,10 @@ class DataManager: ObservableObject {
     }
     
     /// Fetches the tv shows from the view context by applying given predicates
-    /// - Returns: The tv shows matching de predicates
+    /// - Parameter watched: If the shows to fetch are watched or not
+    /// - Returns: The tv shows matching the predicates
     @MainActor func fetchTvShows(watched: Bool? = nil) -> [TvShow] {
-        var predicates = getAllPredicates(forFilter: .tvShows)
+        var predicates = getAllPredicates()
         
         if let watched {
             let watchedPredicate = NSPredicate(format: "watched = %@", NSNumber(value: watched))
@@ -533,13 +544,13 @@ class DataManager: ObservableObject {
     }
     
     /// Gets all predicates to apply to a show or movie request
-    /// - Parameter filter: The current selected filter
     /// - Returns: The predicates applyable to a fetch request
-    func getAllPredicates(forFilter filter: Filter) -> [NSPredicate]  {
-        let activeFilter = selectedFilter ?? .movies
+    func getAllPredicates() -> [NSPredicate]  {
+        let filter = selectedFilter ?? .movies
+        
         var predicates = [NSPredicate]()
         
-        if let tag = activeFilter.tag {
+        if let tag = filter.tag {
             let tagPredicate = NSPredicate(format: "tags CONTAINS %@", tag)
             predicates.append(tagPredicate)
         }

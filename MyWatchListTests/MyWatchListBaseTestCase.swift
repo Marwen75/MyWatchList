@@ -12,9 +12,13 @@ import CoreData
 class MyWatchListBaseTestCase: XCTestCase {
     var dataManager: DataManager!
     var managedObjectContext: NSManagedObjectContext!
-
+    
     override func setUpWithError() throws {
-        dataManager = DataManager(inMemory: true)
+        let suiteName = "TestDefaults_\(UUID().uuidString)"
+        let testDefaults = UserDefaults(suiteName: suiteName)!
+        testDefaults.removePersistentDomain(forName: suiteName)
+        
+        dataManager = DataManager(inMemory: true, defaults: testDefaults)
         managedObjectContext = dataManager.container.viewContext
     }
 }

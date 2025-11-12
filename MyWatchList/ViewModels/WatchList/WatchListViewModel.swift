@@ -22,6 +22,11 @@ class WatchListViewModel: NSObject, ObservableObject, NSFetchedResultsController
     @Published var movieTags: [Filter] = []
     @Published var showTags: [Filter] = []
     @Published var appError: AppError?
+    @Published var showingStore = false
+    
+    var shouldRequestReview: Bool {
+        dataManager.count(for: Tag.fetchRequest()) >= 5
+    }
     
     var notWatchedMovies: [Movie] {
         dataManager.fetchMovies(watched: false)
@@ -76,6 +81,12 @@ class WatchListViewModel: NSObject, ObservableObject, NSFetchedResultsController
             tags = newTags
             movieTags = getCustomTags(forMovies: true)
             showTags = getCustomTags(forMovies: false)
+        }
+    }
+    
+    func tryNewTag(isMovieTag: Bool) {
+        if !dataManager.newTag(isMovieTag: isMovieTag, name: tagName) {
+            showingStore = true
         }
     }
     

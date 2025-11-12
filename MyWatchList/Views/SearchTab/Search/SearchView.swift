@@ -31,6 +31,9 @@ struct SearchView: View {
                     } else {
                         ContentUnavailableView("Results are empty", systemImage: "person.crop.badge.magnifyingglass", description: Text("Use the search bar to find movies or tv shows."))
                             .foregroundStyle(.white)
+                            .fontDesign(.monospaced)
+                            .padding()
+                        
                         Spacer()
                     }
                 }
@@ -43,7 +46,16 @@ struct SearchView: View {
                     SeasonDetailView(season: season)
                 }
             }
-            .navigationTitle("Search")
+            .navigationTitle("")
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    VStack(spacing: 2) {
+                        Text("Search")
+                            .font(.system(size: 18, weight: .heavy, design: .monospaced))
+                            .foregroundStyle(.white)
+                    }
+                }
+            }
             .inlineNavigationBar()
             .onChange(of: searchViewModel.appError) { _, newError in
                 if let error = newError {

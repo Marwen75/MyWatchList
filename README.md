@@ -1,7 +1,7 @@
 # 🎬 MyWatchList  
 “Organize your watchlist. Rediscover your favorites. Enjoy the show.”
 
-![Version](https://img.shields.io/badge/version-1.4-darkred?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-1.5-darkred?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/platforms-iOS%20%7C%20macOS-blue?style=for-the-badge)
 ![Swift](https://img.shields.io/badge/Swift-6.0-orange?style=for-the-badge)
 
@@ -22,6 +22,9 @@ It combines smooth performance and smart filtering to make managing your watchli
 
 - 🏷️ **Custom Tags**  
   Categorize your content with personalized tags like *“Weekend Nights”* or *“With Friends”*.
+
+- 💎 **Premium Unlock**  
+  Unlock unlimited tags and advanced customization options through an in-app purchase powered by StoreKit.
 
 - 📺 **TV Show Progress**  
   Track your progress across seasons and episodes with live progress indicators.
@@ -51,8 +54,9 @@ It combines smooth performance and smart filtering to make managing your watchli
 - 🧱 Pragmatic MVVM Architecture  
 - 🔄 Swift Modern Concurrency  
 - ☁️ iCloud Sync  
-- 💡 Core Spotlight & NSUserActivity for deep linking
-- 🔔 UserNotifications (local reminders)
+- 💡 Core Spotlight & NSUserActivity for deep linking  
+- 🔔 UserNotifications (local reminders)  
+- 🛒 StoreKit 2 (In-App Purchases)
 
 ---
 
@@ -78,7 +82,6 @@ It combines smooth performance and smart filtering to make managing your watchli
 Here’s what’s next for **MyWatchList** 👇
 
 - 🧩 **Widgets** — add your favorite shows or reminders right on your Home Screen.  
-- 💎 **Premium version** — unlock exclusive features and customization options.  
 - ⌚ **Apple Watch compatibility** — track progress and mark episodes from your wrist.  
 - 🥽 **visionOS support** — immersive viewing and browsing experience in spatial UI.  
 
@@ -89,7 +92,7 @@ Here’s what’s next for **MyWatchList** 👇
 - iOS **26.0** or later  
 - macOS **Tahoe (26.0)** or later  
 - Xcode **26.0** or later  
-- Swift **6**
+- Swift **6.2**
 
 ---
 
@@ -107,4 +110,3 @@ This project is licensed under the **MIT License**.
 You’re free to use, modify, and distribute this software with attribution.
 
 © 2025 Marwen Haouacine. All rights reserved.
-
