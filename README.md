@@ -78,7 +78,7 @@ It combines smooth performance and smart filtering to make managing your watchli
 <img width="269" height="685" alt="i_13" src="https://github.com/user-attachments/assets/886c13cf-fe94-4d96-a07f-68a442f90e3a" />
 <img width="269" height="685" alt="i_12" src="https://github.com/user-attachments/assets/509d7c85-69fb-4741-88d8-eeb572e5de1b" />
 <img width="269" height="685" alt="i_11" src="https://github.com/user-attachments/assets/b4a92527-cd0a-4111-9cee-167bfbd1fc7d" />
-<img width="269" height="685" alt="i_10" src="https://github.com/user-attachments/assets/1b7d5949-5792-48b3-94d9-95a14adc3cf9" />
+<img width="269" height="685" alt="i_15" src="https://github.com/user-attachments/assets/cc6ac07f-a939-49bc-b552-6d83b1d02d3e" />
 <img width="269" height="685" alt="i_9" src="https://github.com/user-attachments/assets/d2a4c5ef-97e2-4010-86d1-4043c9d7a8fc" />
 <img width="269" height="685" alt="i_8" src="https://github.com/user-attachments/assets/b50a25f1-be93-4c40-bb8a-53f89f0a38c9" />
 <img width="269" height="685" alt="i_7" src="https://github.com/user-attachments/assets/42a8276f-dfa0-4a56-9424-2963f6de40b8" />
