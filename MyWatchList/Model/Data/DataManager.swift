@@ -7,6 +7,8 @@
 
 import CoreData
 import StoreKit
+import Combine
+import WidgetKit
 
 class DataManager: ObservableObject {
     let container: NSPersistentCloudKitContainer
@@ -26,17 +28,7 @@ class DataManager: ObservableObject {
     private var storeTask: Task<Void, Never>?
     
     let defaults: UserDefaults
-    
-#if DEBUG
-    /// For preview purposes only
-    static var preview: DataManager = {
-        let dataManager = DataManager(inMemory: true)
-        dataManager.createSampleData()
-        return dataManager
-    }()
-#endif
-    
-    
+
     /// We need to explicitly create the model and inject it to the container to avoid multiple model instances loading when testing
     static let model: NSManagedObjectModel = {
         guard let url = Bundle.main.url(forResource: "Main", withExtension: "momd") else {
@@ -66,6 +58,13 @@ class DataManager: ObservableObject {
         // For testing purposes
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(filePath: "/dev/null")
+        } else {
+            let groupID = "group.com.marwen.MyWatchList"
+            
+            // Directing CoreData to share information with the AppGroup
+            if let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupID) {
+                container.persistentStoreDescriptions.first?.url = url.appending(path: "Main.sqlite")
+            }
         }
         
         // Apply any changes that happen to the persisent store to our view context
@@ -74,6 +73,8 @@ class DataManager: ObservableObject {
         
         // Be notified when the store has changed
         container.persistentStoreDescriptions.first?.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+        container.persistentStoreDescriptions.first?.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+        
         NotificationCenter.default.addObserver(forName: .NSPersistentStoreRemoteChange,
                                                object: container.persistentStoreCoordinator,
                                                queue: .main,
@@ -86,7 +87,7 @@ class DataManager: ObservableObject {
             }
             
             // Initializing the spotlight delegate so the user can
-            // search for an Movie or a Tv Show from his home screen
+            // search for a Movie or a Tv Show from his home screen
             if let description = self?.container.persistentStoreDescriptions.first {
                 description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
                 
@@ -99,166 +100,20 @@ class DataManager: ObservableObject {
         }
     }
     
-#if DEBUG
-    func createSampleData() {
-        container.viewContext.performAndWait {
-            let viewContext = container.viewContext
-            let movie = Movie(context: viewContext)
-            movie.poster = "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"
-            movie.title = "Avengers: Infinity War"
-            movie.overview = "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain."
-            movie.budget = Int64(300000000)
-            movie.genres = "Adventure, Action, Science Fiction"
-            movie.id = Int64(86311)
-            movie.releaseDate = "2018-04-25"
-            movie.runTime = Int64(149)
-            movie.trailerUrl = "6ZfuNTqbHE8"
-            movie.voteAverage = 8.235
-            movie.imdbUrl = "test"
-            movie.priority = 2
-            movie.watched = false
-            
-            let director = Director(context: viewContext)
-            director.name = "Anthony Russo"
-            director.id = Int64(19271)
-            director.picture = "/xbINBnWn28YygYWUJ1aSAw0xPRv.jpg"
-            
-            let director2 = Director(context: viewContext)
-            director2.name = "Joe Russo"
-            director2.id = Int64(19272)
-            director2.picture = "/o0OXjFzL10jCy89iAs7UzzSbyoK.jpg"
-            movie.directors = NSSet(array: [director, director2])
-            
-            let actor = Actor(context: viewContext)
-            actor.name = "Adam Test"
-            actor.id = 1
-            actor.picture = "/o0OXjFzL10jCy89iAs7UzzSbyoK.jpg"
-            
-            movie.actors = NSSet(array: [actor])
-            
-            let movie2 = Movie(context: viewContext)
-            movie2.poster = "/lV5OpzAss1z06YNagOVap1I35mH.jpg"
-            movie2.title = "Star Trek"
-            movie2.overview = "The fate of the galaxy rests in the hands of bitter rivals. One, James Kirk, is a delinquent, thrill-seeking Iowa farm boy. The other, Spock, a Vulcan, was raised in a logic-based society that rejects all emotion. As fiery instinct clashes with calm reason, their unlikely but powerful partnership is the only thing capable of leading their crew through unimaginable danger, boldly going where no one has gone before. The human adventure has begun again."
-            movie2.budget = Int64(150000000)
-            movie2.genres = "Adventure, Action, Science Fiction"
-            movie2.id = Int64(115575)
-            movie2.releaseDate = "2009-05-06"
-            movie2.runTime = Int64(127)
-            movie2.trailerUrl = "pFVvigZ5wQY"
-            movie2.voteAverage = 7.425
-            movie2.priority = 0
-            movie2.watched = false
-            
-            let show = TvShow(context: viewContext)
-            show.poster = "/kiy8BHtIHAslh81rvFcZ4wbNGdY.jpg"
-            show.title = "Sons of Anarchy"
-            show.overview = "The Sons of Anarchy (SOA) are an outlaw motorcycle club with many charters in the United States and overseas. The show focused on the original and founding charter, Sons of Anarchy Motorcycle Club, Redwood Original, often referred to by the acronym SAMCRO, Sam Crow, or simply Redwood Charter. The charter operates both legal and illegal businesses in the small town of Charming, California. They combine gun-running and a garage, and involvement in porn film industry. Clay, the charter president, likes it old school and violent; while Jax, his stepson and the club's VP, has thoughts about changing the way things are done. Their conflict has effects on both the club and their personal relationship, especially when Jax goes on a personal quest to cleanse the SAMCRO name and image."
-            show.inProduction = false
-            show.genres = "Crime, Drama"
-            show.id = Int64(1409)
-            show.firstAirDate = "2008-09-03"
-            show.lastAirDate = "2014-12-09"
-            show.numberOfEpisodes = Int64(92)
-            show.numberOfSeasons = Int64(7)
-            show.trailerUrl = "paBZJJXUEtg"
-            show.voteAverage = 8.419
-            show.inProduction = false
-            show.imdbUrl = "test"
-            let creator = Director(context: viewContext)
-            creator.name = "Kurt Sutter"
-            creator.id = Int64(200043)
-            creator.picture = "/A4c9xpj2VuZXGvSv6z1S912Xwnd.jpg"
-            
-            let season1 = ShowSeason(context: viewContext)
-            season1.id = Int64(3684)
-            season1.airDate = "2008-09-03"
-            season1.name = "Season 1"
-            season1.overview = "The Sons of Anarchy live, ride, and die for brotherhood. But as the club's leader Clay Morrow and his wife Gemma steer them in an increasingly lawless direction, Gemma's son Jax is torn between loyalty and the legacy."
-            season1.seasonNumber = Int64(1)
-            season1.voteAverage = 8.1
-            season1.poster = "/eZJPW8G7o0b2fH7GC7Av4MOKTj3.jpg"
-            season1.watched = false
-            
-            let episode1 = ShowEpisode(context: viewContext)
-            episode1.airDate = "2008-09-03"
-            episode1.id = 63924
-            episode1.name = "Pilot"
-            episode1.overview = "When a rival club cleans out and then destroys their illegal arms warehouse, SAMCRO (Sons of Anarchy Motorcycle Club, Redwood Original) executes their own sense of justice in retrieving their guns. Meanwhile, family issues take center stage with a medical emergency involving Jax Teller's newborn son."
-            episode1.episodeNumber = Int64(1)
-            episode1.runTime = 57
-            episode1.voteAverage = 8.4
-            episode1.stillPath = "/jc2RFJIJBFqsMpxnCD6VParg8Rj.jpg"
-            episode1.watched = false
-            
-            season1.episodes = NSSet(array: [episode1])
-            
-            
-            show.seasons = NSSet(array: [season1])
-            
-            show.directors = NSSet(array: [creator])
-            
-            show.actors = NSSet(array: [actor])
-            
-            for i in 0...5 {
-                let tag = Tag(context: viewContext)
-                tag.id = UUID()
-                tag.name = String(i)
-                tag.isMovieTag = true
-                tag.movies = NSSet(array: [movie])
-            }
-            
-            for i in 0...5 {
-                let tag = Tag(context: viewContext)
-                tag.id = UUID()
-                tag.name = "Tag number \(i)"
-                tag.isMovieTag = false
-                tag.shows = NSSet(array: [show])
-            }
-            
-            do {
-                try viewContext.save()
-            } catch {
-                print("Failed to save sample data: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    private func delete(_ fetchRequest: NSFetchRequest<NSFetchRequestResult>) {
-        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        batchDeleteRequest.resultType = .resultTypeObjectIDs
-        
-        // IMPORTANT: When performing a batch delete we need to make sure we read the result back
-        // then merge all the changes from that result back into our live view context
-        // so that the two stay in sync.
-        if let delete = try? container.viewContext.execute(batchDeleteRequest) as? NSBatchDeleteResult {
-            let changes = [NSDeletedObjectsKey: delete.result as? [NSManagedObjectID] ?? []]
-            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [container.viewContext])
-        }
-    }
-    
-    func deleteAll() {
-        let request1: NSFetchRequest<NSFetchRequestResult> = Tag.fetchRequest()
-        delete(request1)
-        
-        let request2: NSFetchRequest<NSFetchRequestResult> = Movie.fetchRequest()
-        delete(request2)
-        
-        let request3: NSFetchRequest<NSFetchRequestResult> = TvShow.fetchRequest()
-        delete(request3)
-        
-        save()
-    }
-    
+    /// Retrieves the count for a given fetch request.
+    /// - Parameter fetchRequest: The fetch request to get the count for.
+    /// - Returns: The count of the given fetch request
     func count<T>(for fetchRequest: NSFetchRequest<T>) -> Int {
         (try? container.viewContext.count(for: fetchRequest)) ?? 0
     }
-#endif
     
     /// Saves the view context only if changes were made
     func save() {
         if container.viewContext.hasChanges {
             try? container.viewContext.save()
+            
+            //Force all widgets to update when a change occurs
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
     
@@ -294,153 +149,6 @@ class DataManager: ObservableObject {
     /// - Parameter notification: The notification to observe (persistent store remote change)
     func remoteStoreChanged(_ notification: Notification) {
         objectWillChange.send()
-    }
-    
-    /// Creates a movie in the view context using fetched data
-    /// - Parameters:
-    ///   - content: The content fetched from the api
-    ///   - castMembers: Cast members relative to the content fetched
-    ///   - directors: Directors relative to the content fetched
-    func createMovie(fromContent content: TmdbContent, priority: WatchPriority = .low, withCastMembers castMembers: [Cast], andDirectors directors: [Cast]) {
-        let movie = Movie(context: container.viewContext)
-        
-        movie.poster = content.posterPath
-        movie.title = content.title
-        movie.overview = content.overview
-        movie.budget = Int64(content.budget ?? 0)
-        if let genres = content.genres {
-            movie.genres = genres.map(\.self.name).joined(separator: ", ")
-        }
-        movie.id = Int64(content.id)
-        movie.releaseDate = content.releaseDate
-        movie.runTime = Int64(content.runtime ?? 0)
-        if let videos = content.videos, let video = videos.results.first(where: {$0.type == "Trailer"}) {
-            movie.trailerUrl = video.key
-        }
-        movie.voteAverage = content.voteAverage ?? 0
-        movie.priority = priority.rawValue
-        movie.watched = false
-        
-        var actors: [Actor] = []
-        
-        /// We need to add a rank to the actors so we can sort them in the good order
-        castMembers.enumerated().forEach { i, castMember in
-            let actor = Actor(context: container.viewContext)
-            actor.rank = Int32(i)
-            actor.id = Int64(castMember.id)
-            actor.name = castMember.name
-            actor.picture = castMember.profilePath
-            actors.append(actor)
-        }
-        
-        movie.actors = NSSet(array: actors)
-        
-        var directorsToSave: [Director] = []
-        
-        for director in directors {
-            let directorObject = Director(context: container.viewContext)
-            directorObject.id = Int64(director.id)
-            directorObject.name = director.name
-            directorObject.picture = director.profilePath
-            directorsToSave.append(directorObject)
-        }
-        
-        movie.directors = NSSet(array: directorsToSave)
-        
-        save()
-    }
-    
-    /// Creates a movie in the view context using fetched data
-    /// - Parameters:
-    ///   - content: The content fetched from the api
-    ///   - castMembers: Cast members relative to the content fetched
-    ///   - creators: Creators relative to the content fetched
-    ///   - seasons: Seasons relative to the content fetched
-    func createTvShow(fromContent content: TmdbContent, priority: WatchPriority = .low, withCastMembers castMembers: [Cast], creators: [Creator], andSeasons seasons: [Season]) {
-        let show = TvShow(context: container.viewContext)
-        
-        show.poster = content.posterPath
-        show.title = content.name
-        show.overview = content.overview
-        show.inProduction = content.inProduction ?? false
-        if let genres = content.genres {
-            show.genres = genres.map(\.self.name).joined(separator: ", ")
-        }
-        show.id = Int64(content.id)
-        show.firstAirDate = content.firstAirDate
-        show.lastAirDate = content.lastAirDate
-        show.numberOfEpisodes = Int64(content.numberOfEpisodes ?? 0)
-        show.numberOfSeasons = Int64(content.numberOfSeasons ?? 0)
-        if let videos = content.videos, let video = videos.results.first(where: {$0.type == "Trailer"}) {
-            show.trailerUrl = video.key
-        }
-        show.voteAverage = content.voteAverage ?? 0
-        show.priority = priority.rawValue
-        show.watched = false
-        
-        var directorsToSave: [Director] = []
-        
-        for creator in creators {
-            let directorObject = Director(context: container.viewContext)
-            directorObject.id = Int64(creator.id)
-            directorObject.name = creator.name
-            directorObject.picture = creator.profilePath
-            directorsToSave.append(directorObject)
-        }
-        
-        show.directors = NSSet(array: directorsToSave)
-        
-        var actors: [Actor] = []
-        
-        /// We need to add a rank to the actors so we can sort them in the good order
-        castMembers.enumerated().forEach { i, castMember in
-            let actor = Actor(context: container.viewContext)
-            actor.rank = Int32(i)
-            actor.id = Int64(castMember.id)
-            actor.name = castMember.name
-            actor.picture = castMember.profilePath
-            actors.append(actor)
-        }
-        
-        show.actors = NSSet(array: actors)
-        
-        var seasonsToSave: [ShowSeason] = []
-        
-        /// We give a rank to the seasons in case the season number is missing so it still appears in the right order
-        seasons.enumerated().forEach { i, season in
-            if season.name != "Specials" || season.airDate != nil {
-                let showSeason = ShowSeason(context: container.viewContext)
-                showSeason.rank = Int64(i)
-                showSeason.id = Int64(season.id)
-                showSeason.airDate = season.airDate
-                showSeason.name = season.name
-                showSeason.overview = season.overview
-                showSeason.seasonNumber = Int64(season.seasonNumber ?? 0)
-                showSeason.voteAverage = season.voteAverage ?? 0
-                showSeason.poster = season.posterPath
-                var seasonEpisodes: [ShowEpisode] = []
-                season.episodes?.enumerated().forEach { i, episode in
-                    let showEpisode = ShowEpisode(context: container.viewContext)
-                    showEpisode.rank = Int64(i)
-                    showEpisode.id = Int64(episode.id)
-                    showEpisode.airDate = episode.airDate
-                    showEpisode.episodeNumber = Int64(episode.episodeNumber ?? 0)
-                    showEpisode.name = episode.name
-                    showEpisode.overview = episode.overview
-                    showEpisode.stillPath = episode.stillPath
-                    showEpisode.voteAverage = episode.voteAverage ?? 0
-                    showEpisode.runTime = Int64(episode.runtime ?? 0)
-                    seasonEpisodes.append(showEpisode)
-                }
-                showSeason.episodes = NSSet(array: seasonEpisodes)
-                
-                seasonsToSave.append(showSeason)
-            }
-        }
-        
-        show.seasons = NSSet(array: seasonsToSave)
-        
-        save()
     }
     
     /// Creates a new tag in the view context
@@ -648,5 +356,57 @@ class DataManager: ObservableObject {
         guard let id = container.persistentStoreCoordinator.managedObjectID(forURIRepresentation: url) else { return nil }
         
         return try? container.viewContext.existingObject(with: id) as? TvShow
+    }
+    
+    /// Returns a configured fetch request to retrieve the highest-priority
+    /// unwatched movies, limited to the specified number.
+    ///
+    /// This method is optimized for lightweight data retrieval in contexts where
+    /// only a small subset of items is needed — such as WidgetKit timelines,
+    /// background refreshes, or quick home-screen previews.
+    /// Movies are filtered to include only those not marked as `watched`,
+    /// and sorted in descending priority (highest priority first).
+    ///
+    /// - Parameter count: The maximum number of movies to return.
+    /// - Returns: An `NSFetchRequest<Movie>` fetching at most `count` unwatched movies.
+    func fetchRequestForTopMovies(count: Int) -> NSFetchRequest<Movie> {
+        let request = Movie.fetchRequest()
+        request.predicate = NSPredicate(format: "watched = false")
+
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Movie.priority, ascending: false)]
+
+        request.fetchLimit = count
+        return request
+    }
+    
+    /// Returns a configured fetch request to retrieve the highest-priority
+    /// unwatched TV shows, limited to the specified number.
+    ///
+    /// This is used by WidgetKit to avoid loading entire collections of shows.
+    /// Only unwatched items are included, and results are sorted by priority
+    /// (highest first), ensuring that widgets display the most relevant content.
+    ///
+    /// - Parameter count: The maximum number of shows to return.
+    /// - Returns: An `NSFetchRequest<TvShow>` fetching at most `count` unwatched shows.
+    func fetchRequestForTopTvShows(count: Int) -> NSFetchRequest<TvShow> {
+        let request = TvShow.fetchRequest()
+        request.predicate = NSPredicate(format: "watched = false")
+        
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \TvShow.priority, ascending: false)]
+        request.fetchLimit = count
+        return request
+    }
+    
+    /// Executes the provided fetch request synchronously on the main `viewContext`.
+    ///
+    /// This utility ensures a lightweight and safe data access layer for modular
+    /// parts of the app such as widgets, extensions, previews, or quick-lookup
+    /// functions. If the fetch fails for any reason, an empty array is returned,
+    /// allowing callers to remain simple and avoid repetitive `do/catch` blocks.
+    ///
+    /// - Parameter fetchRequest: The typed Core Data fetch request to execute.
+    /// - Returns: The fetched objects, or an empty array if the operation fails.
+    func results<T: NSManagedObject>(for fetchRequest: NSFetchRequest<T>) -> [T] {
+        return (try? container.viewContext.fetch(fetchRequest)) ?? []
     }
 }

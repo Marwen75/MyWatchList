@@ -42,13 +42,13 @@ class ErrorManager: ObservableObject {
     
     /// Opens the app's notification settings in the system Settings app.
     private func openAppSettings() {
-        #if os(iOS)
+#if os(iOS)
         guard let settingsURL = URL(string: UIApplication.openNotificationSettingsURLString) else { return }
         UIApplication.shared.open(settingsURL)
-        #else
-        SettingsLink {
-            Text("")
+#else
+        if let url = URL(string: "x-apple.systempreferences:com.apple.Notifications-Settings.extension") {
+            NSWorkspace.shared.open(url)
         }
-        #endif
+#endif
     }
 }

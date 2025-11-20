@@ -1,7 +1,7 @@
 # 🎬 MyWatchList  
 “Organize your watchlist. Rediscover your favorites. Enjoy the show.”
 
-![Version](https://img.shields.io/badge/version-1.5-darkred?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-1.6-darkred?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/platforms-iOS%20%7C%20macOS-blue?style=for-the-badge)
 ![Swift](https://img.shields.io/badge/Swift-6.0-orange?style=for-the-badge)
 
@@ -32,6 +32,11 @@ It combines smooth performance and smart filtering to make managing your watchli
 - 🔔 **Personalized Reminders**  
   Set notifications for upcoming movies or shows and get reminded when it’s time to watch.
 
+- 🧱 **Widgets (iOS)**  
+  Display your favorite content right on your Home Screen:  
+  - 🔸 **Movie Widget** — highlights a selected movie with poster, metadata and quick access.  
+  - 🔸 **Next Episode Widget** — shows your next unwatched episode across all TV shows.  
+
 - 💾 **Core Data + iCloud Sync**  
   Your watchlist stays synced and backed up across all your devices.
 
@@ -50,13 +55,15 @@ It combines smooth performance and smart filtering to make managing your watchli
 
 - 🖥️ Swift / SwiftUI  
 - 💾 Core Data  
-- 🌐 TheMovieDB API  
+- ☁️ Core Data + CloudKit Sync  
 - 🧱 Pragmatic MVVM Architecture  
 - 🔄 Swift Modern Concurrency  
-- ☁️ iCloud Sync  
-- 💡 Core Spotlight & NSUserActivity for deep linking  
-- 🔔 UserNotifications (local reminders)  
-- 🛒 StoreKit 2 (In-App Purchases)
+- 🌐 TheMovieDB API  
+- 🎬 YouTubePlayerKit  
+- 🔔 UserNotifications  
+- 🛒 StoreKit 2 (In-App Purchases)  
+- ✨ **WidgetKit (iOS Widgets)**  
+- 🔍 Core Spotlight & NSUserActivity for deep linking  
 
 ---
 
@@ -87,9 +94,8 @@ It combines smooth performance and smart filtering to make managing your watchli
 
 Here’s what’s next for **MyWatchList** 👇
 
-- 🧩 **Widgets** — add your favorite shows or reminders right on your Home Screen.  
 - ⌚ **Apple Watch compatibility** — track progress and mark episodes from your wrist.  
-- 🥽 **visionOS support** — immersive viewing and browsing experience in spatial UI.  
+- 🥽 **visionOS support** — immersive viewing and browsing experience in spatial UI.
 
 ---
 
@@ -116,3 +122,4 @@ This project is licensed under the **MIT License**.
 You’re free to use, modify, and distribute this software with attribution.
 
 © 2025 Marwen Haouacine. All rights reserved.
+

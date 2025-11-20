@@ -23,7 +23,7 @@ struct ItemListRowPosterWithInfoView<T: WatchableItem>: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            PosterImageView(path: item.itemPosterPath, size: .flexible(maxHeight: 700, minHeight: 150))
+            PosterImageView(path: item.itemPosterPath, size: .flexible(maxHeight: 700, minHeight: 150), cacheIdentifier: item.cacheIdentifier)
             
             VStack {
                 HStack {

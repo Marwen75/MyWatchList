@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension ShowSeason: NotifiableItem {
+extension ShowSeason {
     var seasonAirDate: String {
         return airDate ?? "N/A"
     }
@@ -73,27 +73,5 @@ extension ShowSeason: NotifiableItem {
     
     var seasonProgress: Double {
         Double(numberOfEpisodesWatched) / Double(seasonEpisodeCount)
-    }
-    
-    var seasonReminderDate: Date {
-        get { reminderDate ?? .now }
-        set { reminderDate = newValue }
-    }
-    
-    var titleForNotification: String {
-        if let show = tvShow {
-            "\(show.showTitle), \(seasonName)"
-        } else {
-            seasonName
-        }
-    }
-    
-    var itemReminderDate: Date {
-        seasonReminderDate
-    }
-    
-    var itemReminderEnabled: Bool {
-        get { reminderEnabled }
-        set { reminderEnabled = newValue }
     }
 }

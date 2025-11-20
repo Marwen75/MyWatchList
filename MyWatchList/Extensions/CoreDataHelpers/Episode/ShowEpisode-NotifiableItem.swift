@@ -1,37 +1,14 @@
 //
-//  ShowEpisode-CoreDataHelpers.swift
+//  ShowEpisode-NotifiableItem.swift
 //  MyWatchList
 //
-//  Created by Marwen Haouacine on 04/10/2025.
+//  Created by Marwen Haouacine on 13/11/2025.
 //
 
 import Foundation
+import CoreData
 
 extension ShowEpisode: NotifiableItem {
-    var episodeName: String {
-        name ?? "N/A"
-    }
-    
-    var episodeOverview: String {
-        overview ?? "N/A"
-    }
-    
-    var episodeStillPath: String {
-        stillPath ?? ""
-    }
-    
-    var episodeRunTime: Int {
-        Int(runTime)
-    }
-    
-    var episodeAirDate: String {
-        airDate ?? "N/A"
-    }
-    
-    var episodeVoteAverage: String {
-        String(format: "%.1f", voteAverage)
-    }
-    
     var episodeReminderDate: Date {
         get { reminderDate ?? .now }
         set { reminderDate = newValue }

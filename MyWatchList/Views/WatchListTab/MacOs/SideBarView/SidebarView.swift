@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SidebarView: View {
     @EnvironmentObject var dataManager: DataManager
-    @ObservedObject var sidebarViewViewModel: WatchListViewModel
+    @ObservedObject var watchListViewModel: WatchListViewModel
     
     let smartFilters: [Filter] = [.movies, .tvShows]
     
@@ -18,13 +18,13 @@ struct SidebarView: View {
         ZStack {
             LinearGradient(colors: [.darkRed, .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
             
-            List(selection: $sidebarViewViewModel.selectedFilter) { 
+            List(selection: $watchListViewModel.selectedFilter) {
                 Section("Smart Filters") {
                     ForEach(smartFilters) { filter in
                         NavigationLink(value: filter) {
                             Label(filter.name, systemImage: filter.icon)
                         }
-                        .foregroundStyle(sidebarViewViewModel.selectedFilter == filter ? .white : .gray)
+                        .foregroundStyle(watchListViewModel.selectedFilter == filter ? .white : .gray)
                     }
                 }
                 .listRowBackground(Color.darkYellow.opacity(0.1))
@@ -35,35 +35,35 @@ struct SidebarView: View {
                             Label(filter.name, systemImage: filter.icon)
                                 .badge(filter.tag?.tagMovies.count ?? 0)
                         }
-                        .foregroundStyle(sidebarViewViewModel.selectedFilter == filter ? .white : .gray)
+                        .foregroundStyle(watchListViewModel.selectedFilter == filter ? .white : .gray)
                         .contextMenu {
                             Button {
-                                sidebarViewViewModel.rename(filter)
+                                watchListViewModel.rename(filter)
                             } label: {
                                 Label("Rename", systemImage: "pencil")
                             }
                         }
                     }
-                    .onDelete(perform: sidebarViewViewModel.deleteMovieTag)
+                    .onDelete(perform: watchListViewModel.deleteMovieTag)
                 }
                 .listRowBackground(Color.darkYellow.opacity(0.1))
                 
                 Section("Tv show Tags") {
-                    ForEach(sidebarViewViewModel.showTags) { filter in
+                    ForEach(watchListViewModel.showTags) { filter in
                         NavigationLink(value: filter) {
                             Label(filter.name, systemImage: filter.icon)
                                 .badge(filter.tag?.tagTvShows.count ?? 0)
                         }
-                        .foregroundStyle(sidebarViewViewModel.selectedFilter == filter ? .white : .gray)
+                        .foregroundStyle(watchListViewModel.selectedFilter == filter ? .white : .gray)
                         .contextMenu {
                             Button {
-                                sidebarViewViewModel.rename(filter)
+                                watchListViewModel.rename(filter)
                             } label: {
                                 Label("Rename", systemImage: "pencil")
                             }
                         }
                     }
-                    .onDelete(perform: sidebarViewViewModel.deleteShowTag)
+                    .onDelete(perform: watchListViewModel.deleteShowTag)
                 }
                 .listRowBackground(Color.darkYellow.opacity(0.1))
             }
@@ -71,15 +71,15 @@ struct SidebarView: View {
         }
         .toolbar {
             Button("Add tag", systemImage: "plus") {
-                sidebarViewViewModel.showTagAlert = true
+                watchListViewModel.showTagAlert = true
             }
         }
-        .alert("Create your own tag", isPresented: $sidebarViewViewModel.showTagAlert) {
+        .alert("Create your own tag", isPresented: $watchListViewModel.showTagAlert) {
             Button("Movie tag") {
-                sidebarViewViewModel.dataManager.newTag(isMovieTag: true, name: sidebarViewViewModel.tagName)
+                watchListViewModel.tryNewTag(isMovieTag: true)
             }
             Button("Tv show tag") {
-                sidebarViewViewModel.dataManager.newTag(isMovieTag: false, name: sidebarViewViewModel.tagName)
+                watchListViewModel.tryNewTag(isMovieTag: false)
             }
             Button("Cancel", role: .cancel) { }
             
@@ -90,11 +90,15 @@ struct SidebarView: View {
             Button("Cancel", role: .cancel) { }
             TextField("New name", text: $sidebarViewViewModel.tagName)
         }
+        .sheet(isPresented: $watchListViewModel.showingStore) {
+            StoreView()
+                .accessibilityIdentifier("storeView")
+        }
     }
 }
 
 #Preview {
-    SidebarView(sidebarViewViewModel: WatchListViewModel(dataManager: DataManager.preview))
+    SidebarView(watchListViewModel: WatchListViewModel(dataManager: DataManager.preview))
         .environmentObject(DataManager.preview)
     
 }

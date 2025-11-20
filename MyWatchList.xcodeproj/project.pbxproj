@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		C23CD4E32E6B1C4E00DD1656 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = C23CD4E22E6B1C4E00DD1656 /* YouTubePlayerKit */; };
 		C24517892EA377AA003CB8EE /* _ConfidentialKit in Frameworks */ = {isa = PBXBuildFile; productRef = C24517882EA377AA003CB8EE /* _ConfidentialKit */; };
+		C28232352EC6025D00F83A87 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C28232342EC6025D00F83A87 /* WidgetKit.framework */; };
+		C28232372EC6025D00F83A87 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C28232362EC6025D00F83A87 /* SwiftUI.framework */; };
+		C28232422EC6026000F83A87 /* MyWatchListWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C28232322EC6025C00F83A87 /* MyWatchListWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -19,6 +22,13 @@
 			remoteGlobalIDString = C2D858A32E61AE99005187AF;
 			remoteInfo = MyWatchList;
 		};
+		C28232402EC6026000F83A87 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C2D8589C2E61AE99005187AF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C28232312EC6025C00F83A87;
+			remoteInfo = MyWatchListWidgetExtension;
+		};
 		C2E067782EB0BD9800A2661D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C2D8589C2E61AE99005187AF /* Project object */;
@@ -28,13 +38,67 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		C28232432EC6026000F83A87 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C28232422EC6026000F83A87 /* MyWatchListWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		C257EBA02E9D3DA60064FCC0 /* MyWatchListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyWatchListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C28232322EC6025C00F83A87 /* MyWatchListWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MyWatchListWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C28232342EC6025D00F83A87 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		C28232362EC6025D00F83A87 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		C28232BE2EC6161400F83A87 /* MyWatchListWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyWatchListWidgetExtension.entitlements; sourceTree = "<group>"; };
 		C2D858A42E61AE99005187AF /* MyWatchList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyWatchList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2E067722EB0BD9800A2661D /* MyWatchListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyWatchListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		C28232472EC6026000F83A87 /* Exceptions for "MyWatchListWidget" folder in "MyWatchListWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = C28232312EC6025C00F83A87 /* MyWatchListWidgetExtension */;
+		};
+		C282324C2EC6083B00F83A87 /* Exceptions for "MyWatchList" folder in "MyWatchListWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Extensions/CoreDataHelpers/Actor/Actor-CoreDataHelpers.swift",
+				"Extensions/CoreDataHelpers/Director/Director-CoreDataHelpers.swift",
+				"Extensions/CoreDataHelpers/Episode/ShowEpisode-CoreDataHelpers.swift",
+				"Extensions/CoreDataHelpers/Episode/ShowEpisode-NotifiableItem.swift",
+				"Extensions/CoreDataHelpers/Movie/Movie-CoreDataHelpers.swift",
+				Extensions/CoreDataHelpers/Protocols/NotifiableItem.swift,
+				Extensions/CoreDataHelpers/Protocols/WatchableItem.swift,
+				"Extensions/CoreDataHelpers/Season/Season-CoreDataHelpers.swift",
+				"Extensions/CoreDataHelpers/Season/Season-NotifiableItem.swift",
+				"Extensions/CoreDataHelpers/Tag/Tag-CoreDataHelpers.swift",
+				"Extensions/CoreDataHelpers/TvShow/TvShow-CoreDataHelpers.swift",
+				"Extensions/Helpers/Color-Extension.swift",
+				"Extensions/Previews/Movie-Preview.swift",
+				Localization/Localizable.xcstrings,
+				Model/Data/DataManager.swift,
+				"Model/Data/StoreKit/DataManager-StoreKit.swift",
+				Model/Enums/SortOrder.swift,
+				Model/Enums/WatchPriority.swift,
+				Model/Enums/WatchStatus.swift,
+				Model/Images/ImageCacheManager.swift,
+				Model/Images/Protocols/FileManaging.swift,
+				Model/Main.xcdatamodeld,
+				Model/Types/Filter.swift,
+			);
+			target = C28232312EC6025C00F83A87 /* MyWatchListWidgetExtension */;
+		};
 		C2D858EC2E61D248005187AF /* Exceptions for "MyWatchList" folder in "MyWatchList" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -50,10 +114,19 @@
 			path = MyWatchListTests;
 			sourceTree = "<group>";
 		};
+		C28232382EC6025D00F83A87 /* MyWatchListWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C28232472EC6026000F83A87 /* Exceptions for "MyWatchListWidget" folder in "MyWatchListWidgetExtension" target */,
+			);
+			path = MyWatchListWidget;
+			sourceTree = "<group>";
+		};
 		C2D858A62E61AE99005187AF /* MyWatchList */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				C2D858EC2E61D248005187AF /* Exceptions for "MyWatchList" folder in "MyWatchList" target */,
+				C282324C2EC6083B00F83A87 /* Exceptions for "MyWatchList" folder in "MyWatchListWidgetExtension" target */,
 			);
 			path = MyWatchList;
 			sourceTree = "<group>";
@@ -70,6 +143,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C282322F2EC6025C00F83A87 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C28232372EC6025D00F83A87 /* SwiftUI.framework in Frameworks */,
+				C28232352EC6025D00F83A87 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,12 +174,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C28232332EC6025D00F83A87 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C28232342EC6025D00F83A87 /* WidgetKit.framework */,
+				C28232362EC6025D00F83A87 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C2D8589B2E61AE99005187AF = {
 			isa = PBXGroup;
 			children = (
+				C28232BE2EC6161400F83A87 /* MyWatchListWidgetExtension.entitlements */,
 				C2D858A62E61AE99005187AF /* MyWatchList */,
 				C257EBA12E9D3DA60064FCC0 /* MyWatchListTests */,
 				C2E067732EB0BD9800A2661D /* MyWatchListUITests */,
+				C28232382EC6025D00F83A87 /* MyWatchListWidget */,
+				C28232332EC6025D00F83A87 /* Frameworks */,
 				C2D858A52E61AE99005187AF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,6 +202,7 @@
 				C2D858A42E61AE99005187AF /* MyWatchList.app */,
 				C257EBA02E9D3DA60064FCC0 /* MyWatchListTests.xctest */,
 				C2E067722EB0BD9800A2661D /* MyWatchListUITests.xctest */,
+				C28232322EC6025C00F83A87 /* MyWatchListWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -138,6 +233,28 @@
 			productReference = C257EBA02E9D3DA60064FCC0 /* MyWatchListTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		C28232312EC6025C00F83A87 /* MyWatchListWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C28232462EC6026000F83A87 /* Build configuration list for PBXNativeTarget "MyWatchListWidgetExtension" */;
+			buildPhases = (
+				C282322E2EC6025C00F83A87 /* Sources */,
+				C282322F2EC6025C00F83A87 /* Frameworks */,
+				C28232302EC6025C00F83A87 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				C28232382EC6025D00F83A87 /* MyWatchListWidget */,
+			);
+			name = MyWatchListWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = MyWatchListWidgetExtension;
+			productReference = C28232322EC6025C00F83A87 /* MyWatchListWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		C2D858A32E61AE99005187AF /* MyWatchList */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C2D858B02E61AE9B005187AF /* Build configuration list for PBXNativeTarget "MyWatchList" */;
@@ -145,11 +262,13 @@
 				C2D858A02E61AE99005187AF /* Sources */,
 				C2D858A12E61AE99005187AF /* Frameworks */,
 				C2D858A22E61AE99005187AF /* Resources */,
+				C28232432EC6026000F83A87 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				C245178C2EA3788F003CB8EE /* PBXTargetDependency */,
+				C28232412EC6026000F83A87 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				C2D858A62E61AE99005187AF /* MyWatchList */,
@@ -193,12 +312,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2600;
+				LastSwiftUpdateCheck = 2610;
 				LastUpgradeCheck = 2610;
 				TargetAttributes = {
 					C257EB9F2E9D3DA60064FCC0 = {
 						CreatedOnToolsVersion = 26.0.1;
 						TestTargetID = C2D858A32E61AE99005187AF;
+					};
+					C28232312EC6025C00F83A87 = {
+						CreatedOnToolsVersion = 26.1.1;
 					};
 					C2D858A32E61AE99005187AF = {
 						CreatedOnToolsVersion = 16.4;
@@ -232,12 +354,20 @@
 				C2D858A32E61AE99005187AF /* MyWatchList */,
 				C257EB9F2E9D3DA60064FCC0 /* MyWatchListTests */,
 				C2E067712EB0BD9800A2661D /* MyWatchListUITests */,
+				C28232312EC6025C00F83A87 /* MyWatchListWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C257EB9E2E9D3DA60064FCC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C28232302EC6025C00F83A87 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -262,6 +392,13 @@
 
 /* Begin PBXSourcesBuildPhase section */
 		C257EB9C2E9D3DA60064FCC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C282322E2EC6025C00F83A87 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -293,6 +430,11 @@
 			isa = PBXTargetDependency;
 			target = C2D858A32E61AE99005187AF /* MyWatchList */;
 			targetProxy = C257EBA42E9D3DA70064FCC0 /* PBXContainerItemProxy */;
+		};
+		C28232412EC6026000F83A87 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C28232312EC6025C00F83A87 /* MyWatchListWidgetExtension */;
+			targetProxy = C28232402EC6026000F83A87 /* PBXContainerItemProxy */;
 		};
 		C2E067792EB0BD9800A2661D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -345,6 +487,74 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyWatchList.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyWatchList";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C28232442EC6026000F83A87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = MyWatchListWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PTPRZC36QH;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyWatchListWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyWatchListWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.6;
+				PRODUCT_BUNDLE_IDENTIFIER = com.marwen.MyWatchList.MyWatchListWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C28232452EC6026000F83A87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = MyWatchListWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PTPRZC36QH;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyWatchListWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyWatchListWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.6;
+				PRODUCT_BUNDLE_IDENTIFIER = com.marwen.MyWatchList.MyWatchListWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -505,7 +715,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marwen.MyWatchList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -550,7 +760,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marwen.MyWatchList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -617,6 +827,15 @@
 			buildConfigurations = (
 				C257EBA62E9D3DA70064FCC0 /* Debug */,
 				C257EBA72E9D3DA70064FCC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C28232462EC6026000F83A87 /* Build configuration list for PBXNativeTarget "MyWatchListWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C28232442EC6026000F83A87 /* Debug */,
+				C28232452EC6026000F83A87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

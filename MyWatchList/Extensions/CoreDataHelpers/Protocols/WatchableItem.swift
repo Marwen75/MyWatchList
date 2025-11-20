@@ -11,6 +11,7 @@ import Foundation
 /// It inherits from `NotifiableItem` to include reminder support,
 /// and from `ObservableObject` to support SwiftUI data binding.
 protocol WatchableItem: NotifiableItem, ObservableObject {
+    var itemID: Int { get }
     var itemTitle: String { get }
     var itemPosterPath: String { get }
     var trailerPath: String { get }
@@ -24,4 +25,11 @@ protocol WatchableItem: NotifiableItem, ObservableObject {
     var itemPriority: Int16 { get }
     var itemTagsList: String { get }
     var itemWatched: Bool { get }
+}
+
+extension WatchableItem {
+    var cacheIdentifier: String {
+        let typeName = String(describing: Self.self)
+        return "\(typeName)_\(itemID)"
+    }
 }

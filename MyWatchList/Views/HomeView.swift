@@ -28,7 +28,7 @@ struct HomeView: View {
             Tab("Watch list", systemImage: "list.bullet", value: .userContent) {
 #if os(macOS)
                 NavigationSplitView {
-                    SidebarView(sidebarViewViewModel: watchListViewModel)
+                    SidebarView(watchListViewModel: watchListViewModel)
                 } content: {
                     ContentView(contentViewViewModel: watchListViewModel)
                 } detail: {
@@ -62,6 +62,7 @@ struct HomeView: View {
         }
         .tint(.yellow)
         .onContinueUserActivity(CSSearchableItemActionType, perform: loadSpotlightItem)
+        .onOpenURL(perform: openURL)
     }
     
     func loadSpotlightItem(_ userActivity: NSUserActivity) {
@@ -69,16 +70,36 @@ struct HomeView: View {
             if let movie = dataManager.movie(with: uniqueIdentifier) {
                 dataManager.selectedFilter = .movies
                 dataManager.selectedMovie = movie
-                #if os(iOS)
+#if os(iOS)
                 watchListPathManager.push(to: .movieDetails(movie: movie))
-                #endif
+#endif
             } else if let tvShow = dataManager.tvShow(with: uniqueIdentifier) {
                 dataManager.selectedFilter = .tvShows
                 dataManager.selectedShow = tvShow
-                #if os(iOS)
+#if os(iOS)
                 watchListPathManager.push(to: .tvShowDetails(tvShow: tvShow))
-                #endif
+#endif
             }
+        }
+    }
+    
+    func openURL(_ url: URL) {
+        if let movie = dataManager.movie(with: url.absoluteString) {
+            dataManager.selectedFilter = .movies
+            dataManager.selectedMovie = movie
+#if os(iOS)
+            watchListPathManager.push(to: .movieDetails(movie: movie))
+#endif
+        } else if let tvShow = dataManager.tvShow(with: url.absoluteString) {
+            dataManager.selectedFilter = .tvShows
+            dataManager.selectedShow = tvShow
+#if os(iOS)
+            if let unwatchedSeason = tvShow.showSeasons.first(where: {!$0.watched}), let nextEpisodeToWatch = unwatchedSeason.seasonEpisodes.first(where: {!$0.watched}) {
+                watchListPathManager.push(to: .episodeDetails(episode: nextEpisodeToWatch))
+            } else {
+                watchListPathManager.push(to: .tvShowDetails(tvShow: tvShow))
+            }
+#endif
         }
     }
 }

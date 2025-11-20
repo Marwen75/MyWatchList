@@ -1,5 +1,5 @@
 //
-//  TvShow-WatchableItem.swift
+//  Movie-WatchableItem.swift
 //  MyWatchList
 //
 //  Created by Marwen Haouacine on 07/11/2025.
@@ -7,13 +7,17 @@
 
 import Foundation
 
-extension TvShow: WatchableItem {
+extension Movie: WatchableItem {
+    var itemID: Int {
+        movieId
+    }
+    
     var titleForNotification: String {
-        showTitle
+        movieTitle
     }
     
     var itemReminderDate: Date {
-        showReminderDate
+        movieReminderDate
     }
     
     var itemReminderEnabled: Bool {
@@ -22,51 +26,51 @@ extension TvShow: WatchableItem {
     }
     
     var itemTitle: String {
-        showTitle
+        movieTitle
     }
     
     var itemPosterPath: String {
-        showPoster
+        moviePoster
     }
     
     var trailerPath: String {
-        showTrailer
+        movieTrailer
     }
     
     var itemActors: [Actor] {
-        showActors
+        movieActors
     }
     
     var itemCredits: [Director] {
-        showDirectors
+        movieDirectors
     }
     
     var crewLabelSingular: String {
-        NSLocalizedString("Creator", comment: "")
+        NSLocalizedString("Director", comment: "")
     }
     
     var crewLabelPlural: String {
-        NSLocalizedString("Creators", comment: "")
+        NSLocalizedString("Directors", comment: "")
     }
     
     var itemGenres: String {
-        showGenres
+        movieGenres
     }
     
     var itemOverview: String {
-        showOverview
+        movieOverview
     }
     
     var itemRating: String {
-        showVoteAverage == "0" ? "N/A" : "\(showVoteAverage)/10"
+        movieVoteAverage == "0" ? "N/A" : "\(movieVoteAverage)/10"
     }
     
     var itemPriority: Int16 {
-        priority
+       priority
     }
     
     var itemTagsList: String {
-        showTagsList
+        movieTagsList
     }
     
     var itemWatched: Bool {

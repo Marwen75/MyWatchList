@@ -77,7 +77,6 @@ struct SmartFilterView: View {
         }
         .sheet(isPresented: $watchListViewModel.showingStore) {
             StoreView()
-                .accessibilityIdentifier("storeView")
         }
     }
 }
