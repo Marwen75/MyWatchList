@@ -93,15 +93,20 @@ It combines smooth performance and smart filtering to make managing your watchli
 <img width="269" height="685" alt="i_8" src="https://github.com/user-attachments/assets/b50a25f1-be93-4c40-bb8a-53f89f0a38c9" />
 <img width="269" height="685" alt="i_7" src="https://github.com/user-attachments/assets/42a8276f-dfa0-4a56-9424-2963f6de40b8" />
 
+### ⌚ watchOS App Preview
+<img width="388" height="490" alt="w_seen" src="https://github.com/user-attachments/assets/67e54efc-e1fe-47b0-9af3-9a7eeb5ba8d1" />
+<img width="388" height="490" alt="Capture d’écran 2025-11-23 à 11 51 04" src="https://github.com/user-attachments/assets/7dd3f4c8-275e-4607-95c0-140b9210f023" />
+<img width="388" height="490" alt="w_movie" src="https://github.com/user-attachments/assets/db5bd000-3a5b-4eae-bae9-115310bf265a" />
+<img width="388" height="490" alt="w_movie_w" src="https://github.com/user-attachments/assets/d457c2bc-25b6-43a9-98d8-d6719daa23bd" />
+<img width="388" height="490" alt="w_std" src="https://github.com/user-attachments/assets/4b0af926-8f17-4c84-9d39-8829e88f17bd" />
+<img width="388" height="490" alt="w_show_s" src="https://github.com/user-attachments/assets/52d59506-7435-4c53-9ee5-37f98209ca9f" />
+<img width="388" height="490" alt="w_show_e" src="https://github.com/user-attachments/assets/a796be4d-d178-4a6a-8244-cfb690672a07" />
+<img width="388" height="490" alt="w_show" src="https://github.com/user-attachments/assets/c5189ee9-b83e-45f8-9183-6e4eee98bafb" />
+
 ### 🖥️ macOS App Preview
 <img width="1068" height="698" alt="mac_1" src="https://github.com/user-attachments/assets/7559cca2-94b2-4bb5-b222-1e89f3978ecb" />
 <img width="1068" height="698" alt="mac_2" src="https://github.com/user-attachments/assets/d4c4cb08-fb1d-4cba-963d-9336acaf92ba" />
 <img width="1173" height="698" alt="mac_3" src="https://github.com/user-attachments/assets/281cc2b0-4f1e-4c96-ad4f-859268eb59e3" />
-
----
-
-### ⌚ watchOS App Preview
-
 
 ---
 
