@@ -31,4 +31,16 @@ extension ShowEpisode {
     var episodeVoteAverage: String {
         String(format: "%.1f", voteAverage)
     }
+    
+    var seasonNum: Int {
+        Int(season?.seasonSeasNumber ?? 0)
+    }
+    
+    var episodeNum: Int {
+        Int(episodeNumber)
+    }
+    
+    var formattedNextEp: String {
+        "S\(seasonNum)E\(episodeNum)"
+    }
 }

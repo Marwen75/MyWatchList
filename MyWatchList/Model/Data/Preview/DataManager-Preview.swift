@@ -76,12 +76,13 @@ extension DataManager {
             show.id = Int64(1409)
             show.firstAirDate = "2008-09-03"
             show.lastAirDate = "2014-12-09"
-            show.numberOfEpisodes = Int64(92)
+            show.numberOfEpisodes = Int64(10)
             show.numberOfSeasons = Int64(7)
             show.trailerUrl = "paBZJJXUEtg"
             show.voteAverage = 8.419
             show.inProduction = false
             show.imdbUrl = "test"
+            show.priority = 2
             let creator = Director(context: viewContext)
             creator.name = "Kurt Sutter"
             creator.id = Int64(200043)
@@ -106,10 +107,10 @@ extension DataManager {
             episode1.runTime = 57
             episode1.voteAverage = 8.4
             episode1.stillPath = "/jc2RFJIJBFqsMpxnCD6VParg8Rj.jpg"
-            episode1.watched = false
+            episode1.watched = true
+            episode1.rank = Int64(0)
             
             season1.episodes = NSSet(array: [episode1])
-            
             
             show.seasons = NSSet(array: [season1])
             

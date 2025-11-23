@@ -12,6 +12,7 @@
 		C28232352EC6025D00F83A87 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C28232342EC6025D00F83A87 /* WidgetKit.framework */; };
 		C28232372EC6025D00F83A87 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C28232362EC6025D00F83A87 /* SwiftUI.framework */; };
 		C28232422EC6026000F83A87 /* MyWatchListWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C28232322EC6025C00F83A87 /* MyWatchListWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C2B07FEB2ED06E7C008D0285 /* MWLWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C2B07FE12ED06E7A008D0285 /* MWLWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +29,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = C28232312EC6025C00F83A87;
 			remoteInfo = MyWatchListWidgetExtension;
+		};
+		C2B07FE92ED06E7C008D0285 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C2D8589C2E61AE99005187AF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C2B07FE02ED06E7A008D0285;
+			remoteInfo = "MWLWatch Watch App";
 		};
 		C2E067782EB0BD9800A2661D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -50,6 +58,17 @@
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C2B07FEC2ED06E7C008D0285 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				C2B07FEB2ED06E7C008D0285 /* MWLWatch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +77,7 @@
 		C28232342EC6025D00F83A87 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		C28232362EC6025D00F83A87 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		C28232BE2EC6161400F83A87 /* MyWatchListWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyWatchListWidgetExtension.entitlements; sourceTree = "<group>"; };
+		C2B07FE12ED06E7A008D0285 /* MWLWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MWLWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2D858A42E61AE99005187AF /* MyWatchList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyWatchList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2E067722EB0BD9800A2661D /* MyWatchListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyWatchListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -99,6 +119,30 @@
 			);
 			target = C28232312EC6025C00F83A87 /* MyWatchListWidgetExtension */;
 		};
+		C2B07FF42ED07143008D0285 /* Exceptions for "MyWatchList" folder in "MWLWatch Watch App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Extensions/CoreDataHelpers/Actor/Actor-CoreDataHelpers.swift",
+				"Extensions/CoreDataHelpers/Director/Director-CoreDataHelpers.swift",
+				"Extensions/CoreDataHelpers/Episode/ShowEpisode-CoreDataHelpers.swift",
+				"Extensions/CoreDataHelpers/Movie/Movie-CoreDataHelpers.swift",
+				"Extensions/CoreDataHelpers/Season/Season-CoreDataHelpers.swift",
+				"Extensions/CoreDataHelpers/Tag/Tag-CoreDataHelpers.swift",
+				"Extensions/CoreDataHelpers/TvShow/TvShow-CoreDataHelpers.swift",
+				"Extensions/Helpers/Color-Extension.swift",
+				Localization/Localizable.xcstrings,
+				Model/Data/DataManager.swift,
+				"Model/Data/Preview/DataManager-Preview.swift",
+				"Model/Data/StoreKit/DataManager-StoreKit.swift",
+				Model/Enums/SortOrder.swift,
+				Model/Enums/WatchPriority.swift,
+				Model/Enums/WatchStatus.swift,
+				Model/Images/Protocols/FileManaging.swift,
+				Model/Main.xcdatamodeld,
+				Model/Types/Filter.swift,
+			);
+			target = C2B07FE02ED06E7A008D0285 /* MWLWatch Watch App */;
+		};
 		C2D858EC2E61D248005187AF /* Exceptions for "MyWatchList" folder in "MyWatchList" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -122,11 +166,17 @@
 			path = MyWatchListWidget;
 			sourceTree = "<group>";
 		};
+		C2B07FE22ED06E7A008D0285 /* MWLWatch Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "MWLWatch Watch App";
+			sourceTree = "<group>";
+		};
 		C2D858A62E61AE99005187AF /* MyWatchList */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				C2D858EC2E61D248005187AF /* Exceptions for "MyWatchList" folder in "MyWatchList" target */,
 				C282324C2EC6083B00F83A87 /* Exceptions for "MyWatchList" folder in "MyWatchListWidgetExtension" target */,
+				C2B07FF42ED07143008D0285 /* Exceptions for "MyWatchList" folder in "MWLWatch Watch App" target */,
 			);
 			path = MyWatchList;
 			sourceTree = "<group>";
@@ -152,6 +202,13 @@
 			files = (
 				C28232372EC6025D00F83A87 /* SwiftUI.framework in Frameworks */,
 				C28232352EC6025D00F83A87 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2B07FDE2ED06E7A008D0285 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +248,7 @@
 				C257EBA12E9D3DA60064FCC0 /* MyWatchListTests */,
 				C2E067732EB0BD9800A2661D /* MyWatchListUITests */,
 				C28232382EC6025D00F83A87 /* MyWatchListWidget */,
+				C2B07FE22ED06E7A008D0285 /* MWLWatch Watch App */,
 				C28232332EC6025D00F83A87 /* Frameworks */,
 				C2D858A52E61AE99005187AF /* Products */,
 			);
@@ -203,6 +261,7 @@
 				C257EBA02E9D3DA60064FCC0 /* MyWatchListTests.xctest */,
 				C2E067722EB0BD9800A2661D /* MyWatchListUITests.xctest */,
 				C28232322EC6025C00F83A87 /* MyWatchListWidgetExtension.appex */,
+				C2B07FE12ED06E7A008D0285 /* MWLWatch Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -255,6 +314,28 @@
 			productReference = C28232322EC6025C00F83A87 /* MyWatchListWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		C2B07FE02ED06E7A008D0285 /* MWLWatch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C2B07FEF2ED06E7C008D0285 /* Build configuration list for PBXNativeTarget "MWLWatch Watch App" */;
+			buildPhases = (
+				C2B07FDD2ED06E7A008D0285 /* Sources */,
+				C2B07FDE2ED06E7A008D0285 /* Frameworks */,
+				C2B07FDF2ED06E7A008D0285 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				C2B07FE22ED06E7A008D0285 /* MWLWatch Watch App */,
+			);
+			name = "MWLWatch Watch App";
+			packageProductDependencies = (
+			);
+			productName = "MWLWatch Watch App";
+			productReference = C2B07FE12ED06E7A008D0285 /* MWLWatch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		C2D858A32E61AE99005187AF /* MyWatchList */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C2D858B02E61AE9B005187AF /* Build configuration list for PBXNativeTarget "MyWatchList" */;
@@ -263,12 +344,14 @@
 				C2D858A12E61AE99005187AF /* Frameworks */,
 				C2D858A22E61AE99005187AF /* Resources */,
 				C28232432EC6026000F83A87 /* Embed Foundation Extensions */,
+				C2B07FEC2ED06E7C008D0285 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				C245178C2EA3788F003CB8EE /* PBXTargetDependency */,
 				C28232412EC6026000F83A87 /* PBXTargetDependency */,
+				C2B07FEA2ED06E7C008D0285 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				C2D858A62E61AE99005187AF /* MyWatchList */,
@@ -322,6 +405,9 @@
 					C28232312EC6025C00F83A87 = {
 						CreatedOnToolsVersion = 26.1.1;
 					};
+					C2B07FE02ED06E7A008D0285 = {
+						CreatedOnToolsVersion = 26.1.1;
+					};
 					C2D858A32E61AE99005187AF = {
 						CreatedOnToolsVersion = 16.4;
 					};
@@ -355,6 +441,7 @@
 				C257EB9F2E9D3DA60064FCC0 /* MyWatchListTests */,
 				C2E067712EB0BD9800A2661D /* MyWatchListUITests */,
 				C28232312EC6025C00F83A87 /* MyWatchListWidgetExtension */,
+				C2B07FE02ED06E7A008D0285 /* MWLWatch Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -368,6 +455,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C28232302EC6025C00F83A87 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2B07FDF2ED06E7A008D0285 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -405,6 +499,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C2B07FDD2ED06E7A008D0285 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C2D858A02E61AE99005187AF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -435,6 +536,11 @@
 			isa = PBXTargetDependency;
 			target = C28232312EC6025C00F83A87 /* MyWatchListWidgetExtension */;
 			targetProxy = C28232402EC6026000F83A87 /* PBXContainerItemProxy */;
+		};
+		C2B07FEA2ED06E7C008D0285 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C2B07FE02ED06E7A008D0285 /* MWLWatch Watch App */;
+			targetProxy = C2B07FE92ED06E7C008D0285 /* PBXContainerItemProxy */;
 		};
 		C2E067792EB0BD9800A2661D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -510,7 +616,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marwen.MyWatchList.MyWatchListWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -544,7 +650,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marwen.MyWatchList.MyWatchListWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -556,6 +662,78 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C2B07FED2ED06E7C008D0285 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "MWLWatch Watch App/MWLWatch Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PTPRZC36QH;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MWLWatch-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = MWLWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.marwen.MyWatchList;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.7;
+				PRODUCT_BUNDLE_IDENTIFIER = com.marwen.MyWatchList.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		C2B07FEE2ED06E7C008D0285 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "MWLWatch Watch App/MWLWatch Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PTPRZC36QH;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MWLWatch-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = MWLWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.marwen.MyWatchList;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.7;
+				PRODUCT_BUNDLE_IDENTIFIER = com.marwen.MyWatchList.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Release;
 		};
@@ -689,6 +867,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MyWatchList/MyWatchList.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
@@ -715,9 +894,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marwen.MyWatchList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
@@ -734,6 +914,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MyWatchList/MyWatchList.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
@@ -760,9 +941,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marwen.MyWatchList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
@@ -836,6 +1018,15 @@
 			buildConfigurations = (
 				C28232442EC6026000F83A87 /* Debug */,
 				C28232452EC6026000F83A87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C2B07FEF2ED06E7C008D0285 /* Build configuration list for PBXNativeTarget "MWLWatch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2B07FED2ED06E7C008D0285 /* Debug */,
+				C2B07FEE2ED06E7C008D0285 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

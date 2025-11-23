@@ -1,11 +1,11 @@
 # 🎬 MyWatchList  
 “Organize your watchlist. Rediscover your favorites. Enjoy the show.”
 
-![Version](https://img.shields.io/badge/version-1.6-darkred?style=for-the-badge)
-![Platform](https://img.shields.io/badge/platforms-iOS%20%7C%20macOS-blue?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-1.7-darkred?style=for-the-badge)
+![Platform](https://img.shields.io/badge/platforms-iOS%20%7C%20macOS%20%7C%20watchOS-blue?style=for-the-badge)
 ![Swift](https://img.shields.io/badge/Swift-6.0-orange?style=for-the-badge)
 
-**MyWatchList** is an iOS and macOS app built with **SwiftUI** that lets you track, organize, and rediscover your favorite movies and TV shows.  
+**MyWatchList** is an iOS, macOS, and watchOS app built with **SwiftUI** that lets you track, organize, and rediscover your favorite movies and TV shows.  
 It combines smooth performance and smart filtering to make managing your watchlist effortless and fun.
 
 **MyWatchList** is powered by the [TMDB API](https://developer.themoviedb.org) and [YouTubePlayerKit](https://github.com/SvenTiigi/YouTubePlayerKit).
@@ -35,7 +35,16 @@ It combines smooth performance and smart filtering to make managing your watchli
 - 🧱 **Widgets (iOS)**  
   Display your favorite content right on your Home Screen:  
   - 🔸 **Movie Widget** — highlights a selected movie with poster, metadata and quick access.  
-  - 🔸 **Next Episode Widget** — shows your next unwatched episode across all TV shows.  
+  - 🔸 **Next Episode Widget** — shows your next unwatched episode across all TV shows.
+
+- ⌚ **watchOS Companion App**  
+  A native Apple Watch experience featuring:  
+  - Full navigation between movies and TV shows  
+  - Collapsible seasons  
+  - Episode tracking  
+  - Read/expand movie overview  
+  - Swipe-to-delete  
+  - Instant sync with iCloud
 
 - 💾 **Core Data + iCloud Sync**  
   Your watchlist stays synced and backed up across all your devices.
@@ -47,7 +56,7 @@ It combines smooth performance and smart filtering to make managing your watchli
   Search for movies or shows directly from Spotlight and jump instantly to their detail page.
 
 - 🎨 **Designed for Apple platforms**  
-  A native SwiftUI interface optimized for macOS and iOS, with adaptive layouts and smooth animations.
+  A native SwiftUI interface optimized for iOS, macOS, and watchOS, with adaptive layouts and smooth animations.
 
 ---
 
@@ -62,7 +71,8 @@ It combines smooth performance and smart filtering to make managing your watchli
 - 🎬 YouTubePlayerKit  
 - 🔔 UserNotifications  
 - 🛒 StoreKit 2 (In-App Purchases)  
-- ✨ **WidgetKit (iOS Widgets)**  
+- ✨ WidgetKit  
+- ⌚ SwiftUI-based watchOS App  
 - 🔍 Core Spotlight & NSUserActivity for deep linking  
 
 ---
@@ -90,11 +100,15 @@ It combines smooth performance and smart filtering to make managing your watchli
 
 ---
 
+### ⌚ watchOS App Preview
+
+
+---
+
 ## 🚀 Upcoming Features
 
 Here’s what’s next for **MyWatchList** 👇
 
-- ⌚ **Apple Watch compatibility** — track progress and mark episodes from your wrist.  
 - 🥽 **visionOS support** — immersive viewing and browsing experience in spatial UI.
 
 ---
@@ -103,6 +117,7 @@ Here’s what’s next for **MyWatchList** 👇
 
 - iOS **26.0** or later  
 - macOS **Tahoe (26.0)** or later  
+- watchOS **26.0** or later  
 - Xcode **26.0** or later  
 - Swift **6.2**
 
@@ -114,6 +129,7 @@ Here’s what’s next for **MyWatchList** 👇
 - 📧 marwen.haouacine@gmail.com  
 - 💼 [GitHub](https://github.com/Marwen75) / [LinkedIn](https://fr.linkedin.com/in/marwen-haouacine-b451911b7)
 
+
 ---
 
 ## 📄 License
@@ -122,4 +138,3 @@ This project is licensed under the **MIT License**.
 You’re free to use, modify, and distribute this software with attribution.
 
 © 2025 Marwen Haouacine. All rights reserved.
-

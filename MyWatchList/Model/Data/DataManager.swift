@@ -12,7 +12,10 @@ import WidgetKit
 
 class DataManager: ObservableObject {
     let container: NSPersistentCloudKitContainer
+    
+    #if !os(watchOS)
     var spotlightDelegate: NSCoreDataCoreSpotlightDelegate?
+    #endif 
     
     @Published var selectedFilter: Filter? = Filter.movies
     @Published var selectedMovie: Movie?
@@ -91,11 +94,13 @@ class DataManager: ObservableObject {
             if let description = self?.container.persistentStoreDescriptions.first {
                 description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
                 
+                #if !os(watchOS)
                 if let coordinator = self?.container.persistentStoreCoordinator {
                     self?.spotlightDelegate = NSCoreDataCoreSpotlightDelegate(forStoreWith: description, coordinator: coordinator)
                 }
                 
                 self?.spotlightDelegate?.startSpotlightIndexing()
+                #endif
             }
         }
     }
